@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        DBManager dbManager = new DBManager();
-        Connection connection = dbManager.getConnection();
+
+        Connection connection = DBManager.getConnection();
         PreparedStatement prepareStatement = connection.prepareStatement("SELECT * FROM role");
         prepareStatement.executeQuery();
         ResultSet resultSet = prepareStatement.getResultSet();

@@ -7,21 +7,25 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class DBManager {
-   private final HikariDataSource dataSource;
+    private DBManager() {
+    }
 
-   public DBManager(){
-       HikariConfig config = new HikariConfig();
-       config.setJdbcUrl("jdbc:postgresql://localhost:5432/TravelAgencyDataBase");
-       config.setUsername("postgres");
-       config.setPassword("2298");
-       config.addDataSourceProperty("cachePrepStmts", "true");
-       config.addDataSourceProperty("prepStmtCacheSize", "250");
-       config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+    private static class DBMHolder {
+        private static final HikariDataSource dataSource;
+        private static final HikariConfig config = new HikariConfig();
 
-       dataSource = new HikariDataSource(config);
-   }
+        static {
+            config.setJdbcUrl("jdbc:postgresql://localhost:5432/TravelAgencyDataBase");
+            config.setUsername("postgres");
+            config.setPassword("2298");
+            config.addDataSourceProperty("cachePrepStmts", "true");
+            config.addDataSourceProperty("prepStmtCacheSize", "250");
+            config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+            dataSource = new HikariDataSource(config);
+        }
+    }
 
-    public  Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
+    public static Connection getConnection() throws SQLException {
+        return DBMHolder.dataSource.getConnection();
     }
 }
