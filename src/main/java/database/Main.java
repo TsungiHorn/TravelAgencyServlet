@@ -8,11 +8,11 @@ import java.sql.SQLException;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        Connection connection = DBManager.getConnection();
+        Connection connection = ConnectionPool.getDBManager().getConnection();
         PreparedStatement prepareStatement = connection.prepareStatement("SELECT * FROM role");
         prepareStatement.executeQuery();
         ResultSet resultSet = prepareStatement.getResultSet();
-        while(resultSet.next()){
+        while (resultSet.next()) {
             System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
         }
     }
