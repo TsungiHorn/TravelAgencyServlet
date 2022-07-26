@@ -1,4 +1,4 @@
-package com.colosovskyi.agency.entity;
+package com.kolosovskyi.agency.entity;
 
 import java.math.BigDecimal;
 import java.util.Objects;

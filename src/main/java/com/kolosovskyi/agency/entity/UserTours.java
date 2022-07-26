@@ -1,13 +1,13 @@
-package com.colosovskyi.agency.entity;
+package com.kolosovskyi.agency.entity;
 
 import java.math.BigDecimal;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class UserTours {
-    private Long userId;
-    private Long tourId;
-    private Date orderTime;
+    private User user;
+    private Tour tour;
+    private LocalDate orderTime;
     private TourStatus status;
     private BigDecimal finalPrice;
     private Integer discountPercent;
@@ -15,10 +15,10 @@ public class UserTours {
     public UserTours() {
     }
 
-    public UserTours(Long userId, Long tourId, Date orderTime, TourStatus status, BigDecimal finalPrice, Integer discountPercent) {
+    public UserTours(User user, Tour tour, LocalDate orderTime, TourStatus status, BigDecimal finalPrice, Integer discountPercent) {
         this.discountPercent = discountPercent;
-        this.userId = userId;
-        this.tourId = tourId;
+        this.user = user;
+        this.tour = tour;
         this.status = status;
         this.finalPrice = finalPrice;
         this.orderTime = orderTime;
@@ -49,28 +49,28 @@ public class UserTours {
         this.status = status;
     }
 
-    public Date getOrderTime() {
+    public LocalDate getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(LocalDate orderTime) {
         this.orderTime = orderTime;
     }
 
-    public Long getTourID() {
-        return tourId;
+    public Tour getTour() {
+        return tour;
     }
 
-    public void setTourID(Long tourID) {
-        this.tourId = tourID;
+    public void setTour(Tour tour) {
+        this.tour = tour;
     }
 
-    public Long getUserID() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserID(Long userID) {
-        this.userId = userID;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override
@@ -78,19 +78,19 @@ public class UserTours {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UserTours userTours = (UserTours) o;
-        return Objects.equals(userId, userTours.userId) && Objects.equals(tourId, userTours.tourId) && Objects.equals(orderTime, userTours.orderTime) && status == userTours.status && Objects.equals(finalPrice, userTours.finalPrice) && Objects.equals(discountPercent, userTours.discountPercent);
+        return Objects.equals(user, userTours.user) && Objects.equals(tour, userTours.tour) && Objects.equals(orderTime, userTours.orderTime) && status == userTours.status && Objects.equals(finalPrice, userTours.finalPrice) && Objects.equals(discountPercent, userTours.discountPercent);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, tourId, orderTime, status, finalPrice, discountPercent);
+        return Objects.hash(user, tour, orderTime, status, finalPrice, discountPercent);
     }
 
     @Override
     public String toString() {
         return "UserTours{" +
-                "userID=" + userId +
-                ", tourID=" + tourId +
+                "user=" + user +
+                ", tour=" + tour +
                 ", orderTime=" + orderTime +
                 ", status=" + status +
                 ", finalPrice=" + finalPrice +

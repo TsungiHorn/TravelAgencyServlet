@@ -1,4 +1,4 @@
-package com.colosovskyi.agency.entity;
+package com.kolosovskyi.agency.entity;
 
 public enum TourType {
     REST, SHOPPING, EXCURSION

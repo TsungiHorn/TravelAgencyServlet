@@ -1,14 +1,16 @@
-package com.colosovskyi.agency.connection;
+package com.kolosovskyi.agency.connection;
 
+import com.kolosovskyi.agency.Main;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class PostgreSQLConnectionPool {
+    private static final Logger logger = LogManager.getLogger(Main.class);
     private final HikariDataSource dataSource;
 
     private PostgreSQLConnectionPool() {
@@ -25,19 +27,7 @@ public class PostgreSQLConnectionPool {
     }
 
     public Connection getConnection() throws SQLException {
+        logger.info("GETTING CONNECTION");
         return dataSource.getConnection();
-    }
-
-    public static class Main {
-        public static void main(String[] args) throws SQLException {
-
-            Connection connection = getDBManager().getConnection();
-            PreparedStatement prepareStatement = connection.prepareStatement("SELECT * FROM role");
-            prepareStatement.executeQuery();
-            ResultSet resultSet = prepareStatement.getResultSet();
-            while (resultSet.next()) {
-                System.out.println(resultSet.getString(1) + " " + resultSet.getString(2));
-            }
-        }
     }
 }
