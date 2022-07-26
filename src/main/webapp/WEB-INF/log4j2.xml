@@ -54,33 +54,13 @@
             <AppenderRef ref="infoLog"/>
         </Logger>
 
-        <Root level="error">
+        <Logger name="com.kolosovskyi.agency.servlet" additivity="true" level="info">
+            <AppenderRef ref="errorLog"/>
+            <AppenderRef ref="infoLog"/>
+        </Logger>
+        <Root level="all">
             <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
 
 </Configuration>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
