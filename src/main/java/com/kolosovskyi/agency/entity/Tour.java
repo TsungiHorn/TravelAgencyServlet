@@ -110,11 +110,11 @@ public class Tour {
         this.personNumber = personNumber;
     }
 
-    public TourType getTypeID() {
+    public TourType getType () {
         return tourType;
     }
 
-    public void setTypeID(TourType tourType) {
+    public void setType(TourType tourType) {
         this.tourType = tourType;
     }
 

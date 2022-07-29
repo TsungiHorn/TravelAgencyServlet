@@ -1,24 +1,48 @@
 package com.kolosovskyi.agency.connection;
 
+
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class PostgreSQLConnectionPool {
+public final class PostgreSQLConnectionPool {
+
     private static final Logger LOGGER = LoggerFactory.getLogger(PostgreSQLConnectionPool.class);
     private final HikariDataSource dataSource;
+
     private PostgreSQLConnectionPool() {
         HikariConfig config = new HikariConfig(readProperties());
         dataSource = new HikariDataSource(config);
     }
+
     private static Properties readProperties() {
+        Properties properties = readPropertiesInTestEnvironment();
+        if (properties.isEmpty()) {
+            properties = readPropertiesInTomcatContainer();
+        }
+        return properties;
+    }
+
+    private static Properties readPropertiesInTestEnvironment() {
+        Properties properties = new Properties();
+        try (FileInputStream fileInputStream = new FileInputStream("src/test/resources/hikari.properties")) {
+            properties.load(fileInputStream);
+        } catch (IOException e) {
+            LOGGER.info("Can not load properties from test folder, application running in tomcat", e);
+        }
+        return properties;
+    }
+
+    private static Properties readPropertiesInTomcatContainer() {
         Properties properties;
         ClassLoader loader = Thread.currentThread().getContextClassLoader();
         try (InputStream resource = loader.getResourceAsStream("hikari.properties")) {
@@ -35,7 +59,7 @@ public class PostgreSQLConnectionPool {
         private static final PostgreSQLConnectionPool INSTANCE = new PostgreSQLConnectionPool();
     }
 
-    public static PostgreSQLConnectionPool getDBManager() {
+    public static PostgreSQLConnectionPool getInstance() {
         return ConnectionPoolHolder.INSTANCE;
     }
 

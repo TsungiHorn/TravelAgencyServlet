@@ -53,6 +53,10 @@
             <AppenderRef ref="errorLog"/>
             <AppenderRef ref="infoLog"/>
         </Logger>
+        <Logger name="com.kolosovskyi.agency.dao" additivity="true" level="info">
+            <AppenderRef ref="errorLog"/>
+            <AppenderRef ref="infoLog"/>
+        </Logger>
 
         <Root level="error">
             <AppenderRef ref="Console"/>
