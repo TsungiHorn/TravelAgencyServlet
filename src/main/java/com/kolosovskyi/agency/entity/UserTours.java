@@ -1,13 +1,13 @@
 package com.kolosovskyi.agency.entity;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.Objects;
 
 public class UserTours {
     private User user;
     private Tour tour;
-    private LocalDate orderTime;
+    private Date orderTime;  // must be DataTime
     private TourStatus status;
     private BigDecimal finalPrice;
     private Integer discountPercent;
@@ -15,7 +15,7 @@ public class UserTours {
     public UserTours() {
     }
 
-    public UserTours(User user, Tour tour, LocalDate orderTime, TourStatus status, BigDecimal finalPrice, Integer discountPercent) {
+    public UserTours(User user, Tour tour, Date orderTime, TourStatus status, BigDecimal finalPrice, Integer discountPercent) {
         this.discountPercent = discountPercent;
         this.user = user;
         this.tour = tour;
@@ -45,15 +45,15 @@ public class UserTours {
         return status;
     }
 
-    public void setStatusID(TourStatus status) {
+    public void setStatus(TourStatus status) {
         this.status = status;
     }
 
-    public LocalDate getOrderTime() {
+    public Date getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(LocalDate orderTime) {
+    public void setOrderTime(Date orderTime) {
         this.orderTime = orderTime;
     }
 

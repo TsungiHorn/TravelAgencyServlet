@@ -18,7 +18,7 @@ public class User {
         this.role = role;
     }
 
-    public User(String name, String email, Role role, Boolean isBlocked) {
+    public User(String name, String email, Role role) {
         this.email = email;
         this.name = name;
         this.role = role;

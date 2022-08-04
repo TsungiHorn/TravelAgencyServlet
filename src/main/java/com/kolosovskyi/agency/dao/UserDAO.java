@@ -13,10 +13,10 @@ import java.util.Optional;
 
 public class UserDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserDAO.class);
-    private final PostgreSQLConnectionPool pool = PostgreSQLConnectionPool.getInstance();
+    private final PostgreSQLConnectionPool pool;
 
     private UserDAO(){
-
+        pool = PostgreSQLConnectionPool.getInstance();
     }
 
     private static class UserDAOHandler{
@@ -33,14 +33,15 @@ public class UserDAO {
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setLong(3, user.getRole().ordinal());
-            statement.executeUpdate();
-            throw new SQLException();
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next())
+                user.setId(resultSet.getLong("id"));
         } catch (SQLException e) {
             LOGGER.error("Cannot create user", e);
         }
     }
 
-    public Optional<User> read(Long id){
+    public Optional<User> read(Long id){ //Optional
         User user = null;
         try(Connection connection = pool.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_FROM_USER)){
@@ -51,17 +52,17 @@ public class UserDAO {
                 user = new User(id, resultSet.getString("name"), resultSet.getString("email"), Role.values()[(int) resultSet.getLong("role_id")]);
             }
         }catch(SQLException e){
-            LOGGER.error("Cannot read tour ", e);
+            LOGGER.error("Cannot read user ", e);
         }
         return Optional.ofNullable(user);
     }
 
-    public void update(User user) {
+    public void update(User user, String name, String email, Role role) {
         try(Connection connection = pool.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQLConstance.UPDATE_USER)){
-            statement.setString(1, user.getName());
-            statement.setString(2, user.getName());
-            statement.setLong(3, user.getRole().ordinal());
+            statement.setString(1, name);
+            statement.setString(2, email);
+            statement.setLong(3, role.ordinal());
             statement.setLong(4, user.getId());
             statement.executeUpdate();
         }catch (SQLException e){

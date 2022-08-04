@@ -14,9 +14,11 @@ import java.util.Optional;
 
 public class DiscountDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger(DiscountDAO.class);
-    private final PostgreSQLConnectionPool pool = PostgreSQLConnectionPool.getInstance();
+    private final PostgreSQLConnectionPool pool;
 
-    private DiscountDAO(){}
+    private DiscountDAO(){
+        pool = PostgreSQLConnectionPool.getInstance();
+    }
 
     private static class DiscountDAOHandler{
         private static final DiscountDAO INSTANCE = new DiscountDAO();
@@ -30,8 +32,10 @@ public class DiscountDAO {
              PreparedStatement statement = connection.prepareStatement(SQLConstance.INSERT_INTO_DISCOUNT)){
             statement.setInt(1, discount.getStep());
             statement.setInt(2, discount.getMaxPercent());
-            statement.executeUpdate();
-            throw new SQLException();
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next())
+                discount.setId(resultSet.getLong("id"));
+            discount.setId(resultSet.getLong("id"));
         } catch (SQLException e) {
             LOGGER.error("Cannot create discount", e);
         }
@@ -55,11 +59,11 @@ public class DiscountDAO {
         return Optional.ofNullable(discount);
     }
 
-    public void update(Discount discount) {
+    public void update(Discount discount, Integer step, Integer maxPercent) {
         try(Connection connection = pool.getConnection();
         PreparedStatement statement = connection.prepareStatement(SQLConstance.UPDATE_DISCOUNT)){
-        statement.setLong(1, discount.getStep());
-        statement.setLong(2, discount.getMaxPercent());
+        statement.setInt(1, step);
+        statement.setInt(2, maxPercent);
         statement.setLong(3, discount.getId());
         statement.executeUpdate();
         }catch (SQLException e){
@@ -72,7 +76,7 @@ public class DiscountDAO {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLConstance.DELETE_DISCOUNT)) {
             statement.setLong(1, discount.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Cannot delete discount", e);
             e.printStackTrace();
