@@ -6,9 +6,6 @@ import com.kolosovskyi.agency.entity.TourType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-import javax.swing.text.html.Option;
-import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,7 +56,12 @@ public class TourDAO {
             statement.executeQuery();
             ResultSet resultSet = statement.getResultSet();
             if(resultSet.next()){
-                tour = new Tour(id, resultSet.getString("title"), TourType.values()[(int) resultSet.getLong("type_id")], resultSet.getLong("person_number"), resultSet.getInt("hotel_stars"), resultSet.getBigDecimal("price"), resultSet.getBoolean("is_hot"), resultSet.getBoolean("is_hidden"), resultSet.getString("country"), resultSet.getString("city"));
+                tour = new Tour(id, resultSet.getString("title"),
+                        TourType.values()[(int) resultSet.getLong("type_id")],
+                        resultSet.getLong("person_number"), resultSet.getInt("hotel_stars"),
+                        resultSet.getBigDecimal("price"), resultSet.getBoolean("is_hot"),
+                        resultSet.getBoolean("is_hidden"), resultSet.getString("country"),
+                        resultSet.getString("city"));
             }
         }catch(SQLException e){
             LOGGER.error("Cannot read tour ", e);
@@ -67,19 +69,18 @@ public class TourDAO {
         return Optional.ofNullable(tour);
     }
 
-    public void update(Tour tour, String title, TourType tourType, Long personNumber, Integer hotelStars, BigDecimal price, Boolean isHot,
-                       Boolean isHidden, String country, String city){
+    public void update(Tour tour){
         try(Connection connection = pool.getConnection();
         PreparedStatement statement = connection.prepareStatement(SQLConstance.UPDATE_TOUR)){
-            statement.setString(1, title);
-            statement.setLong(2, tourType.ordinal());
-            statement.setLong(3, personNumber);
-            statement.setInt(4, hotelStars);
-            statement.setBigDecimal(5, price);
-            statement.setBoolean(6, isHot);
-            statement.setBoolean(7, isHidden);
-            statement.setString(8, country);
-            statement.setString(9, city);
+            statement.setString(1, tour.getTitle());
+            statement.setLong(2, tour.getType().ordinal());
+            statement.setLong(3, tour.getPersonNumber());
+            statement.setInt(4, tour.getHotelStars());
+            statement.setBigDecimal(5, tour.getPrice());
+            statement.setBoolean(6, tour.getHot());
+            statement.setBoolean(7, tour.getHidden());
+            statement.setString(8, tour.getCountry());
+            statement.setString(9, tour.getCity());
             statement.setLong(10, tour.getId());
             statement.executeUpdate();
         }catch(SQLException e){
@@ -87,7 +88,8 @@ public class TourDAO {
         }
     }
     public void delete(Tour tour){
-        try(Connection connection = pool.getConnection(); PreparedStatement statement = connection.prepareStatement(SQLConstance.DELETE_TOUR)){
+        try(Connection connection = pool.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQLConstance.DELETE_TOUR)){
             statement.setLong(1, tour.getId());
             statement.executeUpdate();
         }

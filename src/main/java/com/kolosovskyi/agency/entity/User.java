@@ -7,21 +7,32 @@ public class User {
     private String name;
     private String email;
     private Role role;
+    private Boolean isBlocked;
 
     public User() {
     }
 
-    public User(Long id, String name, String email, Role role) {
+    public User(Long id, String name, String email, Role role, Boolean isBlocked) {
         this.id = id;
         this.email = email;
         this.name = name;
         this.role = role;
+        this.isBlocked = isBlocked;
     }
 
-    public User(String name, String email, Role role) {
+    public User(String name, String email, Role role, Boolean isBlocked) {
         this.email = email;
         this.name = name;
         this.role = role;
+        this.isBlocked = isBlocked;
+    }
+
+    public Boolean getBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(Boolean blocked) {
+        isBlocked = blocked;
     }
 
     public Long getId() {

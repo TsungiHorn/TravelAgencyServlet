@@ -59,11 +59,11 @@ public class DiscountDAO {
         return Optional.ofNullable(discount);
     }
 
-    public void update(Discount discount, Integer step, Integer maxPercent) {
+    public void update(Discount discount) {
         try(Connection connection = pool.getConnection();
         PreparedStatement statement = connection.prepareStatement(SQLConstance.UPDATE_DISCOUNT)){
-        statement.setInt(1, step);
-        statement.setInt(2, maxPercent);
+        statement.setInt(1, discount.getStep());
+        statement.setInt(2, discount.getMaxPercent());
         statement.setLong(3, discount.getId());
         statement.executeUpdate();
         }catch (SQLException e){

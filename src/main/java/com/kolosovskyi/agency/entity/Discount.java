@@ -51,7 +51,8 @@ public class Discount {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Discount discount = (Discount) o;
-        return Objects.equals(id, discount.id) && Objects.equals(step, discount.step) && Objects.equals(maxPercent, discount.maxPercent);
+        return Objects.equals(id, discount.id) && Objects.equals(step, discount.step)
+                && Objects.equals(maxPercent, discount.maxPercent);
     }
 
     @Override

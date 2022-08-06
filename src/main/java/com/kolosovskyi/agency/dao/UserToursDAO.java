@@ -1,6 +1,7 @@
 package com.kolosovskyi.agency.dao;
 
 import com.kolosovskyi.agency.connection.PostgreSQLConnectionPool;
+import com.kolosovskyi.agency.entity.Tour;
 import com.kolosovskyi.agency.entity.TourStatus;
 import com.kolosovskyi.agency.entity.User;
 import com.kolosovskyi.agency.entity.UserTours;
@@ -35,7 +36,7 @@ public class UserToursDAO {
             statement.setLong(3, userTours.getDiscountPercent());
             statement.setBigDecimal(4, userTours.getFinalPrice());
             statement.setLong(5, userTours.getStatus().ordinal());
-            statement.setDate(6, userTours.getOrderTime());
+            statement.setDate(6, Date.valueOf(userTours.getOrderTime()));
             statement.executeUpdate();
         }catch (SQLException e){
             LOGGER.error("Cannot create user tours", e);
@@ -52,11 +53,11 @@ public class UserToursDAO {
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 temp = new UserTours();
-                temp.setUser(UserDAO.getUserDAO().read(resultSet.getLong("user_id")).get());
-                temp.setTour(TourDAO.getTourDAO().read(resultSet.getLong("tour_id")).get());
+                temp.setUser(UserDAO.getUserDAO().read(resultSet.getLong("user_id")).orElse(new User()));
+                temp.setTour(TourDAO.getTourDAO().read(resultSet.getLong("tour_id")).orElse(new Tour()));
                 temp.setDiscountPercent(resultSet.getInt("discount_percent"));
                 temp.setFinalPrice(resultSet.getBigDecimal("final_price"));
-                temp.setOrderTime(resultSet.getDate("order_time"));
+                temp.setOrderTime(resultSet.getDate("order_time").toLocalDate());
                 temp.setStatus(TourStatus.values()[(int)resultSet.getLong("status_id")]);
                 userTours.add(temp);
             }
@@ -65,15 +66,16 @@ public class UserToursDAO {
         }
         return Optional.of(userTours);
     }
-     public void update(UserTours userTours){
+     public void update(UserTours userTours){                       //will fix
         try(Connection connection = pool.getConnection();
         PreparedStatement statement = connection.prepareStatement(SQLConstance.UPDATE_USER_TOURS)) {
-            statement.setLong(1, userTours.getTour().getId());
-            statement.setInt(2, userTours.getDiscountPercent());
-            statement.setBigDecimal(3, userTours.getFinalPrice());
-            statement.setLong(4, userTours.getStatus().ordinal());
-            statement.setDate(5, userTours.getOrderTime());
-            statement.setLong(6, userTours.getUser().getId());
+            statement.setLong(1, userTours.getUser().getId());
+            statement.setLong(2, userTours.getTour().getId());
+            statement.setInt(3, userTours.getDiscountPercent());
+            statement.setBigDecimal(4, userTours.getFinalPrice());
+            statement.setLong(5, userTours.getStatus().ordinal());
+            statement.setDate(6, Date.valueOf(userTours.getOrderTime()));
+            statement.setLong(7, userTours.getUser().getId());
 
             statement.executeUpdate();
         }catch (SQLException e){

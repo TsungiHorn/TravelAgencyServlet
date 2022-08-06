@@ -1,13 +1,13 @@
 package com.kolosovskyi.agency.entity;
 
 import java.math.BigDecimal;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class UserTours {
     private User user;
     private Tour tour;
-    private Date orderTime;  // must be DataTime
+    private LocalDate orderTime;
     private TourStatus status;
     private BigDecimal finalPrice;
     private Integer discountPercent;
@@ -15,7 +15,11 @@ public class UserTours {
     public UserTours() {
     }
 
-    public UserTours(User user, Tour tour, Date orderTime, TourStatus status, BigDecimal finalPrice, Integer discountPercent) {
+    public UserTours(User user, Tour tour,
+                     LocalDate orderTime,
+                     TourStatus status,
+                     BigDecimal finalPrice,
+                     Integer discountPercent) {
         this.discountPercent = discountPercent;
         this.user = user;
         this.tour = tour;
@@ -49,11 +53,11 @@ public class UserTours {
         this.status = status;
     }
 
-    public Date getOrderTime() {
+    public LocalDate getOrderTime() {
         return orderTime;
     }
 
-    public void setOrderTime(Date orderTime) {
+    public void setOrderTime(LocalDate orderTime) {
         this.orderTime = orderTime;
     }
 
@@ -77,8 +81,13 @@ public class UserTours {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserTours userTours = (UserTours) o;
-        return Objects.equals(user, userTours.user) && Objects.equals(tour, userTours.tour) && Objects.equals(orderTime, userTours.orderTime) && status == userTours.status && Objects.equals(finalPrice, userTours.finalPrice) && Objects.equals(discountPercent, userTours.discountPercent);
+
+        return user.equals(((UserTours)o).user )&&
+                tour.equals(((UserTours)o).tour) &&
+                orderTime.equals(((UserTours)o).orderTime) &&
+                status.equals(((UserTours)o).status )&&
+                finalPrice.equals(((UserTours)o).finalPrice) &&
+                discountPercent.equals(((UserTours)o).discountPercent);
     }
 
     @Override

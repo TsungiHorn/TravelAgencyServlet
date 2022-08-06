@@ -9,13 +9,13 @@ public final class SQLConstance {
     public static final String GET_INTO_TOUR = "SELECT id, title, type_id, person_number, hotel_stars, price, is_hot, is_hidden, country, city FROM tour WHERE id = ?";
     public static final String UPDATE_TOUR = "UPDATE tour SET title = ?, type_id = ?, person_number = ?, hotel_stars = ?, price = ?, is_hot = ?, is_hidden = ?, country = ?, city = ? WHERE id = ?";
     public static final String DELETE_TOUR = "DELETE FROM tour WHERE id = ?";
-    public static final String INSERT_INTO_USER = "INSERT INTO \"user\"(name, email, role_id) VALUES(?, ?, ?) RETURNING id";
-    public static final String GET_FROM_USER = "SELECT id, name, email, role_id FROM \"user\" WHERE id = ?";
-    public static final String UPDATE_USER = "UPDATE \"user\" SET name = ?, email = ?, role_id = ? WHERE id = ?";
+    public static final String INSERT_INTO_USER = "INSERT INTO \"user\"(name, email, role_id, is_blocked) VALUES(?, ?, ?, ?) RETURNING id";
+    public static final String GET_FROM_USER = "SELECT id, name, email, role_id, is_blocked FROM \"user\" WHERE id = ?";
+    public static final String UPDATE_USER = "UPDATE \"user\" SET name = ?, email = ?, role_id = ?, is_blocked = ? WHERE id = ?";
     public static final String DELETE_USER = "DELETE FROM \"user\" WHERE id = ?";
     public static final String INSERT_INTO_USER_TOURS = "INSERT INTO user_tours(user_id, tour_id, discount_percent, final_price, status_id, order_time) VALUES(?,?,?,?,?,?)";
     public static final String  GET_USER_TOURS = "SELECT user_id, tour_id, discount_percent, final_price, status_id, order_time FROM user_tours WHERE user_id = ?";
-    public static final String UPDATE_USER_TOURS = "UPDATE user_tours SET tour_id = ?, discount_percent = ?, final_price = ?, status_id = ?, order_time = ? WHERE user_id = ?";
+    public static final String UPDATE_USER_TOURS = "UPDATE user_tours SET user_id = ?, tour_id = ?, discount_percent = ?, final_price = ?, status_id = ?, order_time = ? WHERE user_id = ?";
     public static final String DELETE_USER_TOURS = "DELETE FROM user_tours WHERE user_id = ?, tour_id = ?";
     public static final String DROP_DISCOUNT = "DROP TABLE discount";
     public static final String DROP_USER = "DROP TABLE \"user\" CASCADE";

@@ -33,6 +33,7 @@ public class UserDAO {
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setLong(3, user.getRole().ordinal());
+            statement.setBoolean(4, user.getBlocked());
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next())
                 user.setId(resultSet.getLong("id"));
@@ -49,7 +50,10 @@ public class UserDAO {
             statement.executeQuery();
             ResultSet resultSet = statement.getResultSet();
             if(resultSet.next()){
-                user = new User(id, resultSet.getString("name"), resultSet.getString("email"), Role.values()[(int) resultSet.getLong("role_id")]);
+                user = new User(id, resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        Role.values()[(int) resultSet.getLong("role_id")],
+                        resultSet.getBoolean("is_blocked"));
             }
         }catch(SQLException e){
             LOGGER.error("Cannot read user ", e);
@@ -57,13 +61,14 @@ public class UserDAO {
         return Optional.ofNullable(user);
     }
 
-    public void update(User user, String name, String email, Role role) {
+    public void update(User user) {
         try(Connection connection = pool.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQLConstance.UPDATE_USER)){
-            statement.setString(1, name);
-            statement.setString(2, email);
-            statement.setLong(3, role.ordinal());
-            statement.setLong(4, user.getId());
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getEmail());
+            statement.setLong(3, user.getRole().ordinal());
+            statement.setBoolean(4, user.getBlocked());
+            statement.setLong(5, user.getId());
             statement.executeUpdate();
         }catch (SQLException e){
             LOGGER.error("Cannot update user", e);
@@ -75,7 +80,7 @@ public class UserDAO {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLConstance.DELETE_USER)) {
             statement.setLong(1, user.getId());
-            statement.executeQuery();
+            statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Cannot delete user", e);
             e.printStackTrace();

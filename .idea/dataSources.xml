@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="TravelAgencyDataBase@localhost" uuid="2d1ee506-19c6-41d8-a7f8-258b15cc37a8">
+    <data-source source="LOCAL" name="TravelAgencyDataBase@localhost" uuid="c756cfbe-7820-4327-b0ac-b876a5972712">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/TravelAgencyDataBase</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
+    <data-source source="LOCAL" name="TravelAgencyDataBaseTest@localhost" uuid="1c3c0a84-58a8-4b7a-85ed-c816f2698e85">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/TravelAgencyDataBaseTest</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
