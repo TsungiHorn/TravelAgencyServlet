@@ -71,7 +71,6 @@ public class DiscountDAO {
         }
     }
 
-
     public void delete(Discount discount) {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLConstance.DELETE_DISCOUNT)) {

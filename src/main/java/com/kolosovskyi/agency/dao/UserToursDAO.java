@@ -43,9 +43,9 @@ public class UserToursDAO {
         }
     }
 
-    public Optional<List<UserTours>> read(User user){
+    public List<UserTours> read(User user){
         ArrayList<UserTours> userTours = new ArrayList<>();
-        UserTours temp = null;
+        UserTours temp;
         try(Connection connection = pool.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_USER_TOURS);
         ){
@@ -64,7 +64,7 @@ public class UserToursDAO {
         }catch (SQLException e){
             LOGGER.error("Cannot create user tours", e);
         }
-        return Optional.of(userTours);
+        return userTours;
     }
      public void update(UserTours userTours){                       //will fix
         try(Connection connection = pool.getConnection();

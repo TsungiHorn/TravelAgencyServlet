@@ -1,6 +1,7 @@
 package com.kolosovskyi.agency.dao;
 
 public final class SQLConstance {
+    public static final String SELECT_ALL_TOURS = "SELECT * FROM tour";
     public static final String INSERT_INTO_DISCOUNT = "INSERT INTO discount(step, max_percent) VALUES (?, ?) RETURNING id";
     public static final String GET_FROM_DISCOUNT_BY_ID = "SELECT id, step ,max_percent FROM discount WHERE id = ?";
     public static final String UPDATE_DISCOUNT = "UPDATE discount SET step = ?, max_percent = ? WHERE id = ?";

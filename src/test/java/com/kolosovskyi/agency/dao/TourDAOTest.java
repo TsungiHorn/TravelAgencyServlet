@@ -65,9 +65,9 @@ class TourDAOTest {
 
     @Test
     void createAndReadTest() {
-        dao.crate(tour1);
-        dao.crate(tour2);
-        dao.crate(tour3);
+        dao.create(tour1);
+        dao.create(tour2);
+        dao.create(tour3);
 
         assertEquals(tour1, dao.read(1L).orElse(new Tour()));
         assertEquals(tour2, dao.read(2L).orElse(new Tour()));
@@ -76,9 +76,9 @@ class TourDAOTest {
 
     @Test
     void updateTest(){
-        dao.crate(tour1);
-        dao.crate(tour2);
-        dao.crate(tour3);
+        dao.create(tour1);
+        dao.create(tour2);
+        dao.create(tour3);
 
         tour1.setTitle("Jubaba");
         tour1.setType(TourType.REST);
@@ -123,9 +123,9 @@ class TourDAOTest {
 
     @Test
     void deleteTest(){
-        dao.crate(tour1);
-        dao.crate(tour2);
-        dao.crate(tour3);
+        dao.create(tour1);
+        dao.create(tour2);
+        dao.create(tour3);
 
         dao.delete(tour1);
         dao.delete(tour2);
