@@ -25,9 +25,9 @@ class UserDAOTest {
 
     @BeforeEach
     void start() {
-        user1 = new User("Andrey", "kolos@gmail.com", Role.USER, false);
-        user2 = new User("Andrey", "shamashi@gmail.com", Role.ADMIN, false);
-        user3 = new User("Alex", "lolashipan@gmil.com", Role.USER, false);
+        user1 = new User("Andrey", "kolos@gmail.com", "qwser32", Role.USER, false);
+        user2 = new User("Andrey", "shamashi@gmail.com", "asxz34f", Role.ADMIN, false);
+        user3 = new User("Alex", "lolashipan@gmil.com","asxz34f", Role.USER, false);
 
         try (Connection connection = POOL.getConnection()) {
             PreparedStatement statement1 = connection.prepareStatement(SQLConstance.CREATE_USER_TABLE);
@@ -58,6 +58,7 @@ class UserDAOTest {
 
         user1.setName("Andrey");
         user1.setEmail("qwert@gmail.com");
+        user1.setPassword("asdfgh");
         user1.setRole(Role.MANAGER);
         user2.setName("Andrew");
         user2.setEmail("shamashi@gmail.com");

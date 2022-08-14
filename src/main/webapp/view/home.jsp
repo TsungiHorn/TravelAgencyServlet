@@ -48,7 +48,7 @@
                 <p class="fs-5">To start choosing tours, click <a href="${pageContext.request.contextPath}/catalog">here</a> or the "Catalog" button at the top.</p>
                 <p>We are operators of tours in more than 30 countries. We will be happy to help you choose a tour! But for this you need to log in.</p>
                 <p>
-                    <a class="btn btn-primary" href="/docs/5.2/components/navbar/#offcanvas" role="button">Login here</a>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/login" role="button">Login here</a>
                 </p>
             </div>
         </div>

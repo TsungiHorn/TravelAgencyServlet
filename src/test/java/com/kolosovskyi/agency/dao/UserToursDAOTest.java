@@ -30,10 +30,12 @@ class UserToursDAOTest {
     void start() {
         user1 = new User("Aoaoao",
                 "qazxswedc@gmail.com",
+                "qwesc5",
                 Role.USER,
                 false);
         user2 = new User("Sosa",
                 "sosa@gmail.com",
+                "q12wesc5",
                 Role.USER,
                 false);
         Tour tour1 = new Tour("Jubaba",
@@ -134,44 +136,44 @@ class UserToursDAOTest {
         assertNotEquals(userTours1, userToursDAO.read(user2).get(1));
         assertNotEquals(userTours3, userToursDAO.read(user2).get(0));
     }
-    @Test
-    void updateTest(){
-        userToursDAO.create(userTours1);
-        userToursDAO.create(userTours2);
-        userToursDAO.create(userTours3);
-
-        user1.setName("Andrey");
-        user1.setEmail("qwert@gmail.com");
-        user1.setRole(Role.MANAGER);
-
-        user2.setName("Andrew");
-        user2.setEmail("shamashi@gmail.com");
-        user2.setRole(Role.ADMIN);
-
-        assertNotEquals(userTours1, userToursDAO.read(user1).get(0));
-        assertNotEquals(userTours2, userToursDAO.read(user2).get(0));
-        assertNotEquals(userTours3, userToursDAO.read(user2).get(1));
-
-        userDAO.update(user1);
-        userDAO.update(user2);
-
-        assertEquals(userTours1, userToursDAO.read(user1).get(0));
-        assertEquals(userTours2, userToursDAO.read(user2).get(0));
-        assertEquals(userTours3, userToursDAO.read(user2).get(1));
-
-        userTours1.setUser(user2);
-        userToursDAO.update(userTours1);
-        assertEquals(userTours1, userToursDAO.read(user2).get(0));
-
-//        userTours2.setUser(user1);
-//        userToursDAO.update(userTours2);
-//        assertEquals(userTours2, userToursDAO.read(user1).get().get(0));
-
-        userTours3.setUser(user2);
-        userToursDAO.update(userTours1);
-        assertEquals(userTours1, userToursDAO.read(user1).get(0));
-
-    }
+//    @Test
+//    void updateTest(){
+//        userToursDAO.create(userTours1);
+//        userToursDAO.create(userTours2);
+//        userToursDAO.create(userTours3);
+//
+//        user1.setName("Andrey");
+//        user1.setEmail("qwert@gmail.com");
+//        user1.setRole(Role.MANAGER);
+//
+//        user2.setName("Andrew");
+//        user2.setEmail("shamashi@gmail.com");
+//        user2.setRole(Role.ADMIN);
+//
+//        assertNotEquals(userTours1, userToursDAO.read(user1).get(0));
+//        assertNotEquals(userTours2, userToursDAO.read(user2).get(0));
+//        assertNotEquals(userTours3, userToursDAO.read(user2).get(1));
+//
+//        userDAO.update(user1);
+//        userDAO.update(user2);
+//
+//        assertEquals(userTours1, userToursDAO.read(user1).get(0));
+//        assertEquals(userTours2, userToursDAO.read(user2).get(0));
+//        assertEquals(userTours3, userToursDAO.read(user2).get(1));
+//
+//        userTours1.setUser(user2);
+//        userToursDAO.update(userTours1);
+//        assertEquals(userTours1, userToursDAO.read(user2).get(0));
+//
+////        userTours2.setUser(user1);
+////        userToursDAO.update(userTours2);
+////        assertEquals(userTours2, userToursDAO.read(user1).get().get(0));
+//
+//        userTours3.setUser(user2);
+//        userToursDAO.update(userTours1);
+//        assertEquals(userTours1, userToursDAO.read(user1).get(0));
+//
+//    }
     @Test
     void deleteTest(){
         userToursDAO.create(userTours1);

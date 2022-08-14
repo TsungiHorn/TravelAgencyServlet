@@ -6,33 +6,37 @@ public class User {
     private Long id;
     private String name;
     private String email;
+    private String password;
     private Role role;
     private Boolean isBlocked;
 
     public User() {
     }
 
-    public User(Long id, String name, String email, Role role, Boolean isBlocked) {
+    public User(Long id, String name, String email, String password, Role role, Boolean isBlocked) {
         this.id = id;
         this.email = email;
+        this.password = password;
         this.name = name;
         this.role = role;
         this.isBlocked = isBlocked;
+
     }
 
-    public User(String name, String email, Role role, Boolean isBlocked) {
+    public User(String name, String email, String password, Role role, Boolean isBlocked) {
         this.email = email;
         this.name = name;
+        this.password = password;
         this.role = role;
         this.isBlocked = isBlocked;
     }
 
-    public Boolean getBlocked() {
-        return isBlocked;
+    public String getPassword() {
+        return password;
     }
 
-    public void setBlocked(Boolean blocked) {
-        isBlocked = blocked;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Long getId() {
@@ -67,17 +71,25 @@ public class User {
         this.role = role;
     }
 
+    public Boolean getBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(Boolean blocked) {
+        isBlocked = blocked;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && role == user.role;
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && role == user.role && Objects.equals(isBlocked, user.isBlocked);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, role);
+        return Objects.hash(id, name, email, password, role, isBlocked);
     }
 
     @Override
@@ -86,7 +98,9 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
                 ", role=" + role +
+                ", isBlocked=" + isBlocked +
                 '}';
     }
 }

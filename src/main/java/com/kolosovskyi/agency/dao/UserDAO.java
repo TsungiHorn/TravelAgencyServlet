@@ -32,8 +32,9 @@ public class UserDAO {
              PreparedStatement statement = connection.prepareStatement(SQLConstance.INSERT_INTO_USER)){
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
-            statement.setLong(3, user.getRole().ordinal());
-            statement.setBoolean(4, user.getBlocked());
+            statement.setString(3, user.getPassword());
+            statement.setLong(4, user.getRole().ordinal());
+            statement.setBoolean(5, user.getBlocked());
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next())
                 user.setId(resultSet.getLong("id"));
@@ -42,7 +43,7 @@ public class UserDAO {
         }
     }
 
-    public Optional<User> read(Long id){ //Optional
+    public Optional<User> read(Long id){
         User user = null;
         try(Connection connection = pool.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_FROM_USER)){
@@ -52,6 +53,7 @@ public class UserDAO {
             if(resultSet.next()){
                 user = new User(id, resultSet.getString("name"),
                         resultSet.getString("email"),
+                        resultSet.getString("password"),
                         Role.values()[(int) resultSet.getLong("role_id")],
                         resultSet.getBoolean("is_blocked"));
             }
@@ -66,9 +68,10 @@ public class UserDAO {
             PreparedStatement statement = connection.prepareStatement(SQLConstance.UPDATE_USER)){
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
-            statement.setLong(3, user.getRole().ordinal());
-            statement.setBoolean(4, user.getBlocked());
-            statement.setLong(5, user.getId());
+            statement.setString(3, user.getPassword());
+            statement.setLong(4, user.getRole().ordinal());
+            statement.setBoolean(5, user.getBlocked());
+            statement.setLong(6, user.getId());
             statement.executeUpdate();
         }catch (SQLException e){
             LOGGER.error("Cannot update user", e);

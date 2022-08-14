@@ -3,8 +3,6 @@ w
 G.idea/sonarlint/issuestore/3/a/3a7a0c9833c26bc4ade161115760c16f2c225871,d\f\df769a265d404e45c1eeff5fa2b11f5d7af45830
 w
 G.idea/sonarlint/issuestore/8/c/8c48bef62ac5913a4082852f5cf60d706259f390,3\0\301daf9f0cc84132e4fe675d780ad40679291179
-}
-Msrc/main/java/com/kolosovskyi/agency/connection/PostgreSQLConnectionPool.java,c\c\cc9d8704429124c2df7817d05b05b0413c11f0a3
 k
 ;src/main/java/com/kolosovskyi/agency/entity/TourStatus.java,4\2\4268fad0fef6301baeae3d05230b21ce8abcb173
 i
@@ -14,18 +12,18 @@ A
 i
 9src/main/java/com/kolosovskyi/agency/entity/Discount.java,7\f\7f87a51f6fc6aa3d21334445017c98bc6453d4ae
 e
-5src/main/java/com/kolosovskyi/agency/entity/User.java,6\c\6c9e3870c826ede78b24b3c27afc1a1627641f9d
-e
-5src/main/java/com/kolosovskyi/agency/dao/UserDAO.java,1\9\19c35e784bba77916268909992553300dd9786c2
-i
-9src/test/java/com/kolosovskyi/agency/dao/UserDAOTest.java,d\a\da3f03bdafe9348f9bc38574abfcbf330fade83e
-e
 5src/main/java/com/kolosovskyi/agency/entity/Role.java,9\8\98955e2c4038d3d636c3e15de5d32f4731e49c58
 C
 database/schema.sql,8\c\8c48bef62ac5913a4082852f5cf60d706259f390
 j
 :src/main/java/com/kolosovskyi/agency/entity/UserTours.java,d\d\dd224c93f1bcdfdb3521381703eabb851843a31d
-m
-=src/test/java/com/kolosovskyi/agency/dao/DiscountDAOTest.java,a\8\a8d8ce3f661665faf9d54f34b44c3346197f1de9
 e
 5src/main/java/com/kolosovskyi/agency/entity/Tour.java,1\0\10d3c4d3fdd1a12102616395682c8287d894b61b
+i
+9src/main/java/com/kolosovskyi/agency/dao/DiscountDAO.java,7\3\739d766d02e6714d8191750bbfd18606d8995c02
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+e
+5src/main/java/com/kolosovskyi/agency/dao/TourDAO.java,1\e\1ec9693d1d03f24a72863dd2062955d3a879d721
+O
+src/main/webapp/WEB-INF/web.xml,2\e\2e22b6edd746fa3dc40ad7276c87c8d87d72a392
