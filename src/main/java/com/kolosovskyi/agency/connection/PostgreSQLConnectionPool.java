@@ -24,9 +24,9 @@ public final class PostgreSQLConnectionPool {
     }
 
     private static Properties readProperties() {
-        Properties properties = readPropertiesInTestEnvironment();
+        Properties properties = readPropertiesInTomcatContainer();
         if (properties.isEmpty()) {
-            properties = readPropertiesInTomcatContainer();
+            properties = readPropertiesInTestEnvironment();
         }
         return properties;
     }

@@ -1,5 +1,6 @@
 package com.kolosovskyi.agency.servlet;
 
+import com.kolosovskyi.agency.dao.UserDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,12 +9,20 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+    private static final UserDAO USER_DAO = UserDAO.getUserDAO();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
-        rd.forward(request, response);
+        if (USER_DAO.isExistingLogin(request.getParameter("email"), request.getParameter("password"))) {
+            RequestDispatcher rd = request.getRequestDispatcher("/view/home.jsp");
+            rd.forward(request, response);
+        }else{
+            RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
+            rd.forward(request, response);
+        }
     }
 
     @Override

@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Login</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -24,11 +24,11 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/servlet">
+                <a class="nav-link" href="${pageContext.request.contextPath}/catalog">
                     <font color="#f0f8ff">Catalog</font></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><font color="#f0f8ff">Account</font></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/login"><font color="#f0f8ff">Account</font></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"><font color="#f0f8ff">Pricing</font></a>
@@ -123,16 +123,16 @@
     }
 </style>
 <div class="p-x-1 p-y-3">
-    <form class="card card-block m-x-auto bg-faded form-width">
+    <form action="<%= request.getContextPath() %>/login" method="get" class="card card-block m-x-auto bg-faded form-width">
         <legend class="m-b-1 text-xs-center">Login</legend>
         <div class="form-group input-group">
  <span class="has-float-label">
- <input class="form-control" id="first" type="text" placeholder="email"/>
+ <input class="form-control" id="first" type="text" placeholder="email" name="email"/>
  <label for="first">email</label>
  </span>
         </div>
         <div class="form-group has-float-label">
-            <input class="form-control" id="password" type="password" placeholder="••••••••"/>
+            <input class="form-control" id="password" type="password" placeholder="••••••••" name="password"/>
             <label for="password">password</label>
         </div>
 
@@ -143,7 +143,7 @@
         <div class="modal-footer">
             <div class="forgot login-footer">
  <span>Looking to
- <a href="${pageContext.request.contextPath}/registration">create an account</a>
+ <a href="${pageContext.request.contextPath}/view/registration.jsp">create an account</a>
  ?</span>
             </div>
         </div>

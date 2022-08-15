@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Registration</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -24,11 +24,11 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/servlet">
+                <a class="nav-link" href="${pageContext.request.contextPath}/catalog">
                     <font color="#f0f8ff">Catalog</font></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><font color="#f0f8ff">Account</font></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/login"><font color="#f0f8ff">Account</font></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"><font color="#f0f8ff">Pricing</font></a>
@@ -47,11 +47,16 @@
         </ul>
     </div>
 </nav>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"/>
 <style>
-    .form-width {max-width: 25rem;}
+    .form-width {
+        max-width: 25rem;
+    }
+
     .has-float-label {
-        position: relative; }
+        position: relative;
+    }
+
     .has-float-label label {
         position: absolute;
         left: 0;
@@ -65,7 +70,9 @@
         left: 0.75rem;
         z-index: 3;
         line-height: 1;
-        padding: 0 1px; }
+        padding: 0 1px;
+    }
+
     .has-float-label label::after {
         content: " ";
         display: block;
@@ -75,32 +82,47 @@
         top: 50%;
         left: -.2em;
         right: -.2em;
-        z-index: -1; }
+        z-index: -1;
+    }
+
     .has-float-label .form-control::-webkit-input-placeholder {
         opacity: 1;
         -webkit-transition: all .2s;
-        transition: all .2s; }
+        transition: all .2s;
+    }
+
     .has-float-label .form-control:placeholder-shown:not(:focus)::-webkit-input-placeholder {
-        opacity: 0; }
+        opacity: 0;
+    }
+
     .has-float-label .form-control:placeholder-shown:not(:focus) + label {
         font-size: 150%;
         opacity: .5;
-        top: .3em; }
+        top: .3em;
+    }
 
     .input-group .has-float-label {
-        display: table-cell; }
+        display: table-cell;
+    }
+
     .input-group .has-float-label .form-control {
-        border-radius: 0.25rem; }
+        border-radius: 0.25rem;
+    }
+
     .input-group .has-float-label:not(:last-child) .form-control {
         border-bottom-right-radius: 0;
-        border-top-right-radius: 0; }
+        border-top-right-radius: 0;
+    }
+
     .input-group .has-float-label:not(:first-child) .form-control {
         border-bottom-left-radius: 0;
         border-top-left-radius: 0;
-        margin-left: -1px; }
+        margin-left: -1px;
+    }
 </style>
 <div class="p-x-1 p-y-3">
-    <form class="card card-block m-x-auto bg-faded form-width">
+    <form action="<%= request.getContextPath() %>/registration" method="post"
+          class="card card-block m-x-auto bg-faded form-width">
         <legend class="m-b-1 text-xs-center">Registration</legend>
         <div class="form-group input-group">
  <span class="has-float-label">
@@ -111,20 +133,18 @@
         <div class="form-group input-group">
             <span class="input-group-addon">@</span>
             <span class="has-float-label">
- <input class="form-control" id="email" type="email" placeholder="name@example.com"/>
+ <input class="form-control" id="email" type="text" placeholder="name@example.com" name="email"/>
  <label for="email">E-mail</label>
  </span>
         </div>
         <div class="form-group has-float-label">
-            <input class="form-control" id="password" type="password" placeholder="••••••••"/>
+            <input class="form-control" id="password" type="text" placeholder="••••••••" name="password"/>
             <label for="password">password</label>
         </div>
         <div class="form-group">
-            <label class="custom-control custom-checkbox">
-                <input class="custom-control-input" type="checkbox"/>
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Receive news</span>
-            </label>
+                <span>Already have an account?
+ <a href="${pageContext.request.contextPath}/view/login.jsp">Login</a>
+ </span>
         </div>
         <div class="text-xs-center">
             <button class="btn btn-block btn-primary" type="submit">Create an account</button>

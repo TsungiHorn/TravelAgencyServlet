@@ -25,11 +25,11 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/servlet">
+                <a class="nav-link" href="${pageContext.request.contextPath}/catalog">
                     <font color="#f0f8ff">Catalog</font></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><font color="#f0f8ff">Account</font></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/login"><font color="#f0f8ff">Account</font></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#"><font color="#f0f8ff">Pricing</font></a>
@@ -57,7 +57,7 @@
                 <p class="fs-5">T</p>
                 <p>We are operators of tours in more than 30 countries. We will be happy to help you choose a tour! But for this you need to log in.</p>
                 <p>
-                    <a class="btn btn-primary" href="/docs/5.2/components/navbar/#offcanvas" role="button">Login here</a>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/view/login.jsp" role="button">Login here</a>
                 </p>
             </div>
         </div>

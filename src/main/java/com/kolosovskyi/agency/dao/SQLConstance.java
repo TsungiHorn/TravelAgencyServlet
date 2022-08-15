@@ -7,6 +7,8 @@ public final class SQLConstance {
     public static final String UPDATE_DISCOUNT = "UPDATE discount SET step = ?, max_percent = ? WHERE id = ?";
     public static final String DELETE_DISCOUNT = "DELETE FROM discount WHERE id = ?";
     public static final String INSERT_INTO_TOUR = "INSERT INTO tour(title, type_id, person_number, hotel_stars, price, is_hot, is_hidden, country, city) VALUES(?,?,?,?,?,?,?,?,?) RETURNING id";
+    public static final String GET_USER_BY_EMAIL_PASSWORD = "SELECT email, password FROM \"user\" WHERE email=? AND password=?";
+    public static final String GET_USER_BY_EMAIL = "SELECT email FROM \"user\" WHERE email=?";
     public static final String GET_INTO_TOUR = "SELECT id, title, type_id, person_number, hotel_stars, price, is_hot, is_hidden, country, city FROM tour WHERE id = ?";
     public static final String UPDATE_TOUR = "UPDATE tour SET title = ?, type_id = ?, person_number = ?, hotel_stars = ?, price = ?, is_hot = ?, is_hidden = ?, country = ?, city = ? WHERE id = ?";
     public static final String DELETE_TOUR = "DELETE FROM tour WHERE id = ?";

@@ -89,4 +89,33 @@ public class UserDAO {
             e.printStackTrace();
         }
     }
+
+    public boolean isExistingLogin(String email, String password){
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_USER_BY_EMAIL_PASSWORD)) {
+            statement.setString(1, email);
+            statement.setString(2, password);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next())
+                return true;
+        } catch (SQLException e) {
+            LOGGER.error("Cannot delete user", e);
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean isExistingCreateAccount(String email){
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_USER_BY_EMAIL)) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next())
+                return true;
+        } catch (SQLException e) {
+            LOGGER.error("Cannot delete user", e);
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
