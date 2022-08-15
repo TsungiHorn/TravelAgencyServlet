@@ -11,17 +11,14 @@ import java.util.List;
 
 @WebServlet(name = "Catalog", value = "/catalog")
 public class CatalogServlet extends HttpServlet {
+    private static final TourDAO TOUR_DAO = TourDAO.getTourDAO();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Tour> tours = TourDAO.getTourDAO().getAll();
-       RequestDispatcher rd = request.getRequestDispatcher("/view/catalog.jsp");
-       request.setAttribute("tours", tours);
-       rd.forward(request, response);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Tour> tours = TOUR_DAO.getAll();
+        RequestDispatcher rd = request.getRequestDispatcher("/view/catalog.jsp");
+        request.setAttribute("tours", tours);
+        rd.forward(request, response);
 
     }
 }

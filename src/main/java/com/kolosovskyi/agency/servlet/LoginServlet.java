@@ -19,14 +19,9 @@ public class LoginServlet extends HttpServlet {
         if (USER_DAO.isExistingLogin(request.getParameter("email"), request.getParameter("password"))) {
             RequestDispatcher rd = request.getRequestDispatcher("/view/home.jsp");
             rd.forward(request, response);
-        }else{
+        } else {
             RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
             rd.forward(request, response);
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
     }
 }
