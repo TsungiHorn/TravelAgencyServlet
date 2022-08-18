@@ -1,6 +1,7 @@
 package com.kolosovskyi.agency.dao;
 
 public final class SQLConstance {
+    public static final String GET_FULL_USER_BY_EMAIL = "SELECT id, name, email, password, role_id, is_blocked FROM \"user\" WHERE email = ?";
     public static final String SELECT_ALL_TOURS = "SELECT * FROM tour";
     public static final String INSERT_INTO_DISCOUNT = "INSERT INTO discount(step, max_percent) VALUES (?, ?) RETURNING id";
     public static final String GET_FROM_DISCOUNT_BY_ID = "SELECT id, step ,max_percent FROM discount WHERE id = ?";

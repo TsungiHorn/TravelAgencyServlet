@@ -19,6 +19,5 @@ public class CatalogServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher("/view/catalog.jsp");
         request.setAttribute("tours", tours);
         rd.forward(request, response);
-
     }
 }

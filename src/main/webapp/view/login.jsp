@@ -117,7 +117,7 @@
     }
 </style>
 <div class="p-x-1 p-y-3">
-    <form action="<%= request.getContextPath() %>/login" method="get" class="card card-block m-x-auto bg-faded form-width">
+    <form action="<%= request.getContextPath() %>/login" method="post" class="card card-block m-x-auto bg-faded form-width">
         <legend class="m-b-1 text-xs-center">Login</legend>
         <div class="form-group input-group">
  <span class="has-float-label">
@@ -137,7 +137,7 @@
         <div class="modal-footer">
             <div class="forgot login-footer">
  <span>Looking to
- <a href="${pageContext.request.contextPath}/view/registration.jsp">create an account</a>
+ <a href="${pageContext.request.contextPath}/registration">create an account</a>
  ?</span>
             </div>
         </div>

@@ -90,6 +90,26 @@ public class UserDAO {
         }
     }
 
+    public Optional<User> getUserByEmail(String email){
+        User user = null;
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_FULL_USER_BY_EMAIL)) {
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next())
+                user=new User(resultSet.getLong("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        Role.values()[(int) resultSet.getLong("role_id")],
+                        resultSet.getBoolean("is_blocked"));
+        } catch (SQLException e) {
+            LOGGER.error("Cannot get user", e);
+            e.printStackTrace();
+        }
+        return Optional.ofNullable(user);
+    }
+
     public boolean isExistingLogin(String email, String password){
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_USER_BY_EMAIL_PASSWORD)) {
@@ -99,7 +119,7 @@ public class UserDAO {
             if(resultSet.next())
                 return true;
         } catch (SQLException e) {
-            LOGGER.error("Cannot delete user", e);
+            LOGGER.error("Cannot find user in db", e);
             e.printStackTrace();
         }
         return false;
@@ -113,7 +133,7 @@ public class UserDAO {
             if(resultSet.next())
                 return true;
         } catch (SQLException e) {
-            LOGGER.error("Cannot delete user", e);
+            LOGGER.error("Cannot find user in db", e);
             e.printStackTrace();
         }
         return false;

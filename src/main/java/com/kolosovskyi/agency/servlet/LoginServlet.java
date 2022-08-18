@@ -15,13 +15,18 @@ public class LoginServlet extends HttpServlet {
     private static final UserDAO USER_DAO = UserDAO.getUserDAO();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (USER_DAO.isExistingLogin(request.getParameter("email"), request.getParameter("password"))) {
-            RequestDispatcher rd = request.getRequestDispatcher("/view/home.jsp");
-            rd.forward(request, response);
+            response.sendRedirect("/profile?email="+request.getParameter("email"));
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
             rd.forward(request, response);
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
+        rd.forward(request, response);
     }
 }

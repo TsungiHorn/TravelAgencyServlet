@@ -11,29 +11,32 @@ import java.io.IOException;
 
 @WebServlet(name = "RegistrationServlet", value = "/registration")
 public class RegistrationServlet extends HttpServlet {
-    private static final UserDAO USER_DAO = UserDAO.getUserDAO();
+    private static final CredentialService CREDENTIAL_SERVICE = CredentialService.getInstance();
+    private static final UserDAO USER_DAO = UserDAO.getUserDAO();  //serializable
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-        if (!email.isEmpty() &&
-                !USER_DAO.isExistingCreateAccount(email)
-                && !name.isEmpty()
-                && password.length() >= 8) {
+        if (CREDENTIAL_SERVICE.isRightMember(name, email, password)) {
             User user = new User();
             user.setName(name);
             user.setEmail(email);
             user.setPassword(password);
             user.setRole(Role.USER);
             user.setBlocked(false);
-            UserDAO.getUserDAO().create(user);
-            RequestDispatcher rd = request.getRequestDispatcher("/view/home.jsp");
-            rd.forward(request, response);
+            USER_DAO.create(user);
+            response.sendRedirect("/profile");
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("/view/registration.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("/view/registration.jsp"); //no redirect
             rd.forward(request, response);
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("/view/registration.jsp");
+        rd.forward(request, response);
     }
 }

@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -137,11 +136,13 @@
         </div>
         <div class="form-group">
                 <span>Already have an account?
- <a href="${pageContext.request.contextPath}/view/login.jsp">Login</a>
+ <a href="${pageContext.request.contextPath}/login">Login</a>
  </span>
         </div>
         <div class="text-xs-center">
-            <button class="btn btn-block btn-primary" type="submit">Create an account</button>
+            <button class="btn btn-block btn-primary" type="submit">
+                <a href="${pageContext.request.contextPath}/registration"><font color="white">Create an account</font></a>
+            </button>
         </div>
     </form>
 </div>

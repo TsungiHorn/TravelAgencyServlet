@@ -1,25 +1,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%--
+  Created by IntelliJ IDEA.
+  User: Андрей
+  Date: 17.08.2022
+  Time: 14:26
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Catalog</title>
+    <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"></script>
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
     <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><font color="#f0f8ff">Home</font></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/catalog">
-                    <font color="#f0f8ff">Catalog</font></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/catalog"><font color="#f0f8ff">Catalog</font></a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="${pageContext.request.contextPath}/login"><font color="#f0f8ff">Account</font></a>
@@ -28,8 +34,7 @@
                 <a class="nav-link" href="#"><font color="#f0f8ff">Pricing</font></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <font color="#f0f8ff">Dropdown link</font>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -42,47 +47,40 @@
     </div>
 </nav>
 <br>
-<main>
-    <div class="container my-5">
-        <div class="bg-light p-5 rounded">
-            <div class="col-sm-8 py-5 mx-auto">
-                <h1 class="display-5 fw-normal">Piece|Shopping|Excursion</h1>
-                <p class="fs-5">T</p>
-                <p>We are operators of tours in more than 30 countries. We will be happy to help you choose a tour! But
-                    for this you need to log in.</p>
-                <p>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/login" role="button">Login
-                        here</a>
-                </p>
+<section style="background-color: #eee;">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                             class="rounded-circle img-fluid" style="width: 150px;">
+                        <br>
+                        <h5 class="my-3">${user.getName()}</h5>
+                        <p class="text-muted mb-0">${user.getEmail()}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h2>Your tours:</h2>
+                            </div>
+                            <br>
+                        </div>
+                        <div class="row">
+                            <c:forEach items="${userTours}" var="tour">
+                                <p class="mb-0"><strong>${tour.getTour().getTitle()}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: ${tour.getStatus()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order time: ${tour.getOrderTime()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ${tour.getFinalPrice()}$</p>
+                                <br>
+                                <hr>
+                            </c:forEach>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</main>
-<div class="row row-cols-1 row-cols-md-3 text-center">
-
-    <c:forEach var="tour" items="${tours}">
-        <form action="/tour" method="get">
-        <div class="col">
-            <div class="card">
-                <div class="card-header">
-                    <h4>${tour.getTitle()}</h4>
-                </div>
-                <div class="card-body">
-                    <p class="card-text"> Trip to the
-                    <td> ${tour.getCity()} </td>
-                    of
-                    <td> ${tour.getCountry()} </td>
-                    with accommodation in a hotel with
-                    <td> ${tour.getHotelStars()} </td>
-                    stars.</p>
-                        <a class="btn btn-primary" href="tour?i=${tour.getId()}">View</a>
-                </div>
-            </div>
-        </div>
-        </form>
-    </c:forEach>
-
-</div>
 </section>
 <br>
 <br>
