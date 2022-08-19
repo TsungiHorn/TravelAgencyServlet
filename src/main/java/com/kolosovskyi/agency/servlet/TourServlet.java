@@ -7,8 +7,6 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet(name = "TourServlet", value = "/tour")
 public class TourServlet extends HttpServlet {
@@ -21,11 +19,5 @@ public class TourServlet extends HttpServlet {
         request.setAttribute("tour", tour);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/tour.jsp");
         requestDispatcher.forward(request, response);
-
     }
-
-//    @Override
-//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//
-//    }
 }

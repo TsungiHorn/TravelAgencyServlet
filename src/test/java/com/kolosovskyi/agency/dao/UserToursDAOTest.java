@@ -46,7 +46,7 @@ class UserToursDAOTest {
                 true,
                 false,
                 "Egypt",
-                "Alexandria");
+                "Alexandria", LocalDate.now());
         Tour tour2 = new Tour("Don-Huyandon",
                 TourType.SHOPPING,
                 789L,
@@ -55,7 +55,7 @@ class UserToursDAOTest {
                 true,
                 false,
                 "UAE",
-                "Dubai");
+                "Dubai", LocalDate.now());
         Tour tour3 = new Tour("Shibuya",
                 TourType.EXCURSION,
                 500L,
@@ -64,7 +64,7 @@ class UserToursDAOTest {
                 true,
                 true,
                 "Japan",
-                "Kyoto");
+                "Kyoto", LocalDate.now());
 
         userTours1 = new UserTours(user1,
                 tour1,

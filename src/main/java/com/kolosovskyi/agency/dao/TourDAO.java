@@ -6,10 +6,8 @@ import com.kolosovskyi.agency.entity.TourType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +33,7 @@ public class TourDAO {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLConstance.INSERT_INTO_TOUR)) {
             statement.setString(1, tour.getTitle());
-            statement.setInt(2, tour.getType().ordinal());
+            statement.setInt(2, tour.getTourType().ordinal());
             statement.setLong(3, tour.getPersonNumber());
             statement.setInt(4, tour.getHotelStars());
             statement.setBigDecimal(5, tour.getPrice());
@@ -43,6 +41,7 @@ public class TourDAO {
             statement.setBoolean(7, tour.getHidden());
             statement.setString(8, tour.getCountry());
             statement.setString(9, tour.getCity());
+            statement.setDate(10, Date.valueOf(tour.getStartDate()));
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next())
                 tour.setId(resultSet.getLong("id"));
@@ -64,7 +63,8 @@ public class TourDAO {
                         resultSet.getLong("person_number"), resultSet.getInt("hotel_stars"),
                         resultSet.getBigDecimal("price"), resultSet.getBoolean("is_hot"),
                         resultSet.getBoolean("is_hidden"), resultSet.getString("country"),
-                        resultSet.getString("city"));
+                        resultSet.getString("city"),
+                        resultSet.getDate("start_date").toLocalDate());
             }
         } catch (SQLException e) {
             LOGGER.error("Cannot read tour ", e);
@@ -76,7 +76,7 @@ public class TourDAO {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLConstance.UPDATE_TOUR)) {
             statement.setString(1, tour.getTitle());
-            statement.setLong(2, tour.getType().ordinal());
+            statement.setLong(2, tour.getTourType().ordinal());
             statement.setLong(3, tour.getPersonNumber());
             statement.setInt(4, tour.getHotelStars());
             statement.setBigDecimal(5, tour.getPrice());
@@ -84,7 +84,8 @@ public class TourDAO {
             statement.setBoolean(7, tour.getHidden());
             statement.setString(8, tour.getCountry());
             statement.setString(9, tour.getCity());
-            statement.setLong(10, tour.getId());
+            statement.setDate(10, Date.valueOf(tour.getStartDate()));
+            statement.setLong(11, tour.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Cannot update tour ", e);
@@ -116,7 +117,8 @@ public class TourDAO {
                         resultSet.getBoolean("is_hot"),
                         resultSet.getBoolean("is_hidden"),
                         resultSet.getString("country"),
-                        resultSet.getString("city")));
+                        resultSet.getString("city"),
+                        resultSet.getDate("start_date").toLocalDate()));
             }
         } catch (SQLException e) {
             LOGGER.error("Cannot get all tours", e);

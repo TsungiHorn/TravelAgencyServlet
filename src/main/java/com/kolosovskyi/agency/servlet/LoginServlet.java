@@ -17,6 +17,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (USER_DAO.isExistingLogin(request.getParameter("email"), request.getParameter("password"))) {
+            request.getSession().setAttribute("email", request.getParameter("email"));
             response.sendRedirect("/profile?email="+request.getParameter("email"));
         } else {
             RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");

@@ -3,6 +3,7 @@ package com.kolosovskyi.agency.servlet;
 import com.kolosovskyi.agency.dao.UserDAO;
 import com.kolosovskyi.agency.entity.Role;
 import com.kolosovskyi.agency.entity.User;
+import com.kolosovskyi.agency.service.CredentialService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -27,9 +28,9 @@ public class RegistrationServlet extends HttpServlet {
             user.setRole(Role.USER);
             user.setBlocked(false);
             USER_DAO.create(user);
-            response.sendRedirect("/profile");
+            response.sendRedirect("/login");
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("/view/registration.jsp"); //no redirect
+            RequestDispatcher rd = request.getRequestDispatcher("/view/registration.jsp");
             rd.forward(request, response);
         }
     }

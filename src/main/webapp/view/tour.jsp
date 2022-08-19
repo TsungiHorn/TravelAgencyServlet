@@ -17,27 +17,23 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
     <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><font color="#f0f8ff">Home</font></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav">
             <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/catalog"><font
-                        color="#f0f8ff">Catalog</font></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/catalog"><font color="#f0f8ff">Catalog</font></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/login"><font color="#f0f8ff">Account</font></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"><font color="#f0f8ff">Pricing</font></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/profile"><font color="#f0f8ff">Account</font></a>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <font color="#f0f8ff">Dropdown link</font>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -54,14 +50,17 @@
         <div class="bg-light p-5 rounded">
             <div class="col-sm-8 py-5 mx-auto">
                 <h1 class="display-5 fw-normal">
-                ${tour.getTitle()}
+                    ${tour.getTitle()}
                 </h1>
                 <br>
                 <p class="fs-5">Tour location: <b>${tour.getCity()}</b>, <b>${tour.getCountry()}</b></p>
-                <p class="fs-5">Number of people for which the tour is designed: <b>${tour.getPersonNumber()} person</b></p>
-                <p class="fs-5">What is the tour for: <b>${tour.getType()}</b></p>
+                <p class="fs-5">Number of people for which the tour is designed: <b>${tour.getPersonNumber()} person</b>
+                </p>
+                <p class="fs-5">What is the tour for: <b>${tour.getTourType()}</b></p>
+                <p class="fs-5">Start date: <b>${tour.getStartDate()}</b></p>
                 <p>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/login" role="button"/>Book for ${tour.getPrice()}$</a>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/booking?q=${tour.getId()}" role="button"/>Book
+                    for ${tour.getPrice()}$</a>
                 </p>
             </div>
         </div>

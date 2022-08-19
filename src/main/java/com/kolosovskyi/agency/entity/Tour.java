@@ -1,6 +1,7 @@
 package com.kolosovskyi.agency.entity;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Tour {
@@ -14,13 +15,14 @@ public class Tour {
     private Boolean isHidden;
     private String country;
     private String city;
+    private LocalDate startDate;
 
 
     public Tour() {
     }
 
     public Tour(Long id, String title, TourType tourType, Long personNumber, Integer hotelStars, BigDecimal price, Boolean isHot,
-                Boolean isHidden, String country, String city) {
+                Boolean isHidden, String country, String city, LocalDate startDate) {
         this.city = city;
         this.country = country;
         this.isHidden = isHidden;
@@ -31,10 +33,11 @@ public class Tour {
         this.tourType = tourType;
         this.price = price;
         this.isHot = isHot;
+        this.startDate = startDate;
     }
 
     public Tour(String title, TourType tourType, Long personNumber, Integer hotelStars, BigDecimal price, Boolean isHot,
-                Boolean isHidden, String country, String city) {
+                Boolean isHidden, String country, String city, LocalDate startDate) {
         this.city = city;
         this.country = country;
         this.isHidden = isHidden;
@@ -44,6 +47,7 @@ public class Tour {
         this.tourType = tourType;
         this.price = price;
         this.isHot = isHot;
+        this.startDate = startDate;
     }
 
     public Long getId() {
@@ -54,52 +58,20 @@ public class Tour {
         this.id = id;
     }
 
-    public String getCity() {
-        return city;
+    public String getTitle() {
+        return title;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getCountry() {
-        return country;
+    public TourType getTourType() {
+        return tourType;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public Boolean getHidden() {
-        return isHidden;
-    }
-
-    public void setHidden(Boolean hidden) {
-        isHidden = hidden;
-    }
-
-    public Boolean getHot() {
-        return isHot;
-    }
-
-    public void setHot(Boolean hot) {
-        isHot = hot;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Integer getHotelStars() {
-        return hotelStars;
-    }
-
-    public void setHotelStars(Integer hotelStars) {
-        this.hotelStars = hotelStars;
+    public void setTourType(TourType tourType) {
+        this.tourType = tourType;
     }
 
     public Long getPersonNumber() {
@@ -110,20 +82,60 @@ public class Tour {
         this.personNumber = personNumber;
     }
 
-    public TourType getType () {
-        return tourType;
+    public Integer getHotelStars() {
+        return hotelStars;
     }
 
-    public void setType(TourType tourType) {
-        this.tourType = tourType;
+    public void setHotelStars(Integer hotelStars) {
+        this.hotelStars = hotelStars;
     }
 
-    public String getTitle() {
-        return title;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public Boolean getHot() {
+        return isHot;
+    }
+
+    public void setHot(Boolean hot) {
+        isHot = hot;
+    }
+
+    public Boolean getHidden() {
+        return isHidden;
+    }
+
+    public void setHidden(Boolean hidden) {
+        isHidden = hidden;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
     }
 
     @Override
@@ -131,12 +143,12 @@ public class Tour {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Tour tour = (Tour) o;
-        return Objects.equals(id, tour.id) && Objects.equals(title, tour.title) && tourType == tour.tourType && Objects.equals(personNumber, tour.personNumber) && Objects.equals(hotelStars, tour.hotelStars) && Objects.equals(price, tour.price) && Objects.equals(isHot, tour.isHot) && Objects.equals(isHidden, tour.isHidden) && Objects.equals(country, tour.country) && Objects.equals(city, tour.city);
+        return Objects.equals(id, tour.id) && Objects.equals(title, tour.title) && tourType == tour.tourType && Objects.equals(personNumber, tour.personNumber) && Objects.equals(hotelStars, tour.hotelStars) && Objects.equals(price, tour.price) && Objects.equals(isHot, tour.isHot) && Objects.equals(isHidden, tour.isHidden) && Objects.equals(country, tour.country) && Objects.equals(city, tour.city) && Objects.equals(startDate, tour.startDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, tourType, personNumber, hotelStars, price, isHot, isHidden, country, city);
+        return Objects.hash(id, title, tourType, personNumber, hotelStars, price, isHot, isHidden, country, city, startDate);
     }
 
     @Override
@@ -152,6 +164,7 @@ public class Tour {
                 ", isHidden=" + isHidden +
                 ", country='" + country + '\'' +
                 ", city='" + city + '\'' +
+                ", startDate=" + startDate +
                 '}';
     }
 }

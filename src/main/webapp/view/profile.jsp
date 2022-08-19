@@ -18,6 +18,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
     <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><font color="#f0f8ff">Home</font></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -28,10 +29,10 @@
                 <a class="nav-link" href="${pageContext.request.contextPath}/catalog"><font color="#f0f8ff">Catalog</font></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/login"><font color="#f0f8ff">Account</font></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/profile"><font color="#f0f8ff">Account</font></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#"><font color="#f0f8ff">Pricing</font></a>
+                <a class="nav-link" href="/logout"><font color="#f0f8ff">Log out</font></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -65,13 +66,13 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-sm-3">
-                                <h2>Your tours:</h2>
+                                <h2>Tours history:</h2>
                             </div>
                             <br>
                         </div>
                         <div class="row">
                             <c:forEach items="${userTours}" var="tour">
-                                <p class="mb-0"><strong>${tour.getTour().getTitle()}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: ${tour.getStatus()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Order time: ${tour.getOrderTime()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ${tour.getFinalPrice()}$</p>
+                                <p class="mb-0"><strong${tour.getTour().getTitle()}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: ${tour.getStatus()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start date: ${tour.getTour().getStartDate()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ${tour.getFinalPrice()}$</p>
                                 <br>
                                 <hr>
                             </c:forEach>

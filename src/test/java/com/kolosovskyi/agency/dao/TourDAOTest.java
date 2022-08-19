@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,7 +32,7 @@ class TourDAOTest {
                 true,
                 false,
                 "Egypt",
-                "Alexandria");
+                "Alexandria", LocalDate.now());
 
         tour2 = new Tour("Don-Huyandon",
                 TourType.SHOPPING,
@@ -41,7 +42,7 @@ class TourDAOTest {
                 true,
                 false,
                 "UAE",
-                "Dubai");
+                "Dubai", LocalDate.now());
 
         tour3 = new Tour("Shibuya",
                 TourType.EXCURSION,
@@ -51,7 +52,7 @@ class TourDAOTest {
                 true,
                 true,
                 "Japan",
-                "Kyoto");
+                "Kyoto", LocalDate.now());
 
         try (Connection connection = POOL.getConnection()) {
             PreparedStatement statement1 = connection.prepareStatement(SQLConstance.CREATE_TOUR_TABLE);
@@ -81,7 +82,7 @@ class TourDAOTest {
         dao.create(tour3);
 
         tour1.setTitle("Jubaba");
-        tour1.setType(TourType.REST);
+        tour1.setTourType(TourType.REST);
         tour1.setPersonNumber(200L);
         tour1.setHotelStars(4);
         tour1.setPrice(new BigDecimal(2500));
@@ -92,7 +93,7 @@ class TourDAOTest {
 
 
         tour2.setTitle("Don-Huyandon");
-        tour2.setType(TourType.REST);
+        tour2.setTourType(TourType.REST);
         tour2.setPersonNumber(789L);
         tour2.setHotelStars(5);
         tour2.setPrice(new BigDecimal(3000));
@@ -103,7 +104,7 @@ class TourDAOTest {
 
 
         tour3.setTitle("Shibuya 2.0");
-        tour3.setType(TourType.EXCURSION);
+        tour3.setTourType(TourType.EXCURSION);
         tour3.setPersonNumber(500L);
         tour3.setHotelStars(5);
         tour3.setPrice(new BigDecimal(2600));

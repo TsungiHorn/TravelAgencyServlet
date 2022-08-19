@@ -10,6 +10,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
     <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><font color="#f0f8ff">Home</font></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
             aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,10 +23,7 @@
                     <font color="#f0f8ff">Catalog</font></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/login"><font color="#f0f8ff">Account</font></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#"><font color="#f0f8ff">Pricing</font></a>
+                <a class="nav-link" href="${pageContext.request.contextPath}/profile"><font color="#f0f8ff">Account</font></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
@@ -86,47 +84,10 @@
 </section>
 <br>
 <br>
-<footer class="text-center text-lg-start bg-light text-muted">
-    <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-    </section>
-    <section class="">
-        <div class="container text-center text-md-start mt-5">
-            <div class="row mt-3">
-                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                    <!-- Content -->
-                    <h3 class="text-uppercase fw-bold mb-4">
-                        <i class="fas fa-gem me-3"></i>Travel Agency
-                    </h3>
-                </div>
-                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Links
-                    </h6>
-                    <p>
-                        <a href="${pageContext.request.contextPath}/catalog" class="text-reset">Catalog</a>
-                    </p>
-                    <p>
-                        <a href="${pageContext.request.contextPath}/login" class="text-reset">Account</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Bucket</a>
-                    </p>
-                </div>
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <!-- Links -->
-                    <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
-                    <p><i class="fas fa-home me-3"></i> Atlantis, Mermaid 17, Atlantic Sea</p>
-                    <p>
-                        <i class="fas fa-envelope me-3"></i>
-                        tagency@gmail.com
-                    </p>
-                    <p><i class="fas fa-phone me-3"></i> +00 000 000 00</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+<footer class="bg-light text-center text-white">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
         © 2022
+        <a class="text-white" href="https://mdbootstrap.com/">TravelAgency</a>
     </div>
 </footer>
 </body>

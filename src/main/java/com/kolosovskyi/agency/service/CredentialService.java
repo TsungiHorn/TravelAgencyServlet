@@ -1,4 +1,4 @@
-package com.kolosovskyi.agency.servlet;
+package com.kolosovskyi.agency.service;
 
 import com.kolosovskyi.agency.dao.UserDAO;
 

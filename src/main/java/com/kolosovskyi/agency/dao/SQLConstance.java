@@ -7,11 +7,11 @@ public final class SQLConstance {
     public static final String GET_FROM_DISCOUNT_BY_ID = "SELECT id, step ,max_percent FROM discount WHERE id = ?";
     public static final String UPDATE_DISCOUNT = "UPDATE discount SET step = ?, max_percent = ? WHERE id = ?";
     public static final String DELETE_DISCOUNT = "DELETE FROM discount WHERE id = ?";
-    public static final String INSERT_INTO_TOUR = "INSERT INTO tour(title, type_id, person_number, hotel_stars, price, is_hot, is_hidden, country, city) VALUES(?,?,?,?,?,?,?,?,?) RETURNING id";
+    public static final String INSERT_INTO_TOUR = "INSERT INTO tour(title, type_id, person_number, hotel_stars, price, is_hot, is_hidden, country, city, start_date) VALUES(?,?,?,?,?,?,?,?,?,?) RETURNING id";
     public static final String GET_USER_BY_EMAIL_PASSWORD = "SELECT email, password FROM \"user\" WHERE email=? AND password=?";
     public static final String GET_USER_BY_EMAIL = "SELECT email FROM \"user\" WHERE email=?";
-    public static final String GET_INTO_TOUR = "SELECT id, title, type_id, person_number, hotel_stars, price, is_hot, is_hidden, country, city FROM tour WHERE id = ?";
-    public static final String UPDATE_TOUR = "UPDATE tour SET title = ?, type_id = ?, person_number = ?, hotel_stars = ?, price = ?, is_hot = ?, is_hidden = ?, country = ?, city = ? WHERE id = ?";
+    public static final String GET_INTO_TOUR = "SELECT id, title, type_id, person_number, hotel_stars, price, is_hot, is_hidden, country, city, start_date FROM tour WHERE id = ?";
+    public static final String UPDATE_TOUR = "UPDATE tour SET title = ?, type_id = ?, person_number = ?, hotel_stars = ?, price = ?, is_hot = ?, is_hidden = ?, country = ?, city = ?, start_date = ? WHERE id = ?";
     public static final String DELETE_TOUR = "DELETE FROM tour WHERE id = ?";
     public static final String INSERT_INTO_USER = "INSERT INTO \"user\"(name, email, password, role_id, is_blocked) VALUES(?, ?, ?, ?, ?) RETURNING id";
     public static final String GET_FROM_USER = "SELECT id, name, email, password, role_id, is_blocked FROM \"user\" WHERE id = ?";
@@ -32,7 +32,7 @@ public final class SQLConstance {
     public static final String USER_TOURS_FK0 = "ALTER TABLE \"user_tours\" ADD CONSTRAINT \"user_tours_fk0\" FOREIGN KEY (\"user_id\") REFERENCES \"user\"(\"id\");";
     public static final String USER_TOURS_FK1 = "ALTER TABLE \"user_tours\" ADD CONSTRAINT \"user_tours_fk1\" FOREIGN KEY (\"tour_id\") REFERENCES \"tour\"(\"id\");";
     public static final String USER_TOURS_FK2 = "ALTER TABLE \"user_tours\" ADD CONSTRAINT \"user_tours_fk2\" FOREIGN KEY (\"status_id\") REFERENCES \"tour_status\"(\"id\");";
-    public static final String CREATE_TOUR_TABLE = "CREATE TABLE \"tour\" (\"id\" serial NOT NULL, \"title\" varchar(255) NOT NULL, \"type_id\" bigint NOT NULL,  \"person_number\" bigint NOT NULL, \"hotel_stars\" bigint NOT NULL, \"price\" numeric NOT NULL, \"is_hot\" BOOLEAN NOT NULL DEFAULT 'false', \"is_hidden\" BOOLEAN NOT NULL DEFAULT 'false', \"country\" varchar(255) NOT NULL, \"city\" varchar(255) NOT NULL, CONSTRAINT \"tour_pk\" PRIMARY KEY (\"id\")) WITH (OIDS=FALSE);";
+    public static final String CREATE_TOUR_TABLE = "CREATE TABLE \"tour\" (\"id\" serial NOT NULL, \"title\" varchar(255) NOT NULL, \"type_id\" bigint NOT NULL,  \"person_number\" bigint NOT NULL, \"hotel_stars\" bigint NOT NULL, \"price\" numeric NOT NULL, \"is_hot\" BOOLEAN NOT NULL DEFAULT 'false', \"is_hidden\" BOOLEAN NOT NULL DEFAULT 'false', \"country\" varchar(255) NOT NULL, \"city\" varchar(255) NOT NULL, \"start_date\" DATE, CONSTRAINT \"tour_pk\" PRIMARY KEY (\"id\")) WITH (OIDS=FALSE);";
     public static final String CREATE_USER_TOURS_TABLE = "CREATE TABLE \"user_tours\" (\"user_id\" bigint NOT NULL,\"tour_id\" bigint NOT NULL,\"discount_percent\" bigint NOT NULL,\"final_price\" numeric NOT NULL,\"status_id\" bigint NOT NULL,\"order_time\" TIMESTAMP NOT NULL, CONSTRAINT \"user_tours_pk\" PRIMARY KEY (\"user_id\",\"tour_id\")) WITH (OIDS=FALSE);";
 
     private SQLConstance() {
