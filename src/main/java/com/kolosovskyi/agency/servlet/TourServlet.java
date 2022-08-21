@@ -10,7 +10,7 @@ import java.io.IOException;
 
 @WebServlet(name = "TourServlet", value = "/tour")
 public class TourServlet extends HttpServlet {
-    private static final TourDAO TOUR_DAO = TourDAO.getTourDAO();
+    private static final TourDAO TOUR_DAO = TourDAO.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -3,7 +3,7 @@ package com.kolosovskyi.agency.service;
 import com.kolosovskyi.agency.dao.UserDAO;
 
 public class CredentialService {
-    private static final UserDAO userDAO= UserDAO.getUserDAO();
+    private static final UserDAO userDAO= UserDAO.getInstance();
     private CredentialService(){}
     private static class Instance{
         private static final CredentialService CREDENTIAL_SERVICE = new CredentialService();

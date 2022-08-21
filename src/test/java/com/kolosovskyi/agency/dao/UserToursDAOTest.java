@@ -17,8 +17,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserToursDAOTest {
     private static final PostgreSQLConnectionPool POOL = PostgreSQLConnectionPool.getInstance();
     private static final Logger LOGGER = LoggerFactory.getLogger(UserToursDAOTest.class);
-    private static final UserDAO userDAO = UserDAO.getUserDAO();
-    private static final TourDAO tourDAO = TourDAO.getTourDAO();
+    private static final UserDAO userDAO = UserDAO.getInstance();
+    private static final TourDAO tourDAO = TourDAO.getInstance();
     private static final UserToursDAO userToursDAO = UserToursDAO.getInstance();
     private static  User user1;
     private static  User user2;
@@ -180,9 +180,9 @@ class UserToursDAOTest {
         userToursDAO.create(userTours2);
         userToursDAO.create(userTours3);
 
-        userToursDAO.delete(userTours1);
-        userToursDAO.delete(userTours2);
-        userToursDAO.delete(userTours3);
+        userToursDAO.delete(userTours1.getUser().getId(), userTours1.getTour().getId());
+        userToursDAO.delete(userTours2.getUser().getId(), userTours2.getTour().getId());
+        userToursDAO.delete(userTours3.getUser().getId(), userTours3.getTour().getId());
 
         assertFalse(userToursDAO.read(user1).isEmpty());
         assertFalse(userToursDAO.read(user2).isEmpty());

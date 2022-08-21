@@ -16,7 +16,7 @@ import java.util.List;
 
 @WebServlet(name = "ProfileServlet", value = "/profile")
 public class ProfileServlet extends HttpServlet {
-    private static final UserDAO USER_DAO = UserDAO.getUserDAO();
+    private static final UserDAO USER_DAO = UserDAO.getInstance();
     private static final UserToursDAO USER_TOURS_DAO = UserToursDAO.getInstance();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

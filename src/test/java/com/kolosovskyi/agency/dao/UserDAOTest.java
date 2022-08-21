@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 class UserDAOTest {
     private static final PostgreSQLConnectionPool POOL = PostgreSQLConnectionPool.getInstance();
     private static final Logger LOGGER = LoggerFactory.getLogger(UserDAOTest.class);
-    private static final UserDAO dao = UserDAO.getUserDAO();
+    private static final UserDAO dao = UserDAO.getInstance();
     private static User user1;
     private static User user2;
     private static User user3;

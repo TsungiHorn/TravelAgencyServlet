@@ -12,14 +12,13 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @WebServlet(name = "BookingTourServlet", value = "/booking")
 public class BookingTourServlet extends HttpServlet {
-    private static final UserDAO USER_DAO = UserDAO.getUserDAO();
+    private static final UserDAO USER_DAO = UserDAO.getInstance();
     private static final UserToursDAO USER_TOURS_DAO = UserToursDAO.getInstance();
-    private static final TourDAO TOUR_DAO = TourDAO.getTourDAO();
+    private static final TourDAO TOUR_DAO = TourDAO.getInstance();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

@@ -53,8 +53,8 @@ public class UserToursDAO {
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 temp = new UserTours();
-                temp.setUser(UserDAO.getUserDAO().read(resultSet.getLong("user_id")).orElse(new User()));
-                temp.setTour(TourDAO.getTourDAO().read(resultSet.getLong("tour_id")).orElse(new Tour()));
+                temp.setUser(UserDAO.getInstance().read(resultSet.getLong("user_id")).orElse(new User()));
+                temp.setTour(TourDAO.getInstance().read(resultSet.getLong("tour_id")).orElse(new Tour()));
                 temp.setDiscountPercent(resultSet.getInt("discount_percent"));
                 temp.setFinalPrice(resultSet.getBigDecimal("final_price"));
                 temp.setOrderTime(resultSet.getDate("order_time").toLocalDate());
@@ -62,9 +62,31 @@ public class UserToursDAO {
                 userTours.add(temp);
             }
         }catch (SQLException e){
-            LOGGER.error("Cannot create user tours", e);
+            LOGGER.error("Cannot read user tours", e);
         }
         return userTours;
+    }
+
+    public Optional<UserTours>  readTourUser(Long userId, Long tourId){
+        UserTours userTour = null;
+       try(Connection connect = pool.getConnection();
+           PreparedStatement statement = connect.prepareStatement(SQLConstance.GET_TOUR_USER)){
+           statement.setLong(1, userId);
+           statement.setLong(2, tourId);
+           ResultSet resultSet = statement.executeQuery();
+           if(resultSet.next()) {
+            userTour = new UserTours(UserDAO.getInstance().read(userId).orElse(new User()),
+                    TourDAO.getInstance().read(tourId).orElse(new Tour()),
+                    resultSet.getDate("order_time").toLocalDate(),
+                    TourStatus.values()[(int) resultSet.getLong("status_id")],
+                    resultSet.getBigDecimal("final_price"),
+                    resultSet.getInt("discount_percent")
+                    );
+           }
+       }catch (SQLException e){
+           LOGGER.error("Cannot find user`s tour", e);
+       }
+       return Optional.ofNullable(userTour);
     }
      public void update(UserTours userTours){                       //will fix
         try(Connection connection = pool.getConnection();
@@ -76,18 +98,18 @@ public class UserToursDAO {
             statement.setLong(5, userTours.getStatus().ordinal());
             statement.setDate(6, Date.valueOf(userTours.getOrderTime()));
             statement.setLong(7, userTours.getUser().getId());
-
+            statement.setLong(8, userTours.getTour().getId());
             statement.executeUpdate();
         }catch (SQLException e){
             LOGGER.error("Cannot update user tours ", e);
         }
     }
 
-    public void delete(UserTours userTours){
+    public void delete(Long userId, Long tourId){
         try(Connection connection = pool.getConnection();
             PreparedStatement statement = connection.prepareStatement(SQLConstance.DELETE_USER_TOURS)) {
-            statement.setLong(1, userTours.getUser().getId());
-            statement.setLong(2, userTours.getTour().getId());
+            statement.setLong(1, userId);
+            statement.setLong(2, tourId);
             statement.executeUpdate();
         }catch (SQLException e){
             LOGGER.error("Cannot delete user tours ", e);

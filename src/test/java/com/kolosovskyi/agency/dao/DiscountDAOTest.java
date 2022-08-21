@@ -6,19 +6,16 @@ import org.junit.jupiter.api.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.reflect.Executable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class DiscountDAOTest {
     private static final PostgreSQLConnectionPool POOL = PostgreSQLConnectionPool.getInstance();
     private static final Logger LOGGER = LoggerFactory.getLogger(DiscountDAOTest.class);
-    private static final DiscountDAO dao = DiscountDAO.getDiscountDAO();
+    private static final DiscountDAO dao = DiscountDAO.getInstance();
     private static Discount discount1;// = new Discount(1, 1);
     private static Discount discount2;// = new Discount(20, 10);
     private static Discount discount3;// = new Discount(0, 0);

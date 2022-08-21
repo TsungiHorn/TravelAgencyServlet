@@ -24,7 +24,7 @@ public class DiscountDAO {
         private static final DiscountDAO INSTANCE = new DiscountDAO();
     }
 
-    public static DiscountDAO getDiscountDAO(){
+    public static DiscountDAO getInstance(){
         return DiscountDAOHandler.INSTANCE;
     }
     public void create(Discount discount) {

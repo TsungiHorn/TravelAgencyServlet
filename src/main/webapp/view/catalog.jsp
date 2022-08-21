@@ -9,43 +9,25 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-    <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-    <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><font color="#f0f8ff">Home</font></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/catalog">
-                    <font color="#f0f8ff">Catalog</font></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/profile"><font color="#f0f8ff">Account</font></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <font color="#f0f8ff">Dropdown link</font>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+            <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+            <span class="fs-4">TravelAgency</span>
+        </a>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="/catalog" class="nav-link">Catalog</a></li>
+            <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
         </ul>
-    </div>
-</nav>
+    </header>
 <br>
 <main>
     <div class="container my-5">
         <div class="bg-light p-5 rounded">
             <div class="col-sm-8 py-5 mx-auto">
                 <h1 class="display-5 fw-normal">Piece|Shopping|Excursion</h1>
-                <p class="fs-5">T</p>
+                <p class="fs-5">Choose your tour!</p>
                 <p>We are operators of tours in more than 30 countries. We will be happy to help you choose a tour! But
                     for this you need to log in.</p>
                 <p>

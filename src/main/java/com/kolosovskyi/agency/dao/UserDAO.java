@@ -23,7 +23,7 @@ public class UserDAO {
         private static final UserDAO INSTANCE = new UserDAO();
     }
 
-    public static UserDAO getUserDAO(){
+    public static UserDAO getInstance(){
         return UserDAOHandler.INSTANCE;
     }
 

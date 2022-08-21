@@ -17,36 +17,19 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-primary">
-    <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-    <a class="navbar-brand" href="${pageContext.request.contextPath}/home"><font color="#f0f8ff">Home</font></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="${pageContext.request.contextPath}/catalog"><font color="#f0f8ff">Catalog</font></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="${pageContext.request.contextPath}/profile"><font color="#f0f8ff">Account</font></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/logout"><font color="#f0f8ff">Log out</font></a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <font color="#f0f8ff">Dropdown link</font>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-</nav>
+<header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        <span class="fs-4">TravelAgency</span>
+    </a>
+
+    <ul class="nav nav-pills">
+        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page">Home</a></li>
+        <li class="nav-item"><a href="/catalog" class="nav-link">Catalog</a></li>
+        <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+        <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+    </ul>
+</header>
 <br>
 <section style="background-color: #eee;">
         <div class="row">
@@ -71,12 +54,25 @@
                             <br>
                         </div>
                         <div class="row">
+
                             <c:forEach items="${userTours}" var="tour">
-                                <p class="mb-0"><strong${tour.getTour().getTitle()}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: ${tour.getStatus()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start date: ${tour.getTour().getStartDate()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ${tour.getFinalPrice()}$</p>
+                                <div class="col-sm-10">
+                                    <p class="mb-0"><strong>${tour.getTour().getTitle()}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: ${tour.getStatus()}
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start date: ${tour.getTour().getStartDate()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ${tour.getFinalPrice()}$</p>
+                                </div>
+                                <br>
+                                <br>
+                                <div class="col-sm-20">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-primary" href="${pageContext.request.contextPath}/deleteTour?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}" role="button">Remove</a>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-primary" href="${pageContext.request.contextPath}/buy?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}" role="button">Buy for ${tour.getFinalPrice()}$</a>
+
+                                </div>
+
+                                <br>
+                                <br>
                                 <br>
                                 <hr>
                             </c:forEach>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -105,10 +101,7 @@
                         <a href="${pageContext.request.contextPath}/catalog" class="text-reset">Catalog</a>
                     </p>
                     <p>
-                        <a href="${pageContext.request.contextPath}/login" class="text-reset">Account</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Bucket</a>
+                        <a href="/profile" class="text-reset">Account</a>
                     </p>
                 </div>
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">

@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TourDAOTest {
     private static final PostgreSQLConnectionPool POOL = PostgreSQLConnectionPool.getInstance();
     private static final Logger LOGGER = LoggerFactory.getLogger(TourDAOTest.class);
-    private static final TourDAO dao = TourDAO.getTourDAO();
+    private static final TourDAO dao = TourDAO.getInstance();
     private static  Tour tour1;
     private static  Tour tour2;
     private static  Tour tour3;

@@ -11,7 +11,7 @@ import java.util.List;
 
 @WebServlet(name = "Catalog", value = "/catalog")
 public class CatalogServlet extends HttpServlet {
-    private static final TourDAO TOUR_DAO = TourDAO.getTourDAO();
+    private static final TourDAO TOUR_DAO = TourDAO.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
