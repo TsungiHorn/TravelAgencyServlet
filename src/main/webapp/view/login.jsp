@@ -1,4 +1,3 @@
-
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -11,7 +10,9 @@
 <body>
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        <svg class="bi me-2" width="40" height="32">
+            <use xlink:href="#bootstrap"/>
+        </svg>
         <span class="fs-4">TravelAgency</span>
     </a>
 
@@ -97,7 +98,8 @@
     }
 </style>
 <div class="p-x-1 p-y-3">
-    <form action="<%= request.getContextPath() %>/login" method="post" class="card card-block m-x-auto bg-faded form-width">
+    <form action="<%= request.getContextPath() %>/login" method="post"
+          class="card card-block m-x-auto bg-faded form-width">
         <legend class="m-b-1 text-xs-center">Login</legend>
         <div class="form-group input-group">
  <span class="has-float-label">

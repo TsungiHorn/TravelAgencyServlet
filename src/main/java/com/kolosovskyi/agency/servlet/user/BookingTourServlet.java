@@ -1,4 +1,4 @@
-package com.kolosovskyi.agency.servlet;
+package com.kolosovskyi.agency.servlet.user;
 
 import com.kolosovskyi.agency.dao.TourDAO;
 import com.kolosovskyi.agency.dao.UserDAO;
@@ -28,11 +28,6 @@ public class BookingTourServlet extends HttpServlet {
         UserTours userTours = new UserTours(user, tour, LocalDate.now(), TourStatus.REGISTERED,
                 tour.getPrice(), 0);
         USER_TOURS_DAO.create(userTours);
-        response.sendRedirect("/catalog");
+        response.sendRedirect("/profile");
     }
-
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        response.sendRedirect("/catalog");
-//    }
 }

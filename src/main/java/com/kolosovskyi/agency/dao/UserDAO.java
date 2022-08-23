@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class UserDAO {
@@ -29,7 +31,7 @@ public class UserDAO {
 
     public void create(User user){
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLConstance.INSERT_INTO_USER)){
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.INSERT_INTO_USER)){
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
@@ -46,7 +48,7 @@ public class UserDAO {
     public Optional<User> read(Long id){
         User user = null;
         try(Connection connection = pool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_FROM_USER)){
+            PreparedStatement statement = connection.prepareStatement(SQLStatements.GET_FROM_USER)){
             statement.setLong(1, id);
             statement.executeQuery();
             ResultSet resultSet = statement.getResultSet();
@@ -65,7 +67,7 @@ public class UserDAO {
 
     public void update(User user) {
         try(Connection connection = pool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQLConstance.UPDATE_USER)){
+            PreparedStatement statement = connection.prepareStatement(SQLStatements.UPDATE_USER)){
             statement.setString(1, user.getName());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPassword());
@@ -81,7 +83,7 @@ public class UserDAO {
 
     public void delete(User user) {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLConstance.DELETE_USER)) {
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.DELETE_USER)) {
             statement.setLong(1, user.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
@@ -93,7 +95,7 @@ public class UserDAO {
     public Optional<User> getUserByEmail(String email){
         User user = null;
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_FULL_USER_BY_EMAIL)) {
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.GET_FULL_USER_BY_EMAIL)) {
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next())
@@ -112,7 +114,7 @@ public class UserDAO {
 
     public boolean isExistingLogin(String email, String password){
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_USER_BY_EMAIL_PASSWORD)) {
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.GET_USER_BY_EMAIL_PASSWORD)) {
             statement.setString(1, email);
             statement.setString(2, password);
             ResultSet resultSet = statement.executeQuery();
@@ -127,7 +129,7 @@ public class UserDAO {
 
     public boolean isExistingCreateAccount(String email){
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_USER_BY_EMAIL)) {
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.GET_USER_BY_EMAIL)) {
             statement.setString(1, email);
             ResultSet resultSet = statement.executeQuery();
             if(resultSet.next())
@@ -137,5 +139,24 @@ public class UserDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public List<User> getAll(){
+        List<User> users = new ArrayList<>();
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_USERS)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                users.add(new User(resultSet.getLong("id"),
+                        resultSet.getString("name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("password"),
+                        Role.values()[(int)resultSet.getLong("role_id")],
+                        resultSet.getBoolean("is_blocked")));
+            }
+        } catch (SQLException e) {
+            LOGGER.error("Cannot get all users", e);
+        }
+        return users;
     }
 }

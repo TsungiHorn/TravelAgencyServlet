@@ -55,8 +55,8 @@ class TourDAOTest {
                 "Kyoto", LocalDate.now());
 
         try (Connection connection = POOL.getConnection()) {
-            PreparedStatement statement1 = connection.prepareStatement(SQLConstance.CREATE_TOUR_TABLE);
-            PreparedStatement statement2 = connection.prepareStatement(SQLConstance.TOUR_FK);
+            PreparedStatement statement1 = connection.prepareStatement(SQLStatements.CREATE_TOUR_TABLE);
+            PreparedStatement statement2 = connection.prepareStatement(SQLStatements.TOUR_FK);
             statement1.executeUpdate();
             statement2.executeUpdate();
         } catch (SQLException e) {
@@ -139,7 +139,7 @@ class TourDAOTest {
     @AfterEach
      void finish() {
         try (Connection connection = POOL.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SQLConstance.DROP_TOUR);
+            PreparedStatement statement = connection.prepareStatement(SQLStatements.DROP_TOUR);
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("cannot finished com.kolosovskyi.agency.dao.TourDAOTest", e);

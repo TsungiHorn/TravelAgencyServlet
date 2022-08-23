@@ -6,11 +6,11 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "Home", value = "/home")
-public class HomeServlet extends HttpServlet {
+@WebServlet(name = "BlockedUserServlet", value = "/BlockedUserServlet")
+public class BlockedUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/view/home.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/view/blocked_user_warning.jsp");
         rd.forward(request, response);
     }
 }

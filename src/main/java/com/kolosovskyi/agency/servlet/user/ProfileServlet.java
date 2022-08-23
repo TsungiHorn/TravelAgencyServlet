@@ -1,4 +1,4 @@
-package com.kolosovskyi.agency.servlet;
+package com.kolosovskyi.agency.servlet.user;
 
 import com.kolosovskyi.agency.dao.UserDAO;
 import com.kolosovskyi.agency.dao.UserToursDAO;
@@ -28,7 +28,7 @@ public class ProfileServlet extends HttpServlet {
                 userTour.setStatus(TourStatus.CANCELED);
         }
         request.setAttribute("userTours", userTours);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/profile.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view/user/profile.jsp");
         requestDispatcher.forward(request, response);
     }
 }

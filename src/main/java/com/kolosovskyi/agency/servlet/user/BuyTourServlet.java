@@ -1,4 +1,4 @@
-package com.kolosovskyi.agency.servlet;
+package com.kolosovskyi.agency.servlet.user;
 
 import com.kolosovskyi.agency.dao.UserToursDAO;
 import com.kolosovskyi.agency.entity.TourStatus;

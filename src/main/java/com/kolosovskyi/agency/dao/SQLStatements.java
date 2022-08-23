@@ -1,8 +1,11 @@
 package com.kolosovskyi.agency.dao;
 
-public final class SQLConstance {
+public final class SQLStatements {
     public static final String GET_FULL_USER_BY_EMAIL = "SELECT id, name, email, password, role_id, is_blocked FROM \"user\" WHERE email = ?";
+    public static final String SELECT_HOT_TOURS = "SELECT * FROM tour WHERE is_hot = true";
+    public static final String SELECT_SIMPLE_TOURS = "SELECT * FROM tour WHERE is_hot = false";
     public static final String SELECT_ALL_TOURS = "SELECT * FROM tour";
+    public static final String SELECT_ALL_USERS = "SELECT * FROM \"user\"";
     public static final String INSERT_INTO_DISCOUNT = "INSERT INTO discount(step, max_percent) VALUES (?, ?) RETURNING id";
     public static final String GET_FROM_DISCOUNT_BY_ID = "SELECT id, step ,max_percent FROM discount WHERE id = ?";
     public static final String UPDATE_DISCOUNT = "UPDATE discount SET step = ?, max_percent = ? WHERE id = ?";
@@ -36,6 +39,6 @@ public final class SQLConstance {
     public static final String CREATE_USER_TOURS_TABLE = "CREATE TABLE \"user_tours\" (\"user_id\" bigint NOT NULL,\"tour_id\" bigint NOT NULL,\"discount_percent\" bigint NOT NULL,\"final_price\" numeric NOT NULL,\"status_id\" bigint NOT NULL,\"order_time\" TIMESTAMP NOT NULL, CONSTRAINT \"user_tours_pk\" PRIMARY KEY (\"user_id\",\"tour_id\")) WITH (OIDS=FALSE);";
     public static final String GET_TOUR_USER = "SELECT user_id, tour_id, discount_percent, final_price, status_id, order_time FROM user_tours WHERE user_id = ? AND tour_id = ?";
 
-    private SQLConstance() {
+    private SQLStatements() {
     }
 }

@@ -1,6 +1,8 @@
 package com.kolosovskyi.agency.servlet;
 
 import com.kolosovskyi.agency.dao.UserDAO;
+import com.kolosovskyi.agency.entity.Role;
+import com.kolosovskyi.agency.entity.User;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,12 +18,23 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (USER_DAO.isExistingLogin(request.getParameter("email"), request.getParameter("password"))) {
-            request.getSession().setAttribute("email", request.getParameter("email"));
-            response.sendRedirect("/profile?email="+request.getParameter("email"));
+        String email = request.getParameter("email");
+        User user = USER_DAO.getUserByEmail(email).orElse(new User());
+        if (Boolean.TRUE.equals(user.getBlocked())) {
+            response.sendRedirect("/BlockedUserServlet");
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
-            rd.forward(request, response);
+            if (USER_DAO.isExistingLogin(email, request.getParameter("password"))) {
+                if (user.getRole() == Role.USER) {
+                    request.getSession().setAttribute("email", email);
+                    response.sendRedirect("/profile?email=" + email);
+                } else if (user.getRole() == Role.ADMIN) {
+                    request.getSession().setAttribute("email", email);
+                    response.sendRedirect("/4admin-catalog");
+                }
+            } else {
+                RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
+                rd.forward(request, response);
+            }
         }
     }
 

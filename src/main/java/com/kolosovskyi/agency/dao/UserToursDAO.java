@@ -29,7 +29,7 @@ public class UserToursDAO {
 
     public void create(UserTours userTours){
         try(Connection connection = pool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQLConstance.INSERT_INTO_USER_TOURS);
+            PreparedStatement statement = connection.prepareStatement(SQLStatements.INSERT_INTO_USER_TOURS);
         ){
             statement.setLong(1, userTours.getUser().getId());
             statement.setLong(2, userTours.getTour().getId());
@@ -47,13 +47,13 @@ public class UserToursDAO {
         ArrayList<UserTours> userTours = new ArrayList<>();
         UserTours temp;
         try(Connection connection = pool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_USER_TOURS);
+            PreparedStatement statement = connection.prepareStatement(SQLStatements.GET_USER_TOURS);
         ){
             statement.setLong(1, user.getId());
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 temp = new UserTours();
-                temp.setUser(UserDAO.getInstance().read(resultSet.getLong("user_id")).orElse(new User()));
+                temp.setUser(UserDAO.getInstance().read(resultSet.getLong("user_id")).orElse(new User()));     //TODO must be field
                 temp.setTour(TourDAO.getInstance().read(resultSet.getLong("tour_id")).orElse(new Tour()));
                 temp.setDiscountPercent(resultSet.getInt("discount_percent"));
                 temp.setFinalPrice(resultSet.getBigDecimal("final_price"));
@@ -70,7 +70,7 @@ public class UserToursDAO {
     public Optional<UserTours>  readTourUser(Long userId, Long tourId){
         UserTours userTour = null;
        try(Connection connect = pool.getConnection();
-           PreparedStatement statement = connect.prepareStatement(SQLConstance.GET_TOUR_USER)){
+           PreparedStatement statement = connect.prepareStatement(SQLStatements.GET_TOUR_USER)){
            statement.setLong(1, userId);
            statement.setLong(2, tourId);
            ResultSet resultSet = statement.executeQuery();
@@ -90,7 +90,7 @@ public class UserToursDAO {
     }
      public void update(UserTours userTours){                       //will fix
         try(Connection connection = pool.getConnection();
-        PreparedStatement statement = connection.prepareStatement(SQLConstance.UPDATE_USER_TOURS)) {
+        PreparedStatement statement = connection.prepareStatement(SQLStatements.UPDATE_USER_TOURS)) {
             statement.setLong(1, userTours.getUser().getId());
             statement.setLong(2, userTours.getTour().getId());
             statement.setInt(3, userTours.getDiscountPercent());
@@ -107,7 +107,7 @@ public class UserToursDAO {
 
     public void delete(Long userId, Long tourId){
         try(Connection connection = pool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQLConstance.DELETE_USER_TOURS)) {
+            PreparedStatement statement = connection.prepareStatement(SQLStatements.DELETE_USER_TOURS)) {
             statement.setLong(1, userId);
             statement.setLong(2, tourId);
             statement.executeUpdate();

@@ -1,4 +1,4 @@
-package com.kolosovskyi.agency.servlet;
+package com.kolosovskyi.agency.servlet.user;
 
 import com.kolosovskyi.agency.dao.TourDAO;
 import com.kolosovskyi.agency.entity.Tour;
@@ -15,9 +15,12 @@ public class CatalogServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Tour> tours = TOUR_DAO.getAll();
-        RequestDispatcher rd = request.getRequestDispatcher("/view/catalog.jsp");
-        request.setAttribute("tours", tours);
+
+        List<Tour> hotTours = TOUR_DAO.getHot();
+        List<Tour> simpleTours = TOUR_DAO.getSimple();
+        RequestDispatcher rd = request.getRequestDispatcher("/view/user/catalog.jsp");
+        request.setAttribute("hotTours", hotTours);
+        request.setAttribute("simpleTours", simpleTours);
         rd.forward(request, response);
     }
 }

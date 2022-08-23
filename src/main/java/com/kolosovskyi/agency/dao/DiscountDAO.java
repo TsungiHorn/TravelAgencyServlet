@@ -29,7 +29,7 @@ public class DiscountDAO {
     }
     public void create(Discount discount) {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLConstance.INSERT_INTO_DISCOUNT)){
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.INSERT_INTO_DISCOUNT)){
             statement.setInt(1, discount.getStep());
             statement.setInt(2, discount.getMaxPercent());
             ResultSet resultSet = statement.executeQuery();
@@ -44,7 +44,7 @@ public class DiscountDAO {
     public Optional<Discount> read(Long id) {
         Discount discount = null;
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLConstance.GET_FROM_DISCOUNT_BY_ID)) {
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.GET_FROM_DISCOUNT_BY_ID)) {
             statement.setLong(1, id);
             statement.executeQuery();
             ResultSet resultSet = statement.getResultSet();
@@ -61,7 +61,7 @@ public class DiscountDAO {
 
     public void update(Discount discount) {
         try(Connection connection = pool.getConnection();
-        PreparedStatement statement = connection.prepareStatement(SQLConstance.UPDATE_DISCOUNT)){
+        PreparedStatement statement = connection.prepareStatement(SQLStatements.UPDATE_DISCOUNT)){
         statement.setInt(1, discount.getStep());
         statement.setInt(2, discount.getMaxPercent());
         statement.setLong(3, discount.getId());
@@ -73,7 +73,7 @@ public class DiscountDAO {
 
     public void delete(Discount discount) {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLConstance.DELETE_DISCOUNT)) {
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.DELETE_DISCOUNT)) {
             statement.setLong(1, discount.getId());
             statement.executeUpdate();
         } catch (SQLException e) {

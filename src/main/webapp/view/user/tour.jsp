@@ -20,7 +20,9 @@
 
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        <svg class="bi me-2" width="40" height="32">
+            <use xlink:href="#bootstrap"/>
+        </svg>
         <span class="fs-4">TravelAgency</span>
     </a>
 
@@ -45,7 +47,8 @@
                 <p class="fs-5">What is the tour for: <b>${tour.getTourType()}</b></p>
                 <p class="fs-5">Start date: <b>${tour.getStartDate()}</b></p>
                 <p>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/booking?q=${tour.getId()}" role="button"/>Add to profile</a>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/booking?q=${tour.getId()}"
+                       role="button"/>Add to profile</a>
                 </p>
             </div>
         </div>

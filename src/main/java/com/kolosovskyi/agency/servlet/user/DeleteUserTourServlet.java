@@ -1,8 +1,6 @@
-package com.kolosovskyi.agency.servlet;
+package com.kolosovskyi.agency.servlet.user;
 
-import com.kolosovskyi.agency.dao.UserDAO;
 import com.kolosovskyi.agency.dao.UserToursDAO;
-import com.kolosovskyi.agency.entity.UserTours;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -10,7 +8,7 @@ import jakarta.servlet.annotation.*;
 import java.io.IOException;
 
 @WebServlet(name = "DeleteTourServlet", value = "/deleteTour")
-public class DeleteTourServlet extends HttpServlet {
+public class DeleteUserTourServlet extends HttpServlet {
     private static final UserToursDAO USER_TOURS_DAO = UserToursDAO.getInstance();
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

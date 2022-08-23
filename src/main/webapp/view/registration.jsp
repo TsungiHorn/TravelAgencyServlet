@@ -10,7 +10,9 @@
 <body>
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+        <svg class="bi me-2" width="40" height="32">
+            <use xlink:href="#bootstrap"/>
+        </svg>
         <span class="fs-4">TravelAgency</span>
     </a>
 
@@ -121,7 +123,8 @@
         </div>
         <div class="text-xs-center">
             <button class="btn btn-block btn-primary" type="submit">
-                <a href="${pageContext.request.contextPath}/registration"><font color="white">Create an account</font></a>
+                <a href="${pageContext.request.contextPath}/registration"><font color="white">Create an
+                    account</font></a>
             </button>
         </div>
     </form>

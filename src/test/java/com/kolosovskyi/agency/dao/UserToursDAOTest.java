@@ -86,28 +86,28 @@ class UserToursDAOTest {
                  20);
 
         try (Connection connection = POOL.getConnection()) {
-            PreparedStatement statement1 = connection.prepareStatement(SQLConstance.CREATE_USER_TABLE);
+            PreparedStatement statement1 = connection.prepareStatement(SQLStatements.CREATE_USER_TABLE);
             statement1.executeUpdate();
 
-            PreparedStatement statement2 = connection.prepareStatement(SQLConstance.USER_FK);
+            PreparedStatement statement2 = connection.prepareStatement(SQLStatements.USER_FK);
             statement2.executeUpdate();
 
-            PreparedStatement statement3 = connection.prepareStatement(SQLConstance.CREATE_TOUR_TABLE);
+            PreparedStatement statement3 = connection.prepareStatement(SQLStatements.CREATE_TOUR_TABLE);
             statement3.executeUpdate();
 
-            PreparedStatement statement4 = connection.prepareStatement(SQLConstance.TOUR_FK);
+            PreparedStatement statement4 = connection.prepareStatement(SQLStatements.TOUR_FK);
             statement4.executeUpdate();
 
-            PreparedStatement statement5 = connection.prepareStatement(SQLConstance.CREATE_USER_TOURS_TABLE);
+            PreparedStatement statement5 = connection.prepareStatement(SQLStatements.CREATE_USER_TOURS_TABLE);
             statement5.executeUpdate();
 
-            PreparedStatement statement6 = connection.prepareStatement(SQLConstance.USER_TOURS_FK0);
+            PreparedStatement statement6 = connection.prepareStatement(SQLStatements.USER_TOURS_FK0);
             statement6.executeUpdate();
 
-            PreparedStatement statement7 = connection.prepareStatement(SQLConstance.USER_TOURS_FK1);
+            PreparedStatement statement7 = connection.prepareStatement(SQLStatements.USER_TOURS_FK1);
             statement7.executeUpdate();
 
-            PreparedStatement statement8 = connection.prepareStatement(SQLConstance.USER_TOURS_FK2);
+            PreparedStatement statement8 = connection.prepareStatement(SQLStatements.USER_TOURS_FK2);
             statement8.executeUpdate();
 
             userDAO.create(user1);
@@ -190,11 +190,11 @@ class UserToursDAOTest {
     @AfterEach
     void finish() {
         try (Connection connection = POOL.getConnection()) {
-            PreparedStatement statement1 = connection.prepareStatement(SQLConstance.DROP_USER_TOURS);
+            PreparedStatement statement1 = connection.prepareStatement(SQLStatements.DROP_USER_TOURS);
             statement1.executeUpdate();
-            PreparedStatement statement2 = connection.prepareStatement(SQLConstance.DROP_USER);
+            PreparedStatement statement2 = connection.prepareStatement(SQLStatements.DROP_USER);
             statement2.executeUpdate();
-            PreparedStatement statement3 = connection.prepareStatement(SQLConstance.DROP_TOUR);
+            PreparedStatement statement3 = connection.prepareStatement(SQLStatements.DROP_TOUR);
             statement3.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("cannot finished com.kolosovskyi.agency.dao.UserToursDAOTest", e);

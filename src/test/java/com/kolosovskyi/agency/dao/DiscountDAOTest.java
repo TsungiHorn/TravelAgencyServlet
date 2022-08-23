@@ -28,7 +28,7 @@ class DiscountDAOTest {
         discount2 = new Discount(20, 10);
         discount3 = new Discount(0, 0);
         try (Connection connection = POOL.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SQLConstance.CREATE_DISCOUNT_TABLE);
+            PreparedStatement statement = connection.prepareStatement(SQLStatements.CREATE_DISCOUNT_TABLE);
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("cannot start com.kolosovskyi.agency.dao.DiscountDAOTest", e);
@@ -37,7 +37,7 @@ class DiscountDAOTest {
     @AfterEach
     void finish() {
         try (Connection connection = POOL.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(SQLConstance.DROP_DISCOUNT);
+            PreparedStatement statement = connection.prepareStatement(SQLStatements.DROP_DISCOUNT);
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("cannot finished com.kolosovskyi.agency.dao.DiscountDAOTest", e);
