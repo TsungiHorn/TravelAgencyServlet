@@ -2,8 +2,8 @@ package com.kolosovskyi.agency.dao;
 
 public final class SQLStatements {
     public static final String GET_FULL_USER_BY_EMAIL = "SELECT id, name, email, password, role_id, is_blocked FROM \"user\" WHERE email = ?";
-    public static final String SELECT_HOT_TOURS = "SELECT * FROM tour WHERE is_hot = true";
-    public static final String SELECT_SIMPLE_TOURS = "SELECT * FROM tour WHERE is_hot = false";
+    public static final String SELECT_HOT_TOURS = "SELECT * FROM tour WHERE is_hot = true AND is_hidden = false AND start_date >= 'today'";
+    public static final String SELECT_SIMPLE_TOURS = "SELECT * FROM tour WHERE is_hot = false AND is_hidden = false AND start_date >= 'today'";
     public static final String SELECT_ALL_TOURS = "SELECT * FROM tour";
     public static final String SELECT_ALL_USERS = "SELECT * FROM \"user\"";
     public static final String INSERT_INTO_DISCOUNT = "INSERT INTO discount(step, max_percent) VALUES (?, ?) RETURNING id";

@@ -13,7 +13,7 @@ import java.io.IOException;
 @WebServlet(name = "RegistrationServlet", value = "/registration")
 public class RegistrationServlet extends HttpServlet {
     private static final CredentialService CREDENTIAL_SERVICE = CredentialService.getInstance();
-    private static final UserDAO USER_DAO = UserDAO.getInstance();  //serializable
+    private static final UserDAO USER_DAO = UserDAO.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

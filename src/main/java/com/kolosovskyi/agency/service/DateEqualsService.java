@@ -5,7 +5,6 @@ import com.kolosovskyi.agency.dao.UserToursDAO;
 import java.time.LocalDate;
 
 public class DateEqualsService {
-    private static final UserToursDAO USER_TOURS_DAO = UserToursDAO.getInstance();
     private DateEqualsService(){}
     private static class DateEqualsHolder{
         private static final DateEqualsService INSTANCE = new DateEqualsService();

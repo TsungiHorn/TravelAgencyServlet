@@ -13,11 +13,6 @@ public class DeleteUserTourServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         USER_TOURS_DAO.delete(Long.valueOf(request.getParameter("ui")), Long.valueOf(request.getParameter("ti")));
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
         response.sendRedirect("/profile");
     }
 }

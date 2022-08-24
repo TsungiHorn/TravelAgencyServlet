@@ -19,7 +19,7 @@
 <body>
 
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap"/>
         </svg>
@@ -37,6 +37,7 @@
     <div class="container my-5">
         <div class="bg-light p-5 rounded">
             <div class="col-sm-8 py-5 mx-auto">
+                <form action="${pageContext.request.contextPath}/booking?q=${tour.getId()}" method="post">
                 <h1 class="display-5 fw-normal">
                     ${tour.getTitle()}
                 </h1>
@@ -47,9 +48,11 @@
                 <p class="fs-5">What is the tour for: <b>${tour.getTourType()}</b></p>
                 <p class="fs-5">Start date: <b>${tour.getStartDate()}</b></p>
                 <p>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/booking?q=${tour.getId()}"
-                       role="button"/>Add to profile</a>
+                <div class="text-xs-center">
+                    <button class="btn btn-block btn-primary" type="submit">Add to profile</button>
+                </div>
                 </p>
+                </form>
             </div>
         </div>
     </div>

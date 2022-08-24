@@ -17,7 +17,7 @@
 </head>
 <body>
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap"/>
         </svg>
@@ -105,7 +105,7 @@
         }
     </style>
     <div class="p-x-1 p-y-3">
-        <form action="<%= request.getContextPath() %>/edit-tour?id=${tour.getId()}" method="post"
+        <form action="${pageContext.request.contextPath}/edit-tour?id=${tour.getId()}" method="post"
               class="card card-block m-x-auto bg-faded form-width">
             <legend class="m-b-1 text-xs-center">Edit tour</legend>
 
@@ -182,6 +182,14 @@
             </div>
 
 
+            <div class="form-group input-group">
+ <span class="has-float-label">
+ <input class="form-control" id="ten" type="text" placeholder="Hidden" name="hidden" value="${tour.getHidden()}"/>
+ <label for="ten">Hidden(true or false)</label>
+ </span>
+            </div>
+
+
 
 
             <div class="text-xs-center">
@@ -192,5 +200,11 @@
         </form>
     </div>
 </main>
+<footer class="bg-light text-center text-white">
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2022
+        <a class="text-white">TravelAgency</a>
+    </div>
+</footer>
 </body>
 </html>

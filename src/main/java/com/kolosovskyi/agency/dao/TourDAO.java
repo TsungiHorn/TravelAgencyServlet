@@ -107,9 +107,8 @@ public class TourDAO {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_HOT_TOURS)) {
             ResultSet resultSetHot = statement.executeQuery();
-            //req on date
             while (resultSetHot.next()) {
-                if(resultSetHot.getDate("start_date").toLocalDate().compareTo(LocalDate.now()) >= 0) { //req on date!!!
+                //if(resultSetHot.getDate("start_date").toLocalDate().compareTo(LocalDate.now()) >= 0) { //req on date!!!
                     hotTours.add(new Tour(resultSetHot.getLong("id"),
                             resultSetHot.getString("title"),
                             TourType.values()[(int) resultSetHot.getLong("type_id")],
@@ -121,7 +120,7 @@ public class TourDAO {
                             resultSetHot.getString("country"),
                             resultSetHot.getString("city"),
                             resultSetHot.getDate("start_date").toLocalDate()));
-                }
+                //}
             }
         } catch (SQLException e) {
             LOGGER.error("Cannot get all tours", e);
@@ -135,7 +134,7 @@ public class TourDAO {
              PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_SIMPLE_TOURS)) {
             ResultSet resultSetSimple = statement.executeQuery();
             while (resultSetSimple.next()) {
-                if(resultSetSimple.getDate("start_date").toLocalDate().compareTo(LocalDate.now()) >= 0) {
+                //if(resultSetSimple.getDate("start_date").toLocalDate().compareTo(LocalDate.now()) >= 0) {
                     simpleTours.add(new Tour(resultSetSimple.getLong("id"),
                             resultSetSimple.getString("title"),
                             TourType.values()[(int) resultSetSimple.getLong("type_id")],
@@ -147,7 +146,7 @@ public class TourDAO {
                             resultSetSimple.getString("country"),
                             resultSetSimple.getString("city"),
                             resultSetSimple.getDate("start_date").toLocalDate()));
-                }
+               // }
             }
         } catch (SQLException e) {
             LOGGER.error("Cannot get all tours", e);

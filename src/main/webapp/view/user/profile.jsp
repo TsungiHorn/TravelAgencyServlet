@@ -18,8 +18,10 @@
 </head>
 <body>
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+    <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <svg class="bi me-2" width="40" height="32">
+            <use xlink:href="#bootstrap"/>
+        </svg>
         <span class="fs-4">TravelAgency</span>
     </a>
 
@@ -32,47 +34,59 @@
 </header>
 <br>
 <section style="background-color: #eee;">
-        <div class="row">
-            <div class="col-lg-4">
-                <div class="card mb-4">
-                    <div class="card-body text-center">
-                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                             class="rounded-circle img-fluid" style="width: 150px;">
-                        <br>
-                        <h5 class="my-3">${user.getName()}</h5>
-                        <p class="text-muted mb-0">${user.getEmail()}</p>
-                    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div class="card mb-4">
+                <div class="card-body text-center">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                         class="rounded-circle img-fluid" style="width: 150px;">
+                    <br>
+                    <h5 class="my-3">${user.getName()}</h5>
+                    <p class="text-muted mb-0">${user.getEmail()}</p>
                 </div>
             </div>
-            <div class="col-lg-8">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <h2>Tours history:</h2>
+        </div>
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <h2>Tours history:</h2>
+                        </div>
+                        <br>
+                    </div>
+                    <div class="row">
+
+                        <c:forEach items="${userTours}" var="tour">
+                            <div class="col-sm-10">
+                                <p class="mb-0"><strong>${tour.getTour().getTitle()}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: ${tour.getStatus()}
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start
+                                    date: ${tour.getTour().getStartDate()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ${tour.getFinalPrice()}$
+                                </p>
                             </div>
                             <br>
-                        </div>
-                        <div class="row">
-
-                            <c:forEach items="${userTours}" var="tour">
-                                <div class="col-sm-10">
-                                    <p class="mb-0"><strong>${tour.getTour().getTitle()}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: ${tour.getStatus()}
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start date: ${tour.getTour().getStartDate()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ${tour.getFinalPrice()}$</p>
+                            <br>
+                            <div class="col-sm-20">
+                                <div class="btn-group">
+                                    <form action="${pageContext.request.contextPath}/deleteTour?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}"
+                                          method="post">
+                                        <button class="btn btn-block btn-primary" type="submit">Remove</button>
+                                    </form>
+                                    <form action="${pageContext.request.contextPath}/buy?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}"
+                                          method="post">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-block btn-primary"
+                                                                                    type="submit">Buy
+                                        for ${tour.getFinalPrice()}$
+                                    </button>
+                                    </form>
                                 </div>
-                                <br>
-                                <br>
-                                <div class="col-sm-20">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-primary" href="${pageContext.request.contextPath}/deleteTour?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}" role="button">Remove</a>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="btn btn-primary" href="${pageContext.request.contextPath}/buy?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}" role="button">Buy for ${tour.getFinalPrice()}$</a>
+                            </div>
 
-                                </div>
-
-                                <br>
-                                <br>
-                                <br>
-                                <hr>
-                            </c:forEach>
+                            <br>
+                            <br>
+                            <br>
+                            <hr>
+                        </c:forEach>
                     </div>
                 </div>
             </div>

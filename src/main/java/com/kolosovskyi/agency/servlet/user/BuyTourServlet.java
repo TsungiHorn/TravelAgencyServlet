@@ -12,11 +12,6 @@ import java.io.IOException;
 @WebServlet(name = "BuyTourServlet", value = "/buy")
 public class BuyTourServlet extends HttpServlet {
     private  static final UserToursDAO USER_TOURS_DAO = UserToursDAO.getInstance();
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
-        response.sendRedirect("/profile");
-    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -26,5 +21,6 @@ public class BuyTourServlet extends HttpServlet {
             userTour.setStatus(TourStatus.PAID);
             USER_TOURS_DAO.update(userTour);
         }
+        response.sendRedirect("/profile");
     }
 }

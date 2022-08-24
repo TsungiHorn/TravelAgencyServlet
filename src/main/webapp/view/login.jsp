@@ -9,7 +9,7 @@
 </head>
 <body>
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap"/>
         </svg>
@@ -98,7 +98,7 @@
     }
 </style>
 <div class="p-x-1 p-y-3">
-    <form action="<%= request.getContextPath() %>/login" method="post"
+    <form action="${pageContext.request.contextPath}/login" method="post"
           class="card card-block m-x-auto bg-faded form-width">
         <legend class="m-b-1 text-xs-center">Login</legend>
         <div class="form-group input-group">
@@ -131,7 +131,6 @@
         <div class="container text-center text-md-start mt-5">
             <div class="row mt-3">
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                    <!-- Content -->
                     <h3 class="text-uppercase fw-bold mb-4">
                         <i class="fas fa-gem me-3"></i>Travel Agency
                     </h3>
@@ -148,7 +147,6 @@
                     </p>
                 </div>
                 <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                    <!-- Links -->
                     <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
                     <p><i class="fas fa-home me-3"></i> Atlantis, Mermaid 17, Atlantic Sea</p>
                     <p>

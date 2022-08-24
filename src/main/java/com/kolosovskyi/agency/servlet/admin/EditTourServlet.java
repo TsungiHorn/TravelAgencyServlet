@@ -36,6 +36,7 @@ public class EditTourServlet extends HttpServlet {
             tour.setCity(request.getParameter("city"));
             tour.setStartDate(LocalDate.parse(request.getParameter("date")));
             tour.setHot(Boolean.valueOf(request.getParameter("hot")));
+            tour.setHidden(Boolean.valueOf(request.getParameter("hidden")));
 
         TOUR_DAO.update(tour);
         response.sendRedirect("/4admin-catalog");

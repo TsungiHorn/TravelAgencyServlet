@@ -19,10 +19,11 @@ public class BookingTourServlet extends HttpServlet {
     private static final UserDAO USER_DAO = UserDAO.getInstance();
     private static final UserToursDAO USER_TOURS_DAO = UserToursDAO.getInstance();
     private static final TourDAO TOUR_DAO = TourDAO.getInstance();
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String email = (String)request.getSession().getAttribute("email");
+        String email = (String) request.getSession().getAttribute("email");
         User user = USER_DAO.getUserByEmail(email).orElse(new User());
         Tour tour = TOUR_DAO.read(Long.valueOf(request.getParameter("q"))).orElse(new Tour());
         UserTours userTours = new UserTours(user, tour, LocalDate.now(), TourStatus.REGISTERED,

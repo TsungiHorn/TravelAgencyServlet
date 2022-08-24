@@ -14,6 +14,8 @@ import java.util.Optional;
 
 public class UserToursDAO {
     private static final Logger LOGGER = LoggerFactory.getLogger(UserToursDAO.class);
+    private static final UserDAO USER_DAO = UserDAO.getInstance();
+    private static final TourDAO TOUR_DAO = TourDAO.getInstance();
     private final PostgreSQLConnectionPool pool;
 
     private UserToursDAO(){
@@ -53,8 +55,8 @@ public class UserToursDAO {
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next()){
                 temp = new UserTours();
-                temp.setUser(UserDAO.getInstance().read(resultSet.getLong("user_id")).orElse(new User()));     //TODO must be field
-                temp.setTour(TourDAO.getInstance().read(resultSet.getLong("tour_id")).orElse(new Tour()));
+                temp.setUser(USER_DAO.read(resultSet.getLong("user_id")).orElse(new User()));
+                temp.setTour(TOUR_DAO.read(resultSet.getLong("tour_id")).orElse(new Tour()));
                 temp.setDiscountPercent(resultSet.getInt("discount_percent"));
                 temp.setFinalPrice(resultSet.getBigDecimal("final_price"));
                 temp.setOrderTime(resultSet.getDate("order_time").toLocalDate());
@@ -75,8 +77,8 @@ public class UserToursDAO {
            statement.setLong(2, tourId);
            ResultSet resultSet = statement.executeQuery();
            if(resultSet.next()) {
-            userTour = new UserTours(UserDAO.getInstance().read(userId).orElse(new User()),
-                    TourDAO.getInstance().read(tourId).orElse(new Tour()),
+            userTour = new UserTours(USER_DAO.read(userId).orElse(new User()),
+                    TOUR_DAO.read(tourId).orElse(new Tour()),
                     resultSet.getDate("order_time").toLocalDate(),
                     TourStatus.values()[(int) resultSet.getLong("status_id")],
                     resultSet.getBigDecimal("final_price"),
@@ -88,7 +90,7 @@ public class UserToursDAO {
        }
        return Optional.ofNullable(userTour);
     }
-     public void update(UserTours userTours){                       //will fix
+     public void update(UserTours userTours){
         try(Connection connection = pool.getConnection();
         PreparedStatement statement = connection.prepareStatement(SQLStatements.UPDATE_USER_TOURS)) {
             statement.setLong(1, userTours.getUser().getId());

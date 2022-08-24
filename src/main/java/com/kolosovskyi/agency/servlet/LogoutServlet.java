@@ -13,9 +13,4 @@ public class LogoutServlet extends HttpServlet {
         request.getSession().invalidate();
         response.sendRedirect("/home");
     }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }

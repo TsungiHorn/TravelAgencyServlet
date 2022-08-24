@@ -1,7 +1,6 @@
 package com.kolosovskyi.agency.servlet.admin;
 
 import com.kolosovskyi.agency.dao.UserDAO;
-import com.kolosovskyi.agency.entity.Tour;
 import com.kolosovskyi.agency.entity.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
