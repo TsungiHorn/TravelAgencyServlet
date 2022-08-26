@@ -11,10 +11,10 @@ import java.util.List;
 
 @WebServlet(name = "AdminCatalogServlet", value = "/4admin-catalog")
 public class CatalogServlet extends HttpServlet {
-    private static final TourDAO TOUR_DAO = TourDAO.getInstance();
+    private  final TourDAO tourDAO = TourDAO.getInstance();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Tour> tours = TOUR_DAO.getAll();
+        List<Tour> tours = tourDAO.getAll();
         request.setAttribute("tours", tours);
         RequestDispatcher rd = request.getRequestDispatcher("/view/admin/admin-tours.jsp");
         rd.forward(request, response);

@@ -2,9 +2,10 @@ package com.kolosovskyi.agency.entity;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.Objects;
 
-public class Tour {
+public class Tour{
     private Long id;
     private String title;
     private TourType tourType;
@@ -167,4 +168,5 @@ public class Tour {
                 ", startDate=" + startDate +
                 '}';
     }
+
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -9,7 +10,7 @@
 </head>
 <body>
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a  class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap"/>
         </svg>
@@ -99,6 +100,9 @@
     <form action="${pageContext.request.contextPath}/registration" method="post"
           class="card card-block m-x-auto bg-faded form-width">
         <legend class="m-b-1 text-xs-center">Registration</legend>
+        <c:if test="${error}">
+            <font color="red"><p><c:out value="Failed to create an account. Try again."/><p></font>
+        </c:if>
         <div class="form-group input-group">
  <span class="has-float-label">
  <input class="form-control" id="first" type="text" placeholder="Name" name="name"/>
@@ -113,7 +117,7 @@
  </span>
         </div>
         <div class="form-group has-float-label">
-            <input class="form-control" id="password" type="text" placeholder="••••••••" name="password"/>
+            <input class="form-control" id="password" type="text" placeholder="More than 8 characters" name="password"/>
             <label for="password">password</label>
         </div>
         <div class="form-group">

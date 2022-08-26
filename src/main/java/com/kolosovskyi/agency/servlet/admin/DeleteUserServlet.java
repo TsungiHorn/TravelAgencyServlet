@@ -8,14 +8,14 @@ import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
 
-@WebServlet(name = "BlockUserServlet", value = "/BlockUserServlet")
-public class BlockUserServlet extends HttpServlet {
-      private  final UserDAO userDAO = UserDAO.getInstance();
+@WebServlet(name = "DeleteUserServlet", value = "/delete-user")
+public class DeleteUserServlet extends HttpServlet {
+    private final UserDAO userDAO = UserDAO.getInstance();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    User user = userDAO.read(Long.valueOf(request.getParameter("i"))).orElse(new User());
-    user.setBlocked(!user.getBlocked());
-    userDAO.update(user);
-    response.sendRedirect("/4admin-users");
+        User user = userDAO.read(Long.valueOf(request.getParameter("id"))).orElse(new User());
+        userDAO.delete(user);
+        response.sendRedirect("/4admin-users");
     }
 }

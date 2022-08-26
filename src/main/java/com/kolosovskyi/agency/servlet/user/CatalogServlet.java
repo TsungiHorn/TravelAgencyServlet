@@ -11,16 +11,22 @@ import java.util.List;
 
 @WebServlet(name = "Catalog", value = "/catalog")
 public class CatalogServlet extends HttpServlet {
-    private static final TourDAO TOUR_DAO = TourDAO.getInstance();
+    private final TourDAO tourDAO = TourDAO.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-        List<Tour> hotTours = TOUR_DAO.getHot();
-        List<Tour> simpleTours = TOUR_DAO.getSimple();
-        RequestDispatcher rd = request.getRequestDispatcher("/view/user/catalog.jsp");
-        request.setAttribute("hotTours", hotTours);
-        request.setAttribute("simpleTours", simpleTours);
-        rd.forward(request, response);
+        if(request.getParameter("order-by-price")!=null){
+            List<Tour> tours = tourDAO.getTourOrderByPrice();
+            RequestDispatcher rd = request.getRequestDispatcher("/view/user/catalog.jsp");
+            request.setAttribute("tours", tours);
+            rd.forward(request, response);
+        }else {
+            List<Tour> hotTours = tourDAO.getHotTours();
+            List<Tour> simpleTours = tourDAO.getSimpleTours();
+            RequestDispatcher rd = request.getRequestDispatcher("/view/user/catalog.jsp");
+            request.setAttribute("hotTours", hotTours);
+            request.setAttribute("simpleTours", simpleTours);
+            rd.forward(request, response);
+        }
     }
 }

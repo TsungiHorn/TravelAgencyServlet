@@ -31,16 +31,35 @@
                 <p class="fs-5">Choose your tour!</p>
                 <p>We are operators of tours in more than 30 countries. We will be happy to help you choose a tour! But
                     for this you need to log in.</p>
-                <p>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/login" role="button">Login
-                        here</a>
-                </p>
             </div>
+            <br>
+            <a class="btn btn-primary" href="catalog?order-by-price">Sort by price</a>
+
         </div>
     </div>
 </main>
 <div class="row row-cols-1 row-cols-md-3 text-center">
-
+    <c:forEach var="tour" items="${tours}">
+        <form action="/tour" method="get">
+            <div class="col">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>${tour.getTitle()} <c:if test="${tour.getHot()}"><c:out value="(Hot)"/></c:if> </h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text"> Trip to the
+                        <td> ${tour.getCity()} </td>
+                        of
+                        <td> ${tour.getCountry()} </td>
+                        with accommodation in a hotel with
+                        <td> ${tour.getHotelStars()} </td>
+                        stars.</p>
+                        <a class="btn btn-primary" href="tour?i=${tour.getId()}">View</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </c:forEach>
     <c:forEach var="tour" items="${hotTours}">
         <form action="/tour" method="get">
             <div class="col">

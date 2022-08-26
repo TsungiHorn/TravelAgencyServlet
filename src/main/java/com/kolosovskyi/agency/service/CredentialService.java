@@ -13,10 +13,9 @@ public class CredentialService {
         return Instance.CREDENTIAL_SERVICE;
     }
 
-    public boolean isRightMember(String name, String email, String password){
-    return !email.isEmpty() &&
+    public boolean isCredentialValid(String name, String email){
+    return email != null && name != null && !email.isEmpty() &&
         !userDAO.isExistingCreateAccount(email)
-        && !name.isEmpty()
-        && password.length() >= 8;
+        && !name.isEmpty();
     }
 }

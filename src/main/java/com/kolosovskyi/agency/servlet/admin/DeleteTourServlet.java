@@ -10,12 +10,12 @@ import java.io.IOException;
 
 @WebServlet(name = "ServletDeleteTourServlet", value = "/DeleteTourServlet")
 public class DeleteTourServlet extends HttpServlet {
-    private static final TourDAO TOUR_DAO = TourDAO.getInstance();
+    private  final TourDAO tourDAO = TourDAO.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Tour tour = TOUR_DAO.read(Long.valueOf(request.getParameter("i"))).orElse(new Tour());
-        TOUR_DAO.delete(tour);
+        Tour tour = tourDAO.read(Long.valueOf(request.getParameter("i"))).orElse(new Tour());
+        tourDAO.delete(tour);
         response.sendRedirect("/4admin-catalog");
     }
 }

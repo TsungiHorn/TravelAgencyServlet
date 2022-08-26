@@ -1,4 +1,4 @@
-package com.kolosovskyi.agency.servlet;
+package com.kolosovskyi.agency.servlet.general;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -10,7 +10,7 @@ import java.io.IOException;
 public class BlockedUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/view/blocked_user_warning.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/view/static/blocked_user_warning.jsp");
         rd.forward(request, response);
     }
 }

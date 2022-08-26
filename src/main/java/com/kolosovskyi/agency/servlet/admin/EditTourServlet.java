@@ -13,11 +13,11 @@ import java.time.LocalDate;
 
 @WebServlet(name = "EditTourServlet", value = "/edit-tour")
 public class EditTourServlet extends HttpServlet {
-    private static final TourDAO TOUR_DAO = TourDAO.getInstance();
+    private  final TourDAO tourDAO = TourDAO.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Tour tour = TOUR_DAO.read(Long.valueOf(request.getParameter("i"))).orElse(new Tour());
+        Tour tour = tourDAO.read(Long.valueOf(request.getParameter("i"))).orElse(new Tour());
         RequestDispatcher rd = request.getRequestDispatcher("/view/admin/edit-tour.jsp");
         request.setAttribute("tour", tour);
         rd.forward(request, response);
@@ -25,7 +25,7 @@ public class EditTourServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Tour tour = TOUR_DAO.read(Long.valueOf(request.getParameter("id"))).orElse(new Tour());
+        Tour tour = tourDAO.read(Long.valueOf(request.getParameter("id"))).orElse(new Tour());
 
             tour.setTitle(request.getParameter("title"));
             tour.setTourType(TourType.values()[Integer.parseInt(request.getParameter("type"))]);
@@ -38,7 +38,7 @@ public class EditTourServlet extends HttpServlet {
             tour.setHot(Boolean.valueOf(request.getParameter("hot")));
             tour.setHidden(Boolean.valueOf(request.getParameter("hidden")));
 
-        TOUR_DAO.update(tour);
+        tourDAO.update(tour);
         response.sendRedirect("/4admin-catalog");
     }
 }

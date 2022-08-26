@@ -1,4 +1,4 @@
-package com.kolosovskyi.agency.servlet;
+package com.kolosovskyi.agency.servlet.general;
 
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;

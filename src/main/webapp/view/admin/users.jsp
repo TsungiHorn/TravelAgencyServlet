@@ -35,7 +35,6 @@
     <div class="row row-cols-1 row-cols-md-3 text-center">
 
         <c:forEach var="user" items="${users}">
-            <form action="/BlockUserServlet?i=${user.getId()}" method="post">
                 <div class="col">
                     <div class="card">
                         <div class="card-header">
@@ -49,7 +48,14 @@
                                 Role: ${user.getRole()}&nbsp;&nbsp;&nbsp;
                                 isBlocked: ${user.getBlocked()}&nbsp;&nbsp;&nbsp;
                             </p>
+                            <div class="btn-group">
+                                <form action="/BlockUserServlet?i=${user.getId()}" method="post">
                             <button class="btn btn-block btn-primary" type="submit">Blocked/Unblocked</button>
+                                </form>
+                                <form action="/delete-user?id=${user.getId()}" method="post">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-block btn-primary" type="submit">Delete</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

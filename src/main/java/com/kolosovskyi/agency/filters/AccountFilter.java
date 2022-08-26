@@ -1,18 +1,15 @@
 package com.kolosovskyi.agency.filters;
 
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.*;
+import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-public class AccountFilter implements Filter {
-    public void init(FilterConfig config) throws ServletException {
-    }
+@WebFilter(filterName = "AccountFilter", urlPatterns = {"/booking/*", "/profile/*"})
 
-    public void destroy() {
-    }
+public class AccountFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws ServletException, IOException {
@@ -20,7 +17,7 @@ public class AccountFilter implements Filter {
         HttpServletResponse httpResp = (HttpServletResponse) response;
         HttpSession session = httpReq.getSession();
 
-        boolean isAuthorized = session.getAttribute("email")!=null && !session.getAttribute("email").equals("");
+        boolean isAuthorized = session.getAttribute("email")!=null;
         if(isAuthorized){
             chain.doFilter(request, response);
         }else {

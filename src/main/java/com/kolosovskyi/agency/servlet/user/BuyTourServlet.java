@@ -11,15 +11,15 @@ import java.io.IOException;
 
 @WebServlet(name = "BuyTourServlet", value = "/buy")
 public class BuyTourServlet extends HttpServlet {
-    private  static final UserToursDAO USER_TOURS_DAO = UserToursDAO.getInstance();
+    private  final UserToursDAO userToursDAO = UserToursDAO.getInstance();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        UserTours userTour = USER_TOURS_DAO.readTourUser(Long.valueOf(request.getParameter("ui")),
+        UserTours userTour = userToursDAO.readTourUser(Long.valueOf(request.getParameter("ui")),
                 Long.valueOf(request.getParameter("ti"))).orElse(new UserTours());
         if (userTour.getStatus() != TourStatus.PAID && userTour.getStatus()!=TourStatus.CANCELED) {
             userTour.setStatus(TourStatus.PAID);
-            USER_TOURS_DAO.update(userTour);
+            userToursDAO.update(userTour);
         }
         response.sendRedirect("/profile");
     }

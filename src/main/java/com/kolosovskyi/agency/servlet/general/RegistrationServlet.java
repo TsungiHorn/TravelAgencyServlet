@@ -1,42 +1,54 @@
-package com.kolosovskyi.agency.servlet;
+package com.kolosovskyi.agency.servlet.general;
 
 import com.kolosovskyi.agency.dao.UserDAO;
 import com.kolosovskyi.agency.entity.Role;
 import com.kolosovskyi.agency.entity.User;
 import com.kolosovskyi.agency.service.CredentialService;
+import com.kolosovskyi.agency.service.PasswordHasher;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 
 @WebServlet(name = "RegistrationServlet", value = "/registration")
 public class RegistrationServlet extends HttpServlet {
-    private static final CredentialService CREDENTIAL_SERVICE = CredentialService.getInstance();
-    private static final UserDAO USER_DAO = UserDAO.getInstance();
+    private final CredentialService credentialService = CredentialService.getInstance();
+    private final UserDAO userDAO = UserDAO.getInstance();
+    private final Logger logger = LoggerFactory.getLogger(RegistrationServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
-        String email = request.getParameter("email");
         String password = request.getParameter("password");
-        if (CREDENTIAL_SERVICE.isRightMember(name, email, password)) {
+        int passwordLength = password.length();
+        try {
+            password = PasswordHasher.toHexString(PasswordHasher.getSHA(password));
+        } catch (NoSuchAlgorithmException e) {
+            logger.error("cannot hash password", e);
+        }
+        String email = request.getParameter("email");
+        if (credentialService.isCredentialValid(name, email) && passwordLength >= 8) {
             User user = new User();
             user.setName(name);
             user.setEmail(email);
             user.setPassword(password);
             user.setRole(Role.USER);
             user.setBlocked(false);
-            USER_DAO.create(user);
+            userDAO.create(user);
             response.sendRedirect("/login");
         } else {
-            RequestDispatcher rd = request.getRequestDispatcher("/view/registration.jsp");
-            rd.forward(request, response);
+            response.sendRedirect("/registration?error");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        boolean isFail = request.getParameter("error") != null;
+        request.setAttribute("error", isFail);
         RequestDispatcher rd = request.getRequestDispatcher("/view/registration.jsp");
         rd.forward(request, response);
     }

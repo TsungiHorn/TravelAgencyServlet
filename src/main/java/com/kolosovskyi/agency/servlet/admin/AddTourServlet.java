@@ -13,7 +13,7 @@ import java.time.LocalDate;
 
 @WebServlet(name = "AddTourServlet", value = "/AddTourServlet")
 public class AddTourServlet extends HttpServlet {
-    private static final TourDAO TOUR_DAO = TourDAO.getInstance();
+    private  final TourDAO tourDAO = TourDAO.getInstance();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("/view/admin/add-tour.jsp");
@@ -22,7 +22,7 @@ public class AddTourServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        TOUR_DAO.create(new Tour(request.getParameter("title"),
+        tourDAO.create(new Tour(request.getParameter("title"),
                 TourType.values()[Integer.parseInt(request.getParameter("type"))],
                 Long.valueOf(request.getParameter("person")),
                 Integer.parseInt(request.getParameter("stars")),
@@ -32,6 +32,6 @@ public class AddTourServlet extends HttpServlet {
                 request.getParameter("country"),
                 request.getParameter("city"),
                 LocalDate.parse(request.getParameter("date"))));
-        response.sendRedirect("/4admin-main");
+        response.sendRedirect("/4admin-catalog");
     }
 }
