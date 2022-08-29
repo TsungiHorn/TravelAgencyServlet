@@ -38,20 +38,22 @@
         <div class="bg-light p-5 rounded">
             <div class="col-sm-8 py-5 mx-auto">
                 <form action="${pageContext.request.contextPath}/booking?q=${tour.getId()}" method="post">
-                <h1 class="display-5 fw-normal">
-                    ${tour.getTitle()}
-                </h1>
-                <br>
-                <p class="fs-5">Tour location: <b>${tour.getCity()}</b>, <b>${tour.getCountry()}</b></p>
-                <p class="fs-5">Number of people for which the tour is designed: <b>${tour.getPersonNumber()} person</b>
-                </p>
-                <p class="fs-5">What is the tour for: <b>${tour.getTourType()}</b></p>
-                <p class="fs-5">Start date: <b>${tour.getStartDate()}</b></p>
-                <p>
-                <div class="text-xs-center">
-                    <button class="btn btn-block btn-primary" type="submit">Add to profile</button>
-                </div>
-                </p>
+                    <h1 class="display-5 fw-normal">
+                        ${tour.getTitle()}
+                    </h1>
+                    <br>
+                    <p class="fs-5">Tour location: <b>${tour.getCity()}</b>, <b>${tour.getCountry()}</b></p>
+                    <p class="fs-5">Number of people for which the tour is designed: <b>${tour.getPersonNumber()}
+                        person</b>
+                    </p>
+                    <p class="fs-5">What is the tour for: <b>${tour.getTourType()}</b></p>
+                    <p class="fs-5">Start date: <b>${tour.getStartDate()}</b></p>
+                    <p class="fs-5">Price: <b>${tour.getPrice()}$</b></p>
+                    <p>
+                    <div class="text-xs-center">
+                        <button class="btn btn-block btn-primary" type="submit">Add to profile</button>
+                    </div>
+                    </p>
                 </form>
             </div>
         </div>

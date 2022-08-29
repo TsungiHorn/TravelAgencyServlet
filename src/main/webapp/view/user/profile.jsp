@@ -25,44 +25,47 @@
         <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
     </ul>
 </header>
-    <div class="row">
-        <div class="col-lg-4">
-            <div class="card mb-4">
-                <div class="card-body text-center">
-                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
-                         class="rounded-circle img-fluid" style="width: 150px;">
-                    <br>
-                    <h5 class="my-3">${user.getName()}</h5>
-                    <p class="text-muted mb-0">${user.getEmail()}</p>
-                </div>
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-body text-center">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                     class="rounded-circle img-fluid" style="width: 150px;">
+                <br>
+                <h5 class="my-3">${user.getName()}</h5>
+                <p class="text-muted mb-0">${user.getEmail()}</p>
             </div>
         </div>
-        <div class="col-lg-8">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <h2>Tours history:</h2>
+    </div>
+    <div class="col-lg-8">
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <h2>Tours history:</h2>
+                    </div>
+                    <br>
+                </div>
+                <div class="row">
+
+                    <c:forEach items="${userTours}" var="tour">
+                        <div class="col-sm-10">
+                            <p class="mb-0"><strong>${tour.getTour().getTitle()}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: ${tour.getStatus()}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start
+                                date: ${tour.getTour().getStartDate()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ${tour.getFinalPrice()}$
+                            </p>
                         </div>
                         <br>
-                    </div>
-                    <div class="row">
-
-                        <c:forEach items="${userTours}" var="tour">
-                            <div class="col-sm-10">
-                                <p class="mb-0"><strong>${tour.getTour().getTitle()}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: ${tour.getStatus()}
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start
-                                    date: ${tour.getTour().getStartDate()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ${tour.getFinalPrice()}$
-                                </p>
-                            </div>
-                            <br>
-                            <br>
-                            <div class="col-sm-20">
-                                <div class="btn-group">
+                        <br>
+                        <div class="col-sm-20">
+                            <div class="btn-group">
+                                <c:if test="${tour.getStatus().toString().length()!=8}">
                                     <form action="${pageContext.request.contextPath}/deleteTour?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}"
                                           method="post">
                                         <button class="btn btn-block btn-primary" type="submit">Cancel</button>
                                     </form>
+                                </c:if>
+                                <c:if test="${(tour.getStatus().toString().length()!=4) and (tour.getStatus().toString().length()!=8)}">
                                     <form action="${pageContext.request.contextPath}/buy?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}"
                                           method="post">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-block btn-primary"
@@ -70,19 +73,20 @@
                                         for ${tour.getFinalPrice()}$
                                     </button>
                                     </form>
-                                </div>
+                                </c:if>
                             </div>
+                        </div>
 
-                            <br>
-                            <br>
-                            <br>
-                            <hr>
-                        </c:forEach>
-                    </div>
+                        <br>
+                        <br>
+                        <br>
+                        <hr>
+                    </c:forEach>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <br>
 </body>
 </html>

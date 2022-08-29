@@ -19,7 +19,7 @@
         <p class="lead">
             The page you are looking for does not exist.
         </p>
-        <a href="/view/user/home.jsp" class="btn btn-primary">Go Home</a>
+        <a href="/home" class="btn btn-primary">Go Home</a>
     </div>
 </div>
 </body>

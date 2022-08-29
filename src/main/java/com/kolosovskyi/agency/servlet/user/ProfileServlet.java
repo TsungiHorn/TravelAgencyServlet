@@ -2,7 +2,6 @@ package com.kolosovskyi.agency.servlet.user;
 
 import com.kolosovskyi.agency.dao.UserDAO;
 import com.kolosovskyi.agency.dao.UserToursDAO;
-import com.kolosovskyi.agency.entity.Tour;
 import com.kolosovskyi.agency.entity.TourStatus;
 import com.kolosovskyi.agency.entity.User;
 import com.kolosovskyi.agency.entity.UserTours;

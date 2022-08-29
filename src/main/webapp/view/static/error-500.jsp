@@ -19,7 +19,7 @@
         <p class="lead">
             Try this action later.
         </p>
-        <a href="/view/user/home.jsp" class="btn btn-primary">Go Home</a>
+        <a href="/home" class="btn btn-primary">Go Home</a>
     </div>
 </div>
 </body>

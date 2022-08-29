@@ -13,7 +13,7 @@ public class CredentialService {
         return Instance.CREDENTIAL_SERVICE;
     }
 
-    public boolean isCredentialValid(String name, String email){
+    public boolean isCredentialFree(String name, String email){
     return email != null && name != null && !email.isEmpty() &&
         !userDAO.isExistingCreateAccount(email)
         && !name.isEmpty();

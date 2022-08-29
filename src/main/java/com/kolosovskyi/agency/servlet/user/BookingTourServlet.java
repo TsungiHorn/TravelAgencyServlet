@@ -28,11 +28,16 @@ public class BookingTourServlet extends HttpServlet {
         Tour tour = TOUR_DAO.read(Long.valueOf(request.getParameter("q"))).orElse(new Tour());
         UserTours userTours = new UserTours(user, tour, LocalDate.now(), TourStatus.REGISTERED,
                 tour.getPrice(), 0);
+        bookTourOperation(user, tour, userTours);
+        response.sendRedirect("/profile");
+    }
+
+    private void bookTourOperation(User user, Tour tour, UserTours userTours) {
         if(USER_TOURS_DAO.readTourUser(user.getId(), tour.getId()).isPresent()){
-            USER_TOURS_DAO.update(userTours);
+            if(USER_TOURS_DAO.readTourUser(user.getId(), tour.getId()).get().getStatus()!=TourStatus.PAID)
+                USER_TOURS_DAO.update(userTours);
         }else {
             USER_TOURS_DAO.create(userTours);
         }
-        response.sendRedirect("/profile");
     }
 }

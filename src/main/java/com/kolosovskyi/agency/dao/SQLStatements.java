@@ -6,7 +6,8 @@ public final class SQLStatements {
     public static final String SELECT_HOT_TOURS = "SELECT * FROM tour WHERE is_hot = true AND is_hidden = false AND start_date >= 'today'";
     public static final String SELECT_SIMPLE_TOURS = "SELECT * FROM tour WHERE is_hot = false AND is_hidden = false AND start_date >= 'today'";
     public static final String SELECT_ALL_TOURS_ORDER_BY_PRICE = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY price";
-    public static final String SELECT_ALL_TOURS_ORDER_BY_HOTEL_STARS = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY hotel_stars DESC";
+    public static final String SELECT_ALL_TOURS_ORDER_BY_HOTEL_STARS = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY hotel_stars ASC";
+    public static final String SELECT_ALL_TOURS_ORDER_BY_HOTEL_STARS_REVERB = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY hotel_stars DESC";
     public static final String SELECT_ALL_TOURS_ORDER_BY_PERSON_NUMBER = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY person_number DESC";
     public static final String SELECT_ALL_TOURS = "SELECT * FROM tour";
     public static final String SELECT_ALL_USERS = "SELECT * FROM \"user\"";

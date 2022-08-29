@@ -32,6 +32,9 @@
                 <p>We are operators of tours in more than 30 countries. We will be happy to help you choose a tour! But
                     for this you need to log in.</p>
                 <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-price" role="button">Sort by price</a>
+
+
+
                 <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-stars" role="button">Sort by hotel stars</a>
                 <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-people" role="button">Sort by count of people</a>
                 <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog" role="button">Drop filter</a>

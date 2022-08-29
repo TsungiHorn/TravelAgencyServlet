@@ -31,8 +31,8 @@ public class RegistrationServlet extends HttpServlet {
             logger.error("cannot hash password", e);
         }
         String email = request.getParameter("email");
-        if (credentialService.isCredentialValid(name, email)) {
-            if(passwordLength >= 8) {
+        if (credentialService.isCredentialFree(name, email)) {
+            if (passwordLength >= 8) {  //TODO in credential and isBlank
                 User user = new User();
                 user.setName(name);
                 user.setEmail(email);
@@ -41,7 +41,7 @@ public class RegistrationServlet extends HttpServlet {
                 user.setBlocked(false);
                 userDAO.create(user);
                 response.sendRedirect("/login");
-            }else {
+            } else {
                 response.sendRedirect("/registration?password_fail");
             }
         } else {
