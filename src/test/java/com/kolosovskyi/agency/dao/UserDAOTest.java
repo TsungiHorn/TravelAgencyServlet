@@ -11,8 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 class UserDAOTest {
@@ -89,6 +88,17 @@ class UserDAOTest {
         assertFalse(dao.read(1L).isPresent());
         assertFalse(dao.read(2L).isPresent());
         assertFalse(dao.read(3L).isPresent());
+    }
+
+    @Test
+    void isExistingLoginTest(){
+        dao.create(user1);
+        dao.create(user2);
+        dao.create(user3);
+
+        assertTrue(dao.isExistingLogin("kolos@gmail.com", "qwser32"));
+        assertFalse(dao.isExistingLogin("kolos@gmail.com", "qw44r32"));
+
     }
 
     @AfterEach

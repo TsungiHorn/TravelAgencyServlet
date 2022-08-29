@@ -117,4 +117,27 @@ public class UserToursDAO {
             LOGGER.error("Cannot delete user tours ", e);
         }
     }
+
+    public List<UserTours> getAll(){
+        ArrayList<UserTours> userTours = new ArrayList<>();
+        UserTours temp;
+        try(Connection connection = pool.getConnection();
+            PreparedStatement statement = connection.prepareStatement(SQLStatements.GET_ALL_USER_TOURS);
+        ){
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                temp = new UserTours();
+                temp.setUser(USER_DAO.read(resultSet.getLong("user_id")).orElse(new User()));
+                temp.setTour(TOUR_DAO.read(resultSet.getLong("tour_id")).orElse(new Tour()));
+                temp.setDiscountPercent(resultSet.getInt("discount_percent"));
+                temp.setFinalPrice(resultSet.getBigDecimal("final_price"));
+                temp.setOrderTime(resultSet.getDate("order_time").toLocalDate());
+                temp.setStatus(TourStatus.values()[(int)resultSet.getLong("status_id")]);
+                userTours.add(temp);
+            }
+        }catch (SQLException e){
+            LOGGER.error("Cannot read user tours", e);
+        }
+        return userTours;
+    }
 }

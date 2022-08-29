@@ -200,4 +200,51 @@ public class TourDAO {
         }
         return tours;
     }
+    public List<Tour> getTourOrderByStars() {
+        List<Tour> tours = new ArrayList<>();
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS_ORDER_BY_HOTEL_STARS)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                tours.add(new Tour(resultSet.getLong("id"),
+                        resultSet.getString("title"),
+                        TourType.values()[(int) resultSet.getLong("type_id")],
+                        resultSet.getLong("person_number"),
+                        resultSet.getInt("hotel_stars"),
+                        resultSet.getBigDecimal("price"),
+                        resultSet.getBoolean("is_hot"),
+                        resultSet.getBoolean("is_hidden"),
+                        resultSet.getString("country"),
+                        resultSet.getString("city"),
+                        resultSet.getDate("start_date").toLocalDate()));
+            }
+        } catch (SQLException e) {
+            LOGGER.error("cannot get tours by stars", e);
+        }
+        return tours;
+    }
+
+    public List<Tour> getTourOrderByCountOfPerson() {
+        List<Tour> tours = new ArrayList<>();
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS_ORDER_BY_PERSON_NUMBER)) {
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                tours.add(new Tour(resultSet.getLong("id"),
+                        resultSet.getString("title"),
+                        TourType.values()[(int) resultSet.getLong("type_id")],
+                        resultSet.getLong("person_number"),
+                        resultSet.getInt("hotel_stars"),
+                        resultSet.getBigDecimal("price"),
+                        resultSet.getBoolean("is_hot"),
+                        resultSet.getBoolean("is_hidden"),
+                        resultSet.getString("country"),
+                        resultSet.getString("city"),
+                        resultSet.getDate("start_date").toLocalDate()));
+            }
+        } catch (SQLException e) {
+            LOGGER.error("cannot get tours by person number", e);
+        }
+        return tours;
+    }
 }

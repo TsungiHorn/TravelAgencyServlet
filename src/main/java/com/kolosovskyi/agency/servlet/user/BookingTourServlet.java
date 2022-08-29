@@ -28,7 +28,11 @@ public class BookingTourServlet extends HttpServlet {
         Tour tour = TOUR_DAO.read(Long.valueOf(request.getParameter("q"))).orElse(new Tour());
         UserTours userTours = new UserTours(user, tour, LocalDate.now(), TourStatus.REGISTERED,
                 tour.getPrice(), 0);
-        USER_TOURS_DAO.create(userTours);
+        if(USER_TOURS_DAO.readTourUser(user.getId(), tour.getId()).isPresent()){
+            USER_TOURS_DAO.update(userTours);
+        }else {
+            USER_TOURS_DAO.create(userTours);
+        }
         response.sendRedirect("/profile");
     }
 }

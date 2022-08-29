@@ -100,8 +100,11 @@
     <form action="${pageContext.request.contextPath}/registration" method="post"
           class="card card-block m-x-auto bg-faded form-width">
         <legend class="m-b-1 text-xs-center">Registration</legend>
-        <c:if test="${error}">
-            <font color="red"><p><c:out value="Failed to create an account. Try again."/><p></font>
+        <c:if test="${email_fail}">
+            <font color="red"><p><c:out value="Mail error or this mail may already used. Try again."/><p></font>
+        </c:if>
+        <c:if test="${password_fail}">
+            <font color="red"><p><c:out value="Password must contain more then 7 characters. Try again."/><p></font>
         </c:if>
         <div class="form-group input-group">
  <span class="has-float-label">

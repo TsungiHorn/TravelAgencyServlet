@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Login</title>
@@ -101,8 +102,8 @@
     <form action="${pageContext.request.contextPath}/login" method="post"
           class="card card-block m-x-auto bg-faded form-width">
         <legend class="m-b-1 text-xs-center">Login</legend>
-        <c:if test="${isFail}">
-            <font color="red"><p><c:out value="Failed to create an account. Try again."/><p></font>
+        <c:if test="${fail}">
+            <font color="red"><p><c:out value="Incorrect email or password. Try again."/><p></font>
         </c:if>
         <div class="form-group input-group">
  <span class="has-float-label">

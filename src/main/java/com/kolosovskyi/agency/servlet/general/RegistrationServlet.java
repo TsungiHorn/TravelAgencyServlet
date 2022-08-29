@@ -31,24 +31,30 @@ public class RegistrationServlet extends HttpServlet {
             logger.error("cannot hash password", e);
         }
         String email = request.getParameter("email");
-        if (credentialService.isCredentialValid(name, email) && passwordLength >= 8) {
-            User user = new User();
-            user.setName(name);
-            user.setEmail(email);
-            user.setPassword(password);
-            user.setRole(Role.USER);
-            user.setBlocked(false);
-            userDAO.create(user);
-            response.sendRedirect("/login");
+        if (credentialService.isCredentialValid(name, email)) {
+            if(passwordLength >= 8) {
+                User user = new User();
+                user.setName(name);
+                user.setEmail(email);
+                user.setPassword(password);
+                user.setRole(Role.USER);
+                user.setBlocked(false);
+                userDAO.create(user);
+                response.sendRedirect("/login");
+            }else {
+                response.sendRedirect("/registration?password_fail");
+            }
         } else {
-            response.sendRedirect("/registration?error");
+            response.sendRedirect("/registration?email_fail");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        boolean isFail = request.getParameter("error") != null;
-        request.setAttribute("error", isFail);
+        boolean isPasswordFail = request.getParameter("password_fail") != null;
+        boolean isEmailFail = request.getParameter("email_fail") != null;
+        request.setAttribute("password_fail", isPasswordFail);
+        request.setAttribute("email_fail", isEmailFail);
         RequestDispatcher rd = request.getRequestDispatcher("/view/registration.jsp");
         rd.forward(request, response);
     }
