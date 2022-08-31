@@ -24,6 +24,7 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
+        boolean isValidPassword = credentialService.isCorrectPassword(password);
         try {
             password = PasswordHasher.toHexString(PasswordHasher.getSHA(password));
         } catch (NoSuchAlgorithmException e) {
@@ -31,7 +32,7 @@ public class RegistrationServlet extends HttpServlet {
         }
         String email = request.getParameter("email");
         if (credentialService.validateEmail(email) && credentialService.isCredentialFree(name, email)) {
-            if (credentialService.isCorrectPassword(password)) {
+            if (isValidPassword) {
                 User user = new User();
                 user.setName(name);
                 user.setEmail(email);

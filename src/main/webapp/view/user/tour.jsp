@@ -42,7 +42,7 @@
                     <br>
                     <p class="fs-5"><fmt:message key="label.Tour.ONE"/> <b>${tour.getCity()}</b>, <b>${tour.getCountry()}</b></p>
                     <p class="fs-5"><fmt:message key="label.Tour.TWO"/> <b>${tour.getPersonNumber()}
-                        person</b>
+                        <fmt:message key="label.Tour.SEVEN"/></b>
                     </p>
                     <p class="fs-5"><fmt:message key="label.Tour.THREE"/> <b>${tour.getTourType()}</b></p>
                     <p class="fs-5"><fmt:message key="label.Tour.FOUR"/> <b>${tour.getStartDate()}</b></p>
