@@ -1,5 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page session="true" %>
+
+<fmt:setLocale value="${sessionScope.lang}" />
+<fmt:setBundle basename="lang"/>
+
 <html>
 <head>
     <title>Home</title>
@@ -19,24 +25,24 @@
     </a>
 
     <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="/catalog" class="nav-link">Catalog</a></li>
-        <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page"><fmt:message key="label.General_Home" /></a></li>
+        <li class="nav-item"><a href="/catalog" class="nav-link"><fmt:message key="label.General_Catalog" /></a></li>
+        <li class="nav-item"><a href="/profile" class="nav-link"><fmt:message key="label.General_Profile" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=ua" class="nav-link"><fmt:message key="label.General_UA" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=en" class="nav-link"><fmt:message key="label.General_ENG" /></a></li>
     </ul>
 </header>
 <main>
     <div class="container my-5">
         <div class="bg-light p-5 rounded">
             <div class="col-sm-8 py-5 mx-auto">
-                <h1 class="display-5 fw-normal">Travel Agency greets You!</h1>
-                <p class="fs-5">To start choosing tours, click <a
-                        href="${pageContext.request.contextPath}/catalog">here</a> or the "Catalog" button at the top.
+                <h1 class="display-5 fw-normal"><fmt:message key="label.Home_ONE" /></h1>
+                <p class="fs-5"><fmt:message key="label.Home_TWO" />
+                    <a href="${pageContext.request.contextPath}/catalog"><fmt:message key="label.Home_THREE" /></a> <fmt:message key="label.Home_FOUR" />
                 </p>
-                <p>We are operators of tours in more than 30 countries. We will be happy to help you choose a tour! But
-                    for this you need to log in.</p>
+                <p><fmt:message key="label.Home_FIVE" /></p>
                 <p>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/login" role="button">Login
-                        here</a>
+                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/login" role="button"><fmt:message key="label.Home_SIX" /></a>
                 </p>
             </div>
         </div>

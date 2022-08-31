@@ -1,5 +1,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="lang"/>
+
 <html>
 <head>
     <title>Profile</title>
@@ -19,21 +24,24 @@
     </a>
 
     <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="/catalog" class="nav-link">Catalog</a></li>
-        <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
-        <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page"><fmt:message key="label.General_Home" /></a></li>
+        <li class="nav-item"><a href="/catalog" class="nav-link"><fmt:message key="label.General_Catalog" /></a></li>
+        <li class="nav-item"><a href="/profile" class="nav-link"><fmt:message key="label.General_Profile" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=ua" class="nav-link"><fmt:message key="label.General_UA" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=en" class="nav-link"><fmt:message key="label.General_ENG" /></a></li>
     </ul>
 </header>
 <div class="row">
     <div class="col-lg-4">
         <div class="card mb-4">
             <div class="card-body text-center">
-                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.ltSIBM-hmrYmSVoNipRazQHaHa%26pid%3DApi&f=1"
                      class="rounded-circle img-fluid" style="width: 150px;">
                 <br>
                 <h5 class="my-3">${user.getName()}</h5>
                 <p class="text-muted mb-0">${user.getEmail()}</p>
+                <br>
+                <a class="btn btn-primary" href="/logout"><fmt:message key="label.Profile.ONE"/></a>
             </div>
         </div>
     </div>
@@ -42,7 +50,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-3">
-                        <h2>Tours history:</h2>
+                        <h2><fmt:message key="label.Profile.TWO"/></h2>
                     </div>
                     <br>
                 </div>
@@ -50,9 +58,13 @@
 
                     <c:forEach items="${userTours}" var="tour">
                         <div class="col-sm-10">
-                            <p class="mb-0"><strong>${tour.getTour().getTitle()}</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status: ${tour.getStatus()}
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Start
-                                date: ${tour.getTour().getStartDate()}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Price: ${tour.getFinalPrice()}$
+                            <p class="mb-0"><strong>${tour.getTour().getTitle()}</strong>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:message
+                                        key="label.Profile.THREE"/> ${tour.getStatus()}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:message
+                                        key="label.Profile.FOUR"/> ${tour.getTour().getStartDate()}
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:message
+                                        key="label.Profile.FIVE"/> ${tour.getFinalPrice()}$
                             </p>
                         </div>
                         <br>
@@ -62,15 +74,17 @@
                                 <c:if test="${tour.getStatus().toString().length()!=8}">
                                     <form action="${pageContext.request.contextPath}/deleteTour?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}"
                                           method="post">
-                                        <button class="btn btn-block btn-primary" type="submit">Cancel</button>
+                                        <button class="btn btn-block btn-primary" type="submit"><fmt:message
+                                                key="label.Profile.SIX"/></button>
                                     </form>
                                 </c:if>
                                 <c:if test="${(tour.getStatus().toString().length()!=4) and (tour.getStatus().toString().length()!=8)}">
                                     <form action="${pageContext.request.contextPath}/buy?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}"
                                           method="post">
                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-block btn-primary"
-                                                                                    type="submit">Buy
-                                        for ${tour.getFinalPrice()}$
+                                                                                    type="submit"><fmt:message
+                                            key="label.Profile.SEVEN"/>
+                                            ${tour.getFinalPrice()}$
                                     </button>
                                     </form>
                                 </c:if>
@@ -89,4 +103,4 @@
 </div>
 <br>
 </body>
-</html>
+<html/>

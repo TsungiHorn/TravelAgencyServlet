@@ -24,15 +24,14 @@ public class RegistrationServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
-        int passwordLength = password.length();
         try {
             password = PasswordHasher.toHexString(PasswordHasher.getSHA(password));
         } catch (NoSuchAlgorithmException e) {
             logger.error("cannot hash password", e);
         }
         String email = request.getParameter("email");
-        if (credentialService.isCredentialFree(name, email)) {
-            if (passwordLength >= 8) {  //TODO in credential and isBlank
+        if (credentialService.validateEmail(email) && credentialService.isCredentialFree(name, email)) {
+            if (credentialService.isCorrectPassword(password)) {
                 User user = new User();
                 user.setName(name);
                 user.setEmail(email);

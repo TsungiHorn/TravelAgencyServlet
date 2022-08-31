@@ -44,22 +44,16 @@
                             <p class="card-text">
                                 Name: ${user.getName()}&nbsp;&nbsp;&nbsp;
                                 Email: ${user.getEmail()}&nbsp;&nbsp;&nbsp;
-                                Password: ${user.getPassword()}&nbsp;&nbsp;&nbsp;
                                 Role: ${user.getRole()}&nbsp;&nbsp;&nbsp;
                                 isBlocked: ${user.getBlocked()}&nbsp;&nbsp;&nbsp;
                             </p>
-                            <div class="btn-group">
                                 <form action="/BlockUserServlet?i=${user.getId()}" method="post">
                             <button class="btn btn-block btn-primary" type="submit">Blocked/Unblocked</button>
                                 </form>
-                                <form action="/delete-user?id=${user.getId()}" method="post">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-block btn-primary" type="submit">Delete</button>
-                                </form>
-                            </div>
+                                <a class="btn btn-primary" href="edit-role?id=${user.getId()}">Edit role</a>
                         </div>
                     </div>
                 </div>
-            </form>
         </c:forEach>
     </div>
 </main>

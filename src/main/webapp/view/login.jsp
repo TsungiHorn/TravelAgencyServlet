@@ -1,5 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+<fmt:setLocale value="${sessionScope.lang}" />
+<fmt:setBundle basename="lang"/>
+
 <html>
 <head>
     <title>Login</title>
@@ -18,9 +23,11 @@
     </a>
 
     <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="/catalog" class="nav-link">Catalog</a></li>
-        <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page"><fmt:message key="label.General_Home" /></a></li>
+        <li class="nav-item"><a href="/catalog" class="nav-link"><fmt:message key="label.General_Catalog" /></a></li>
+        <li class="nav-item"><a href="/profile" class="nav-link"><fmt:message key="label.General_Profile" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=ua" class="nav-link"><fmt:message key="label.General_UA" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=en" class="nav-link"><fmt:message key="label.General_ENG" /></a></li>
     </ul>
 </header>
 
@@ -101,29 +108,29 @@
 <div class="p-x-1 p-y-3">
     <form action="${pageContext.request.contextPath}/login" method="post"
           class="card card-block m-x-auto bg-faded form-width">
-        <legend class="m-b-1 text-xs-center">Login</legend>
+        <legend class="m-b-1 text-xs-center"><fmt:message key="label.Login.ONE"/></legend>
         <c:if test="${fail}">
-            <font color="red"><p><c:out value="Incorrect email or password. Try again."/><p></font>
+            <font color="red"><p><fmt:message key="label.Login.SEVEN"/><p></font>
         </c:if>
         <div class="form-group input-group">
  <span class="has-float-label">
- <input class="form-control" id="first" type="text" placeholder="email" name="email"/>
- <label for="first">email</label>
+ <input class="form-control" id="first" type="text" placeholder="<fmt:message key="label.Login.TWO"/>" name="email"/>
+ <label for="first"><fmt:message key="label.Login.TWO"/></label>
  </span>
         </div>
         <div class="form-group has-float-label">
             <input class="form-control" id="password" type="password" placeholder="••••••••" name="password"/>
-            <label for="password">password</label>
+            <label for="password"><fmt:message key="label.Login.THREE"/></label>
         </div>
 
 
         <div class="text-xs-center">
-            <button class="btn btn-block btn-primary" type="submit">Sign in</button>
+            <button class="btn btn-block btn-primary" type="submit"><fmt:message key="label.Login.FOUR"/></button>
         </div>
         <div class="modal-footer">
             <div class="forgot login-footer">
- <span>Looking to
- <a href="${pageContext.request.contextPath}/registration">create an account</a>?</span>
+ <span><fmt:message key="label.Login.FIVE"/>
+ <a href="${pageContext.request.contextPath}/registration"><fmt:message key="label.Login.SIX"/></a>?</span>
             </div>
         </div>
     </form>

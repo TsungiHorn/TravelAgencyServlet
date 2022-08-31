@@ -1,5 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="lang"/>
+
+
 <html>
 <head>
     <title>Catalog</title>
@@ -10,7 +16,7 @@
 </head>
 <body>
 <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-    <a  class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+    <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
         <svg class="bi me-2" width="40" height="32">
             <use xlink:href="#bootstrap"/>
         </svg>
@@ -18,26 +24,30 @@
     </a>
 
     <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="/catalog" class="nav-link">Catalog</a></li>
-        <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page"><fmt:message key="label.General_Home" /></a></li>
+        <li class="nav-item"><a href="/catalog" class="nav-link"><fmt:message key="label.General_Catalog" /></a></li>
+        <li class="nav-item"><a href="/profile" class="nav-link"><fmt:message key="label.General_Profile" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=ua" class="nav-link"><fmt:message key="label.General_UA" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=en" class="nav-link"><fmt:message key="label.General_ENG" /></a></li>
     </ul>
 </header>
 <main>
     <div class="container my-5">
         <div class="bg-light p-5 rounded">
             <div class="col-sm-8 py-5 mx-auto">
-                <h1 class="display-5 fw-normal">Piece|Shopping|Excursion</h1>
-                <p class="fs-5">Choose your tour!</p>
-                <p>We are operators of tours in more than 30 countries. We will be happy to help you choose a tour! But
-                    for this you need to log in.</p>
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-price" role="button">Sort by price</a>
+                <h1 class="display-5 fw-normal"><fmt:message key="label.Catalog_ONE"/></h1>
+                <p class="fs-5"><fmt:message key="label.Catalog_TWO"/></p>
+                <p><fmt:message key="label.Catalog_THREE"/></p>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-price"
+                   role="button"><fmt:message key="label.Catalog_FOUR"/></a>
 
 
-
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-stars" role="button">Sort by hotel stars</a>
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-people" role="button">Sort by count of people</a>
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog" role="button">Drop filter</a>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-stars"
+                   role="button"><fmt:message key="label.Catalog_FIVE"/></a>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-people"
+                   role="button"><fmt:message key="label.Catalog_SIX"/></a>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog" role="button"><fmt:message
+                        key="label.Catalog_SEVEN"/></a>
             </div>
         </div>
     </div>
@@ -48,38 +58,45 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h4>${tour.getTitle()} <c:if test="${tour.getHot()}"><c:out value="(Hot)"/></c:if> </h4>
+                        <h4>${tour.getTitle()} <c:if test="${tour.getHot()}"><font color="red"> <fmt:message
+                                key="label.Catalog.EIGHT"/></font> </c:if></h4>
                     </div>
                     <div class="card-body">
-                        <p class="card-text"> Trip to the
+                        <p class="card-text">
+                                <fmt:message key="label.Catalog.NINE"/>
                         <td> ${tour.getCity()} </td>
-                        of
+                        <fmt:message key="label.Catalog.TEN"/>
                         <td> ${tour.getCountry()} </td>
-                        with accommodation in a hotel with
+                        <fmt:message key="label.Catalog.ELEVEN"/>
                         <td> ${tour.getHotelStars()} </td>
-                        stars.</p>
-                        <a class="btn btn-primary" href="tour?i=${tour.getId()}">View</a>
+                            <fmt:message key="label.Catalog.TWELVE"/></p>
+                        <a class="btn btn-primary" href="tour?i=${tour.getId()}"><fmt:message
+                                key="label.Catalog.THIRTEEN"/></a>
                     </div>
                 </div>
             </div>
         </form>
     </c:forEach>
+
     <c:forEach var="tour" items="${byPeople}">
         <form action="/tour" method="get">
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h4>${tour.getTitle()} <c:if test="${tour.getHot()}"><c:out value="(Hot)"/></c:if> </h4>
+                        <h4>${tour.getTitle()} <c:if test="${tour.getHot()}"><font color="red"> <fmt:message
+                                key="label.Catalog.EIGHT"/></font> </c:if></h4>
                     </div>
                     <div class="card-body">
-                        <p class="card-text"> Trip to the
+                        <p class="card-text">
+                                <fmt:message key="label.Catalog.NINE"/>
                         <td> ${tour.getCity()} </td>
-                        of
+                        <fmt:message key="label.Catalog.TEN"/>
                         <td> ${tour.getCountry()} </td>
-                        with accommodation in a hotel with
+                        <fmt:message key="label.Catalog.ELEVEN"/>
                         <td> ${tour.getHotelStars()} </td>
-                        stars.</p>
-                        <a class="btn btn-primary" href="tour?i=${tour.getId()}">View</a>
+                            <fmt:message key="label.Catalog.TWELVE"/></p>
+                        <a class="btn btn-primary" href="tour?i=${tour.getId()}"><fmt:message
+                                key="label.Catalog.THIRTEEN"/></a>
                     </div>
                 </div>
             </div>
@@ -90,17 +107,20 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h4>${tour.getTitle()} <c:if test="${tour.getHot()}"><c:out value="(Hot)"/></c:if> </h4>
+                        <h4>${tour.getTitle()} <c:if test="${tour.getHot()}"><font color="red"> <fmt:message
+                                key="label.Catalog.EIGHT"/></font> </c:if></h4>
                     </div>
                     <div class="card-body">
-                        <p class="card-text"> Trip to the
+                        <p class="card-text">
+                                <fmt:message key="label.Catalog.NINE"/>
                         <td> ${tour.getCity()} </td>
-                        of
+                        <fmt:message key="label.Catalog.TEN"/>
                         <td> ${tour.getCountry()} </td>
-                        with accommodation in a hotel with
+                        <fmt:message key="label.Catalog.ELEVEN"/>
                         <td> ${tour.getHotelStars()} </td>
-                        stars.</p>
-                        <a class="btn btn-primary" href="tour?i=${tour.getId()}">View</a>
+                            <fmt:message key="label.Catalog.TWELVE"/></p>
+                        <a class="btn btn-primary" href="tour?i=${tour.getId()}"><fmt:message
+                                key="label.Catalog.THIRTEEN"/></a>
                     </div>
                 </div>
             </div>
@@ -111,17 +131,17 @@
             <div class="col">
                 <div class="card">
                     <div class="card-header">
-                        <h4>${tour.getTitle()} (Hot)</h4>
+                        <h4>${tour.getTitle()} <font color="red"> <fmt:message key="label.Catalog.EIGHT"/></font></h4>
                     </div>
                     <div class="card-body">
-                        <p class="card-text"> Trip to the
+                        <p class="card-text"> <fmt:message key="label.Catalog.NINE"/>
                         <td> ${tour.getCity()} </td>
-                        of
+                        <fmt:message key="label.Catalog.TEN"/>
                         <td> ${tour.getCountry()} </td>
-                        with accommodation in a hotel with
+                        <fmt:message key="label.Catalog.ELEVEN"/>
                         <td> ${tour.getHotelStars()} </td>
-                        stars.</p>
-                        <a class="btn btn-primary" href="tour?i=${tour.getId()}">View</a>
+                            <fmt:message key="label.Catalog.TWELVE"/></p>
+                        <a class="btn btn-primary" href="tour?i=${tour.getId()}"><fmt:message key="label.Catalog.THIRTEEN"/></a>
                     </div>
                 </div>
             </div>
@@ -135,14 +155,14 @@
                         <h4>${tour.getTitle()}</h4>
                     </div>
                     <div class="card-body">
-                        <p class="card-text"> Trip to the
+                        <p class="card-text"> <fmt:message key="label.Catalog.NINE"/>
                         <td> ${tour.getCity()} </td>
-                        of
+                        <fmt:message key="label.Catalog.TEN"/>
                         <td> ${tour.getCountry()} </td>
-                        with accommodation in a hotel with
+                        <fmt:message key="label.Catalog.ELEVEN"/>
                         <td> ${tour.getHotelStars()} </td>
-                        stars.</p>
-                        <a class="btn btn-primary" href="tour?i=${tour.getId()}">View</a>
+                            <fmt:message key="label.Catalog.TWELVE"/></p>
+                        <a class="btn btn-primary" href="tour?i=${tour.getId()}"><fmt:message key="label.Catalog.THIRTEEN"/></a>
                     </div>
                 </div>
             </div>

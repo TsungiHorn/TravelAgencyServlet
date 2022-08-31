@@ -10,6 +10,8 @@ import java.io.IOException;
 public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if(request.getSession().getAttribute("lang")==null)
+            request.getSession().setAttribute("lang", "en");
         RequestDispatcher rd = request.getRequestDispatcher("/view/user/home.jsp");
         rd.forward(request, response);
     }

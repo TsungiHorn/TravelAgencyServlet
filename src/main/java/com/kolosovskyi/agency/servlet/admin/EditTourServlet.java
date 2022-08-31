@@ -28,7 +28,7 @@ public class EditTourServlet extends HttpServlet {
         Tour tour = tourDAO.read(Long.valueOf(request.getParameter("id"))).orElse(new Tour());
 
             tour.setTitle(request.getParameter("title"));
-            tour.setTourType(TourType.values()[Integer.parseInt(request.getParameter("type"))]);
+            tour.setTourType(TourType.valueOf(request.getParameter("type")));
             tour.setPersonNumber(Long.valueOf(request.getParameter("person")));
             tour.setHotelStars(Integer.parseInt(request.getParameter("stars")));
             tour.setPrice(BigDecimal.valueOf(Long.parseLong(request.getParameter("price"))));

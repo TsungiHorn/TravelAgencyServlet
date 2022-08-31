@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="INFO" monitorInterval="30">
 
-    <!-- Logging Properties -->
+    <!-- Logging lang_en.properties -->
     <Properties>
         <Property name="LOG_PATTERN">%d{yyyy-MM-dd'T'HH:mm:ss.SSSZ} %p %m%n</Property>
         <Property name="APP_LOG_ROOT">C:\Users\Андрей\Desktop\Final Task\TravelAgencyServlet\logs </Property>

@@ -1,5 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="lang"/>
+
+
 <html>
 <head>
     <title>Registration</title>
@@ -18,9 +24,11 @@
     </a>
 
     <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="/catalog" class="nav-link">Catalog</a></li>
-        <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
+        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page"><fmt:message key="label.General_Home" /></a></li>
+        <li class="nav-item"><a href="/catalog" class="nav-link"><fmt:message key="label.General_Catalog" /></a></li>
+        <li class="nav-item"><a href="/profile" class="nav-link"><fmt:message key="label.General_Profile" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=ua" class="nav-link"><fmt:message key="label.General_UA" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=en" class="nav-link"><fmt:message key="label.General_ENG" /></a></li>
     </ul>
 </header>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/css/bootstrap.min.css"/>
@@ -99,39 +107,38 @@
 <div class="p-x-1 p-y-3">
     <form action="${pageContext.request.contextPath}/registration" method="post"
           class="card card-block m-x-auto bg-faded form-width">
-        <legend class="m-b-1 text-xs-center">Registration</legend>
+        <legend class="m-b-1 text-xs-center"><fmt:message key="label.Registration.ONE"/></legend>
         <c:if test="${email_fail}">
-            <font color="red"><p><c:out value="Mail error or this mail may already used. Try again."/><p></font>
+            <font color="red"><p><fmt:message key="label.Registration.TEN"/><p></font>
         </c:if>
         <c:if test="${password_fail}">
-            <font color="red"><p><c:out value="Password must contain more then 7 characters. Try again."/><p></font>
+            <font color="red"><p><fmt:message key="label.Registration.ELEVEN"/><p></font>
         </c:if>
         <div class="form-group input-group">
  <span class="has-float-label">
  <input class="form-control" id="first" type="text" placeholder="Name" name="name"/>
- <label for="first">Full name</label>
+ <label for="first"><fmt:message key="label.Registration.TWO"/></label>
  </span>
         </div>
         <div class="form-group input-group">
             <span class="input-group-addon">@</span>
             <span class="has-float-label">
  <input class="form-control" id="email" type="text" placeholder="name@example.com" name="email"/>
- <label for="email">E-mail</label>
+ <label for="email"><fmt:message key="label.Registration.THREE"/></label>
  </span>
         </div>
         <div class="form-group has-float-label">
-            <input class="form-control" id="password" type="text" placeholder="More than 8 characters" name="password"/>
-            <label for="password">password</label>
+            <input class="form-control" id="password" type="text" placeholder="<fmt:message key="label.Registration.NINE"/>" name="password"/>
+            <label for="password"><fmt:message key="label.Registration.FOUR"/></label>
         </div>
         <div class="form-group">
-                <span>Already have an account?
- <a href="${pageContext.request.contextPath}/login">Login</a>
+                <span><fmt:message key="label.Registration.FIVE"/>
+ <a href="${pageContext.request.contextPath}/login"><fmt:message key="label.Registration.SIX"/></a>
  </span>
         </div>
         <div class="text-xs-center">
             <button class="btn btn-block btn-primary" type="submit">
-                <a href="${pageContext.request.contextPath}/registration"><font color="white">Create an
-                    account</font></a>
+                <a href="${pageContext.request.contextPath}/registration"><font color="white"><fmt:message key="label.Registration.SEVEN"/></font></a>
             </button>
         </div>
     </form>

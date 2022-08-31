@@ -23,7 +23,7 @@ public class AddTourServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         tourDAO.create(new Tour(request.getParameter("title"),
-                TourType.values()[Integer.parseInt(request.getParameter("type"))],
+                TourType.valueOf(request.getParameter("type")),
                 Long.valueOf(request.getParameter("person")),
                 Integer.parseInt(request.getParameter("stars")),
                 BigDecimal.valueOf(Long.parseLong(request.getParameter("price"))),

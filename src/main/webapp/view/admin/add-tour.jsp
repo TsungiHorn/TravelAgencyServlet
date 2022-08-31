@@ -113,8 +113,8 @@
 
             <div class="form-group input-group">
  <span class="has-float-label">
- <input class="form-control" id="two" type="text" placeholder="0(REST), 1(SHOPPING) or 2(EXCURSION)" name="type"/>
- <label for="two">0, 1 or 2</label>
+ <input class="form-control" id="two" type="text" placeholder="REST, SHOPPING or EXCURSION" name="type"/>
+ <label for="two">REST, SHOPPING or EXCURSION</label>
  </span>
             </div>
 

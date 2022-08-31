@@ -1,15 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: Андрей
-  Date: 16.08.2022
-  Time: 14:50
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<fmt:setLocale value="${sessionScope.lang}" />
+<fmt:setBundle basename="lang"/>
 <html>
 <head>
-    <title>Home</title>
+    <title>${tour.getTitle()}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
@@ -27,10 +24,11 @@
     </a>
 
     <ul class="nav nav-pills">
-        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page">Home</a></li>
-        <li class="nav-item"><a href="/catalog" class="nav-link">Catalog</a></li>
-        <li class="nav-item"><a href="/profile" class="nav-link">Profile</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">FAQs</a></li>
+        <li class="nav-item"><a href="/home" class="nav-link active" aria-current="page"><fmt:message key="label.General_Home" /></a></li>
+        <li class="nav-item"><a href="/catalog" class="nav-link"><fmt:message key="label.General_Catalog" /></a></li>
+        <li class="nav-item"><a href="/profile" class="nav-link"><fmt:message key="label.General_Profile" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=ua" class="nav-link"><fmt:message key="label.General_UA" /></a></li>
+        <li class="nav-item"><a href="/changing-lang?lang=en" class="nav-link"><fmt:message key="label.General_ENG" /></a></li>
     </ul>
 </header>
 <main>
@@ -42,16 +40,16 @@
                         ${tour.getTitle()}
                     </h1>
                     <br>
-                    <p class="fs-5">Tour location: <b>${tour.getCity()}</b>, <b>${tour.getCountry()}</b></p>
-                    <p class="fs-5">Number of people for which the tour is designed: <b>${tour.getPersonNumber()}
+                    <p class="fs-5"><fmt:message key="label.Tour.ONE"/> <b>${tour.getCity()}</b>, <b>${tour.getCountry()}</b></p>
+                    <p class="fs-5"><fmt:message key="label.Tour.TWO"/> <b>${tour.getPersonNumber()}
                         person</b>
                     </p>
-                    <p class="fs-5">What is the tour for: <b>${tour.getTourType()}</b></p>
-                    <p class="fs-5">Start date: <b>${tour.getStartDate()}</b></p>
-                    <p class="fs-5">Price: <b>${tour.getPrice()}$</b></p>
+                    <p class="fs-5"><fmt:message key="label.Tour.THREE"/> <b>${tour.getTourType()}</b></p>
+                    <p class="fs-5"><fmt:message key="label.Tour.FOUR"/> <b>${tour.getStartDate()}</b></p>
+                    <p class="fs-5"><fmt:message key="label.Tour.FIVE"/> <b>${tour.getPrice()}$</b></p>
                     <p>
                     <div class="text-xs-center">
-                        <button class="btn btn-block btn-primary" type="submit">Add to profile</button>
+                        <button class="btn btn-block btn-primary" type="submit"><fmt:message key="label.Tour.SIX"/></button>
                     </div>
                     </p>
                 </form>
