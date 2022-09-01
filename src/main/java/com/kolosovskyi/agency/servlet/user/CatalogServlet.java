@@ -7,6 +7,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "Catalog", value = "/catalog")
@@ -16,34 +17,49 @@ public class CatalogServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("by-price") != null) {
-            List<Tour> toursByPrice = TOUR_DAO.getTourOrderByPrice();
-            RequestDispatcher rd = request.getRequestDispatcher(PATH_TO_CATALOG);
-            request.setAttribute("byPrice", toursByPrice);
-            rd.forward(request, response);
-        } else if (request.getParameter("by-stars") != null) {
-            List<Tour> toursByStars = TOUR_DAO.getTourOrderByStars();
-            RequestDispatcher rd = request.getRequestDispatcher(PATH_TO_CATALOG);
-            request.setAttribute("byStars", toursByStars);
-            rd.forward(request, response);
-        } else if (request.getParameter("by-people") != null) {
-            List<Tour> toursByCountOfPerson = TOUR_DAO.getTourOrderByCountOfPerson();
-            RequestDispatcher rd = request.getRequestDispatcher(PATH_TO_CATALOG);
-            request.setAttribute("byPeople", toursByCountOfPerson);
-            rd.forward(request, response);
-        } else {
-            List<Tour> hotTours = TOUR_DAO.getHotTours();
-            List<Tour> simpleTours = TOUR_DAO.getSimpleTours();
-            RequestDispatcher rd = request.getRequestDispatcher(PATH_TO_CATALOG);
-            request.setAttribute("hotTours", hotTours);
-            request.setAttribute("simpleTours", simpleTours);
-            rd.forward(request, response);
-        }
+        List<Tour> tours = filterBy(request);
+        request.setAttribute("tours", tours);
+        RequestDispatcher rd = request.getRequestDispatcher(PATH_TO_CATALOG);
+        rd.forward(request, response);
     }
 
-    private void setFiltersByPrice(String filterNameByPrice){
-        if(filterNameByPrice!=null){
+    private static List<Tour> filterBy(HttpServletRequest request) {
+        String filterName = request.getParameter("filterName");
+        int page = 1;
+        if (request.getParameter("page") != null)
+            page = Integer.parseInt(request.getParameter("page"));
 
+        List<Tour> tours = new ArrayList<>();
+        if (request.getParameter("filterName") == null) {
+            tours = TOUR_DAO.getAll((page - 1) * 6);
+            int noOfPages = TOUR_DAO.getAmountOfPages();
+            request.setAttribute("tours", tours);
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);
+            return tours;
+        } else if (filterName.equals("price")) {
+            tours = TOUR_DAO.getTourOrderByPrice((page - 1) * 6);
+            int noOfPages = TOUR_DAO.getAmountOfPages();
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);
+            request.setAttribute("byPrice", tours);
+            return tours;
+
+        } else if (filterName.equals("stars")) {
+            tours = TOUR_DAO.getTourOrderByStars((page - 1) * 6);
+            int noOfPages = TOUR_DAO.getAmountOfPages();
+            request.setAttribute("byStars", tours);
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);
+            return tours;
+        } else if (filterName.equals("people")) {
+            tours = TOUR_DAO.getTourOrderByCountOfPerson((page - 1) * 6);
+            int noOfPages = TOUR_DAO.getAmountOfPages();
+            request.setAttribute("noOfPages", noOfPages);
+            request.setAttribute("currentPage", page);
+            request.setAttribute("byPeople", tours);
+            return tours;
         }
+        return tours;
     }
 }

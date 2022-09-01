@@ -29,7 +29,8 @@
         <div class="bg-light p-5 rounded">
             <div class="col-sm-8 py-5 mx-auto">
                 <h1 class="display-5 fw-normal">Tour management</h1>
-                    <a class="btn btn-primary" href="${pageContext.request.contextPath}/AddTourServlet" role="button">Add new tour</a>
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/AddTourServlet" role="button">Add
+                    new tour</a>
                 </p>
             </div>
         </div>
@@ -37,32 +38,61 @@
     <div class="row row-cols-1 row-cols-md-3 text-center">
 
         <c:forEach var="tour" items="${tours}">
-        <form action="DeleteTourServlet?i=${tour.getId()}" method="post">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>${tour.getTitle()}</h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                            Type: ${tour.getTourType()}&nbsp;&nbsp;&nbsp;
-                            Person number: ${tour.getPersonNumber()}&nbsp;&nbsp;&nbsp;
-                            Hotel stars: ${tour.getHotelStars()}&nbsp;&nbsp;&nbsp;
-                            Start date: ${tour.getStartDate()}&nbsp;&nbsp;&nbsp;
-                            Price: ${tour.getPrice()}&nbsp;&nbsp;&nbsp;
-                            Hot: ${tour.getHot()}&nbsp;&nbsp;&nbsp;
-                            Hidden: ${tour.getHidden()}&nbsp;&nbsp;&nbsp;
-                            Country: ${tour.getCountry()}&nbsp;&nbsp;&nbsp;
-                            City: ${tour.getCity()}&nbsp;&nbsp;&nbsp;
-                        </p>
-                        <a class="btn btn-primary" href="edit-tour?i=${tour.getId()}">Edit</a>
-                        <button class="btn btn-block btn-primary" type="submit">Delete</button>
+            <form action="DeleteTourServlet?i=${tour.getId()}" method="post">
+                <div class="col">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>${tour.getTitle()}</h4>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                Type: ${tour.getTourType()}&nbsp;&nbsp;&nbsp;
+                                Person number: ${tour.getPersonNumber()}&nbsp;&nbsp;&nbsp;
+                                Hotel stars: ${tour.getHotelStars()}&nbsp;&nbsp;&nbsp;
+                                Start date: ${tour.getStartDate()}&nbsp;&nbsp;&nbsp;
+                                Price: ${tour.getPrice()}&nbsp;&nbsp;&nbsp;
+                                Hot: ${tour.getHot()}&nbsp;&nbsp;&nbsp;
+                                Hidden: ${tour.getHidden()}&nbsp;&nbsp;&nbsp;
+                                Country: ${tour.getCountry()}&nbsp;&nbsp;&nbsp;
+                                City: ${tour.getCity()}&nbsp;&nbsp;&nbsp;
+                            </p>
+                            <a class="btn btn-primary" href="edit-tour?i=${tour.getId()}">Edit</a>
+                            <button class="btn btn-block btn-primary" type="submit">Delete</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </form>
         </c:forEach>
+
     </div>
+    <br>
+    <div class="row row-cols-1 row-cols-md-3 text-center">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+
+                <li class="page-item"><a class="page-link"
+                                         <c:if test="${currentPage != 1}">href="/4admin-catalog?page=${currentPage-1}</c:if>">Previous</a>
+                </li>
+
+                <c:forEach begin="1" end="${noOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${currentPage eq i}">
+                            <a class="page-link" href="/4admin-catalog?page=${i}">${i}</a>
+                        </c:when>
+                        <c:otherwise>
+                            <li class="page-item"><a class="page-link" href="/4admin-catalog?page=${i}">${i}</a></li>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+                <li class="page-item"><a class="page-link"
+                                         <c:if test="${currentPage lt noOfPages}">href="/4admin-catalog?page=${currentPage + 1}</c:if>">Next</a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+
 </main>
 <footer class="bg-light text-center text-white">
     <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">

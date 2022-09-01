@@ -101,147 +101,98 @@ public class TourDAO {
         }
     }
 
-    public List<Tour> getHotTours() {
-        List<Tour> hotTours = new ArrayList<>();
-        try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_HOT_TOURS)) {
-            ResultSet resultSetHot = statement.executeQuery();
-            while (resultSetHot.next()) {
-                //if(resultSetHot.getDate("start_date").toLocalDate().compareTo(LocalDate.now()) >= 0) { //req on date!!!
-                hotTours.add(new Tour(resultSetHot.getLong("id"),
-                        resultSetHot.getString("title"),
-                        TourType.values()[(int) resultSetHot.getLong("type_id")],
-                        resultSetHot.getLong("person_number"),
-                        resultSetHot.getInt("hotel_stars"),
-                        resultSetHot.getBigDecimal("price"),
-                        resultSetHot.getBoolean("is_hot"),
-                        resultSetHot.getBoolean("is_hidden"),
-                        resultSetHot.getString("country"),
-                        resultSetHot.getString("city"),
-                        resultSetHot.getDate("start_date").toLocalDate()));
-                //}
-            }
-        } catch (SQLException e) {
-            LOGGER.error("Cannot get all tours", e);
-        }
-        return hotTours;
-    }
-
-    public List<Tour> getSimpleTours() {
-        List<Tour> simpleTours = new ArrayList<>();
-        try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_SIMPLE_TOURS)) {
-            ResultSet resultSetSimple = statement.executeQuery();
-            while (resultSetSimple.next()) {
-                //if(resultSetSimple.getDate("start_date").toLocalDate().compareTo(LocalDate.now()) >= 0) {
-                simpleTours.add(new Tour(resultSetSimple.getLong("id"),
-                        resultSetSimple.getString("title"),
-                        TourType.values()[(int) resultSetSimple.getLong("type_id")],
-                        resultSetSimple.getLong("person_number"),
-                        resultSetSimple.getInt("hotel_stars"),
-                        resultSetSimple.getBigDecimal("price"),
-                        resultSetSimple.getBoolean("is_hot"),
-                        resultSetSimple.getBoolean("is_hidden"),
-                        resultSetSimple.getString("country"),
-                        resultSetSimple.getString("city"),
-                        resultSetSimple.getDate("start_date").toLocalDate()));
-                // }
-            }
-        } catch (SQLException e) {
-            LOGGER.error("Cannot get all tours", e);
-        }
-        return simpleTours;
-    }
-
-    public List<Tour> getAll() {
+    public List<Tour> getAll(int offset) {
         List<Tour> tours = new ArrayList<>();
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS)) {
+            statement.setInt(1, offset);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                tours.add(new Tour(resultSet.getLong("id"),
-                        resultSet.getString("title"),
-                        TourType.values()[(int) resultSet.getLong("type_id")],
-                        resultSet.getLong("person_number"),
-                        resultSet.getInt("hotel_stars"),
-                        resultSet.getBigDecimal("price"),
-                        resultSet.getBoolean("is_hot"),
-                        resultSet.getBoolean("is_hidden"),
-                        resultSet.getString("country"),
-                        resultSet.getString("city"),
-                        resultSet.getDate("start_date").toLocalDate()));
-            }
+            tours = getListOfTours(resultSet);
         } catch (SQLException e) {
             LOGGER.error("Cannot get all tours", e);
         }
         return tours;
     }
 
-    public List<Tour> getTourOrderByPrice() {
+    public List<Tour> getAllToursToADMIN(int offset) {
+        List<Tour> tours = new ArrayList<>();
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS_ADMIN)) {
+            statement.setInt(1, offset);
+            ResultSet resultSet = statement.executeQuery();
+            tours = getListOfTours(resultSet);
+        } catch (SQLException e) {
+            LOGGER.error("Cannot get all admin tours", e);
+        }
+        return tours;
+    }
+
+    private List<Tour> getListOfTours(ResultSet resultSet) throws SQLException {
+        List<Tour> tours = new ArrayList<>();
+        while (resultSet.next()) {
+            tours.add(new Tour(resultSet.getLong("id"),
+                    resultSet.getString("title"),
+                    TourType.values()[(int) resultSet.getLong("type_id")],
+                    resultSet.getLong("person_number"),
+                    resultSet.getInt("hotel_stars"),
+                    resultSet.getBigDecimal("price"),
+                    resultSet.getBoolean("is_hot"),
+                    resultSet.getBoolean("is_hidden"),
+                    resultSet.getString("country"),
+                    resultSet.getString("city"),
+                    resultSet.getDate("start_date").toLocalDate()));
+        }
+        return tours;
+    }
+
+    public int getAmountOfPages() {
+        int result = 0;
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_PAGES_OF_TOUR)) {
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                result = resultSet.getInt("ceil");
+            }
+        } catch (
+                SQLException e) {
+            LOGGER.error("Cannot get all tours", e);
+        }
+        return result;
+    }
+
+    public List<Tour> getTourOrderByPrice(int offset) {
         List<Tour> tours = new ArrayList<>();
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS_ORDER_BY_PRICE)) {
+            statement.setInt(1, offset);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                tours.add(new Tour(resultSet.getLong("id"),
-                        resultSet.getString("title"),
-                        TourType.values()[(int) resultSet.getLong("type_id")],
-                        resultSet.getLong("person_number"),
-                        resultSet.getInt("hotel_stars"),
-                        resultSet.getBigDecimal("price"),
-                        resultSet.getBoolean("is_hot"),
-                        resultSet.getBoolean("is_hidden"),
-                        resultSet.getString("country"),
-                        resultSet.getString("city"),
-                        resultSet.getDate("start_date").toLocalDate()));
-            }
+            tours = getListOfTours(resultSet);
         } catch (SQLException e) {
             LOGGER.error("cannot get tours by price", e);
         }
         return tours;
     }
-    public List<Tour> getTourOrderByStars() {
+
+    public List<Tour> getTourOrderByStars(int offset) {
         List<Tour> tours = new ArrayList<>();
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS_ORDER_BY_HOTEL_STARS)) {
+            statement.setInt(1, offset);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                tours.add(new Tour(resultSet.getLong("id"),
-                        resultSet.getString("title"),
-                        TourType.values()[(int) resultSet.getLong("type_id")],
-                        resultSet.getLong("person_number"),
-                        resultSet.getInt("hotel_stars"),
-                        resultSet.getBigDecimal("price"),
-                        resultSet.getBoolean("is_hot"),
-                        resultSet.getBoolean("is_hidden"),
-                        resultSet.getString("country"),
-                        resultSet.getString("city"),
-                        resultSet.getDate("start_date").toLocalDate()));
-            }
+            tours = getListOfTours(resultSet);
         } catch (SQLException e) {
             LOGGER.error("cannot get tours by stars", e);
         }
         return tours;
     }
 
-    public List<Tour> getTourOrderByCountOfPerson() {
+    public List<Tour> getTourOrderByCountOfPerson(int offset) {
         List<Tour> tours = new ArrayList<>();
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS_ORDER_BY_PERSON_NUMBER)) {
+            statement.setInt(1, offset);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                tours.add(new Tour(resultSet.getLong("id"),
-                        resultSet.getString("title"),
-                        TourType.values()[(int) resultSet.getLong("type_id")],
-                        resultSet.getLong("person_number"),
-                        resultSet.getInt("hotel_stars"),
-                        resultSet.getBigDecimal("price"),
-                        resultSet.getBoolean("is_hot"),
-                        resultSet.getBoolean("is_hidden"),
-                        resultSet.getString("country"),
-                        resultSet.getString("city"),
-                        resultSet.getDate("start_date").toLocalDate()));
-            }
+            tours = getListOfTours(resultSet);
         } catch (SQLException e) {
             LOGGER.error("cannot get tours by person number", e);
         }

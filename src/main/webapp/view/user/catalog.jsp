@@ -38,13 +38,13 @@
                 <h1 class="display-5 fw-normal"><fmt:message key="label.Catalog_ONE"/></h1>
                 <p class="fs-5"><fmt:message key="label.Catalog_TWO"/></p>
                 <p><fmt:message key="label.Catalog_THREE"/></p>
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-price"
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?filterName=price"
                    role="button"><fmt:message key="label.Catalog_FOUR"/></a>
 
 
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-stars"
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?filterName=stars"
                    role="button"><fmt:message key="label.Catalog_FIVE"/></a>
-                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?by-people"
+                <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog?filterName=people"
                    role="button"><fmt:message key="label.Catalog_SIX"/></a>
                 <a class="btn btn-primary" href="${pageContext.request.contextPath}/catalog" role="button"><fmt:message
                         key="label.Catalog_SEVEN"/></a>
@@ -53,7 +53,7 @@
     </div>
 </main>
 <div class="row row-cols-1 row-cols-md-3 text-center">
-    <c:forEach var="tour" items="${byStars}">
+    <c:forEach var="tour" items="${tours}">
         <form action="/tour" method="get">
             <div class="col">
                 <div class="card">
@@ -77,100 +77,36 @@
             </div>
         </form>
     </c:forEach>
+</div>
+<br>
+<div class="row row-cols-1 row-cols-md-3 text-center">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
 
-    <c:forEach var="tour" items="${byPeople}">
-        <form action="/tour" method="get">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>${tour.getTitle()} <c:if test="${tour.getHot()}"><font color="red"> <fmt:message
-                                key="label.Catalog.EIGHT"/></font> </c:if></h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                                <fmt:message key="label.Catalog.NINE"/>
-                        <td> ${tour.getCity()} </td>
-                        <fmt:message key="label.Catalog.TEN"/>
-                        <td> ${tour.getCountry()} </td>
-                        <fmt:message key="label.Catalog.ELEVEN"/>
-                        <td> ${tour.getHotelStars()} </td>
-                            <fmt:message key="label.Catalog.TWELVE"/></p>
-                        <a class="btn btn-primary" href="tour?i=${tour.getId()}"><fmt:message
-                                key="label.Catalog.THIRTEEN"/></a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </c:forEach>
-    <c:forEach var="tour" items="${byPrice}">
-        <form action="/tour" method="get">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>${tour.getTitle()} <c:if test="${tour.getHot()}"><font color="red"> <fmt:message
-                                key="label.Catalog.EIGHT"/></font> </c:if></h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text">
-                                <fmt:message key="label.Catalog.NINE"/>
-                        <td> ${tour.getCity()} </td>
-                        <fmt:message key="label.Catalog.TEN"/>
-                        <td> ${tour.getCountry()} </td>
-                        <fmt:message key="label.Catalog.ELEVEN"/>
-                        <td> ${tour.getHotelStars()} </td>
-                            <fmt:message key="label.Catalog.TWELVE"/></p>
-                        <a class="btn btn-primary" href="tour?i=${tour.getId()}"><fmt:message
-                                key="label.Catalog.THIRTEEN"/></a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </c:forEach>
-    <c:forEach var="tour" items="${hotTours}">
-        <form action="/tour" method="get">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>${tour.getTitle()} <font color="red"> <fmt:message key="label.Catalog.EIGHT"/></font></h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text"> <fmt:message key="label.Catalog.NINE"/>
-                        <td> ${tour.getCity()} </td>
-                        <fmt:message key="label.Catalog.TEN"/>
-                        <td> ${tour.getCountry()} </td>
-                        <fmt:message key="label.Catalog.ELEVEN"/>
-                        <td> ${tour.getHotelStars()} </td>
-                            <fmt:message key="label.Catalog.TWELVE"/></p>
-                        <a class="btn btn-primary" href="tour?i=${tour.getId()}"><fmt:message key="label.Catalog.THIRTEEN"/></a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </c:forEach>
-    <c:forEach var="tour" items="${simpleTours}">
-        <form action="/tour" method="get">
-            <div class="col">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>${tour.getTitle()}</h4>
-                    </div>
-                    <div class="card-body">
-                        <p class="card-text"> <fmt:message key="label.Catalog.NINE"/>
-                        <td> ${tour.getCity()} </td>
-                        <fmt:message key="label.Catalog.TEN"/>
-                        <td> ${tour.getCountry()} </td>
-                        <fmt:message key="label.Catalog.ELEVEN"/>
-                        <td> ${tour.getHotelStars()} </td>
-                            <fmt:message key="label.Catalog.TWELVE"/></p>
-                        <a class="btn btn-primary" href="tour?i=${tour.getId()}"><fmt:message key="label.Catalog.THIRTEEN"/></a>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </c:forEach>
+            <li class="page-item"><a class="page-link"
+                                     <c:if test="${currentPage != 1}">href="/catalog?page=${currentPage-1}</c:if>">Previous</a>
+            </li>
 
+            <c:forEach begin="1" end="${noOfPages}" var="i">
+                <c:choose>
+                    <c:when test="${currentPage eq i}">
+                        <a class="page-link" href="/catalog?page=${i}">${i}</a>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="/catalog?page=${i}">${i}</a></li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+            <li class="page-item"><a class="page-link"
+                                     <c:if test="${currentPage lt noOfPages}">href="/catalog?page=${currentPage + 1}</c:if>">Next</a>
+            </li>
+
+        </ul>
+    </nav>
 </div>
 </section>
+
 <br>
 <br>
 <footer class="bg-light text-center text-white">

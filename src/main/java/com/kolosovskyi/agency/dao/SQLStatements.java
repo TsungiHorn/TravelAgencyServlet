@@ -3,12 +3,12 @@ package com.kolosovskyi.agency.dao;
 public final class SQLStatements {
     public static final String GET_FULL_USER_BY_EMAIL = "SELECT id, name, email, password, role_id, is_blocked FROM \"user\" WHERE email = ?";
     public static final String GET_ALL_USER_TOURS = "SELECT * FROM user_tours ORDER BY order_time DESC";
-    public static final String SELECT_HOT_TOURS = "SELECT * FROM tour WHERE is_hot = true AND is_hidden = false AND start_date >= 'today'";
-    public static final String SELECT_SIMPLE_TOURS = "SELECT * FROM tour WHERE is_hot = false AND is_hidden = false AND start_date >= 'today'";
-    public static final String SELECT_ALL_TOURS_ORDER_BY_PRICE = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY price";
-    public static final String SELECT_ALL_TOURS_ORDER_BY_HOTEL_STARS = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY hotel_stars ASC";
-    public static final String SELECT_ALL_TOURS_ORDER_BY_PERSON_NUMBER = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY person_number DESC";
-    public static final String SELECT_ALL_TOURS = "SELECT * FROM tour";
+    public static final String SELECT_ALL_TOURS_ORDER_BY_PRICE = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY price LIMIT 6 OFFSET ?";
+    public static final String SELECT_ALL_TOURS_ORDER_BY_HOTEL_STARS = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY hotel_stars DESC LIMIT 6 OFFSET ?";
+    public static final String SELECT_ALL_TOURS_ORDER_BY_PERSON_NUMBER = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY person_number DESC LIMIT 6 OFFSET ?";
+    public static final String SELECT_ALL_TOURS = "SELECT * FROM tour WHERE is_hidden = false ORDER BY is_hot DESC LIMIT 6 OFFSET ? ";
+    public static final String SELECT_ALL_TOURS_ADMIN = "SELECT * FROM tour ORDER BY is_hot DESC LIMIT 6 OFFSET ? ";
+    public static final String SELECT_PAGES_OF_TOUR = "SELECT CEIL(count(id)/6.0) from tour";
     public static final String SELECT_ALL_USERS = "SELECT * FROM \"user\"";
     public static final String INSERT_INTO_DISCOUNT = "INSERT INTO discount(step, max_percent) VALUES (?, ?) RETURNING id";
     public static final String GET_FROM_DISCOUNT_BY_ID = "SELECT id, step ,max_percent FROM discount WHERE id = ?";
