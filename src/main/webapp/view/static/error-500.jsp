@@ -10,7 +10,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-
 <body>
 <div class="d-flex align-items-center justify-content-center vh-100">
     <div class="text-center">

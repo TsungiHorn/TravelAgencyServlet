@@ -2,6 +2,7 @@ package com.kolosovskyi.agency.dao;
 
 import com.kolosovskyi.agency.connection.PostgreSQLConnectionPool;
 import com.kolosovskyi.agency.entity.*;
+import com.kolosovskyi.agency.exception.DAOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,6 +43,7 @@ public class UserDAO {
                 user.setId(resultSet.getLong("id"));
         } catch (SQLException e) {
             LOGGER.error("Cannot create user", e);
+            throw new DAOException();
         }
     }
 
@@ -61,6 +63,7 @@ public class UserDAO {
             }
         }catch(SQLException e){
             LOGGER.error("Cannot read user ", e);
+            throw new DAOException();
         }
         return Optional.ofNullable(user);
     }
@@ -77,6 +80,7 @@ public class UserDAO {
             statement.executeUpdate();
         }catch (SQLException e){
             LOGGER.error("Cannot update user", e);
+            throw new DAOException();
         }
     }
 
@@ -88,7 +92,7 @@ public class UserDAO {
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Cannot delete user", e);
-            e.printStackTrace();
+            throw new DAOException();
         }
     }
 
@@ -107,7 +111,7 @@ public class UserDAO {
                         resultSet.getBoolean("is_blocked"));
         } catch (SQLException e) {
             LOGGER.error("Cannot get user", e);
-            e.printStackTrace();
+            throw new DAOException();
         }
         return Optional.ofNullable(user);
     }
@@ -122,7 +126,7 @@ public class UserDAO {
                 return true;
         } catch (SQLException e) {
             LOGGER.error("Cannot find user in db", e);
-            e.printStackTrace();
+            throw new DAOException();
         }
         return false;
     }
@@ -136,7 +140,7 @@ public class UserDAO {
                 return true;
         } catch (SQLException e) {
             LOGGER.error("Cannot find user in db", e);
-            e.printStackTrace();
+            throw new DAOException();
         }
         return false;
     }
@@ -156,6 +160,7 @@ public class UserDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("Cannot get all users", e);
+            throw new DAOException();
         }
         return users;
     }

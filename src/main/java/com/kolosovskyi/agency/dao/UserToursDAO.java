@@ -5,6 +5,7 @@ import com.kolosovskyi.agency.entity.Tour;
 import com.kolosovskyi.agency.entity.TourStatus;
 import com.kolosovskyi.agency.entity.User;
 import com.kolosovskyi.agency.entity.UserTours;
+import com.kolosovskyi.agency.exception.DAOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.sql.*;
@@ -42,6 +43,7 @@ public class UserToursDAO {
             statement.executeUpdate();
         }catch (SQLException e){
             LOGGER.error("Cannot create user tours", e);
+            throw new DAOException();
         }
     }
 
@@ -65,6 +67,7 @@ public class UserToursDAO {
             }
         }catch (SQLException e){
             LOGGER.error("Cannot read user tours", e);
+            throw new DAOException();
         }
         return userTours;
     }
@@ -87,6 +90,7 @@ public class UserToursDAO {
            }
        }catch (SQLException e){
            LOGGER.error("Cannot find user`s tour", e);
+           throw new DAOException();
        }
        return Optional.ofNullable(userTour);
     }
@@ -104,6 +108,7 @@ public class UserToursDAO {
             statement.executeUpdate();
         }catch (SQLException e){
             LOGGER.error("Cannot update user tours ", e);
+            throw new DAOException();
         }
     }
 
@@ -115,6 +120,7 @@ public class UserToursDAO {
             statement.executeUpdate();
         }catch (SQLException e){
             LOGGER.error("Cannot delete user tours ", e);
+            throw new DAOException();
         }
     }
 
@@ -137,6 +143,7 @@ public class UserToursDAO {
             }
         }catch (SQLException e){
             LOGGER.error("Cannot read user tours", e);
+            throw new DAOException();
         }
         return userTours;
     }

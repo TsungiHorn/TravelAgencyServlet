@@ -63,7 +63,6 @@ public final class PostgreSQLConnectionPool {
     }
 
     public Connection getConnection() throws SQLException {
-        LOGGER.info("GETTING CONNECTION");
         return dataSource.getConnection();
     }
 }

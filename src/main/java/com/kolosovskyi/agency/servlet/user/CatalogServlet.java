@@ -23,6 +23,9 @@ public class CatalogServlet extends HttpServlet {
         rd.forward(request, response);
     }
 
+
+
+
     private static List<Tour> filterBy(HttpServletRequest request) {
         String filterName = request.getParameter("filterName");
         int page = 1;
@@ -31,14 +34,14 @@ public class CatalogServlet extends HttpServlet {
 
         List<Tour> tours = new ArrayList<>();
         if (request.getParameter("filterName") == null) {
-            tours = TOUR_DAO.getAll((page - 1) * 6);
+            tours = TOUR_DAO.getAll((page - 1) * 9);
             int noOfPages = TOUR_DAO.getAmountOfPages();
             request.setAttribute("tours", tours);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             return tours;
         } else if (filterName.equals("price")) {
-            tours = TOUR_DAO.getTourOrderByPrice((page - 1) * 6);
+            tours = TOUR_DAO.getTourOrderByPrice((page - 1) * 9);
             int noOfPages = TOUR_DAO.getAmountOfPages();
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
@@ -46,14 +49,14 @@ public class CatalogServlet extends HttpServlet {
             return tours;
 
         } else if (filterName.equals("stars")) {
-            tours = TOUR_DAO.getTourOrderByStars((page - 1) * 6);
+            tours = TOUR_DAO.getTourOrderByStars((page - 1) * 9);
             int noOfPages = TOUR_DAO.getAmountOfPages();
             request.setAttribute("byStars", tours);
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);
             return tours;
         } else if (filterName.equals("people")) {
-            tours = TOUR_DAO.getTourOrderByCountOfPerson((page - 1) * 6);
+            tours = TOUR_DAO.getTourOrderByCountOfPerson((page - 1) * 9);
             int noOfPages = TOUR_DAO.getAmountOfPages();
             request.setAttribute("noOfPages", noOfPages);
             request.setAttribute("currentPage", page);

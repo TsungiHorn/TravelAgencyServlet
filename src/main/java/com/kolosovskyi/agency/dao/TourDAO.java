@@ -3,6 +3,7 @@ package com.kolosovskyi.agency.dao;
 import com.kolosovskyi.agency.connection.PostgreSQLConnectionPool;
 import com.kolosovskyi.agency.entity.Tour;
 import com.kolosovskyi.agency.entity.TourType;
+import com.kolosovskyi.agency.exception.DAOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,6 +47,7 @@ public class TourDAO {
                 tour.setId(resultSet.getLong("id"));
         } catch (SQLException e) {
             LOGGER.error("Cannot create tour ", e);
+            throw new DAOException();
         }
     }
 
@@ -67,6 +69,7 @@ public class TourDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("Cannot read tour ", e);
+            throw new DAOException();
         }
         return Optional.ofNullable(tour);
     }
@@ -88,6 +91,7 @@ public class TourDAO {
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Cannot update tour ", e);
+            throw new DAOException();
         }
     }
 
@@ -98,11 +102,12 @@ public class TourDAO {
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Cannot delete tour ", e);
+            throw new DAOException();
         }
     }
 
-    public List<Tour> getAll(int offset) {
-        List<Tour> tours = new ArrayList<>();
+    public List<Tour> getAll(int offset)  {
+        List<Tour> tours;
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS)) {
             statement.setInt(1, offset);
@@ -110,6 +115,7 @@ public class TourDAO {
             tours = getListOfTours(resultSet);
         } catch (SQLException e) {
             LOGGER.error("Cannot get all tours", e);
+            throw new DAOException();
         }
         return tours;
     }
@@ -123,6 +129,7 @@ public class TourDAO {
             tours = getListOfTours(resultSet);
         } catch (SQLException e) {
             LOGGER.error("Cannot get all admin tours", e);
+            throw new DAOException();
         }
         return tours;
     }
@@ -156,6 +163,7 @@ public class TourDAO {
         } catch (
                 SQLException e) {
             LOGGER.error("Cannot get all tours", e);
+            throw new DAOException();
         }
         return result;
     }
@@ -169,6 +177,7 @@ public class TourDAO {
             tours = getListOfTours(resultSet);
         } catch (SQLException e) {
             LOGGER.error("cannot get tours by price", e);
+            throw new DAOException();
         }
         return tours;
     }
@@ -182,6 +191,7 @@ public class TourDAO {
             tours = getListOfTours(resultSet);
         } catch (SQLException e) {
             LOGGER.error("cannot get tours by stars", e);
+            throw new DAOException();
         }
         return tours;
     }
@@ -195,6 +205,7 @@ public class TourDAO {
             tours = getListOfTours(resultSet);
         } catch (SQLException e) {
             LOGGER.error("cannot get tours by person number", e);
+            throw new DAOException();
         }
         return tours;
     }

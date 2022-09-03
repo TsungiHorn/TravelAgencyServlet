@@ -44,19 +44,6 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    private void redirectByRole(HttpServletRequest request, HttpServletResponse response, String email, User user) throws IOException {
-        if (user.getRole() == Role.USER) {
-            request.getSession().setAttribute("email", email);
-            response.sendRedirect("/profile?email=" + email);
-        } else if (user.getRole() == Role.ADMIN) {
-            request.getSession().setAttribute("email", email);
-            response.sendRedirect("/4admin-catalog");
-        }else if(user.getRole() == Role.MANAGER){
-            request.getSession().setAttribute("email", email);
-            response.sendRedirect("/manager-users");
-        }
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         boolean isFail = request.getParameter("fail") != null;
@@ -64,5 +51,18 @@ public class LoginServlet extends HttpServlet {
 
         RequestDispatcher rd = request.getRequestDispatcher("/view/login.jsp");
         rd.forward(request, response);
+    }
+
+    private void redirectByRole(HttpServletRequest request, HttpServletResponse response, String email, User user) throws IOException {
+        if (user.getRole() == Role.USER) {
+            request.getSession().setAttribute("email", email);
+            response.sendRedirect("/profile?email=" + email);
+        } else if (user.getRole() == Role.ADMIN) {
+            request.getSession().setAttribute("email", email);
+            response.sendRedirect("/4admin-catalog");
+        } else if (user.getRole() == Role.MANAGER) {
+            request.getSession().setAttribute("email", email);
+            response.sendRedirect("/manager-users");
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.kolosovskyi.agency.dao;
 
 import com.kolosovskyi.agency.connection.PostgreSQLConnectionPool;
 import com.kolosovskyi.agency.entity.Discount;
+import com.kolosovskyi.agency.exception.DAOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,6 +39,7 @@ public class DiscountDAO {
             discount.setId(resultSet.getLong("id"));
         } catch (SQLException e) {
             LOGGER.error("Cannot create discount", e);
+            throw new DAOException();
         }
     }
 
@@ -54,7 +56,7 @@ public class DiscountDAO {
             }
         } catch (SQLException e) {
             LOGGER.error("Cannot read discount", e);
-            e.printStackTrace();
+            throw new DAOException();
         }
         return Optional.ofNullable(discount);
     }
@@ -68,6 +70,7 @@ public class DiscountDAO {
         statement.executeUpdate();
         }catch (SQLException e){
             LOGGER.error("Cannot update discount", e);
+            throw new DAOException();
         }
     }
 
@@ -78,7 +81,7 @@ public class DiscountDAO {
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Cannot delete discount", e);
-            e.printStackTrace();
+            throw new DAOException();
         }
     }
 }
