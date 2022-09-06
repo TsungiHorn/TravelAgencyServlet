@@ -64,6 +64,11 @@
                                           method="post">
                                         <button class="btn btn-block btn-primary" type="submit">Canceled</button>
                                     </form>
+                                    </form>
+                                    &nbsp;&nbsp;&nbsp;<form action="${pageContext.request.contextPath}/manager-delete-order?ui=${order.getUser().getId()}&ti=${order.getTour().getId()}&act=can"
+                                                            method="post">
+                                    <button class="btn btn-block btn-primary" type="submit">Delete order</button>
+                                </form>
                                 </div>
                             </div>
                             <hr>

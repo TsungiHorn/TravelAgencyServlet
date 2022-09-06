@@ -3,7 +3,7 @@ package com.kolosovskyi.agency.servlet.general;
 import com.kolosovskyi.agency.dao.UserDAO;
 import com.kolosovskyi.agency.entity.Role;
 import com.kolosovskyi.agency.entity.User;
-import com.kolosovskyi.agency.service.PasswordHasher;
+import com.kolosovskyi.agency.exception.service.PasswordHasher;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -19,8 +19,8 @@ import java.security.NoSuchAlgorithmException;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-    private final UserDAO userDAO = UserDAO.getInstance();
-    private final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
+    private static final UserDAO userDAO = UserDAO.getInstance();
+    private static final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
             logger.error("cannot hash password", e);
         }
 
-        if (userDAO.isExistingLogin(email, password)) {
+        if (userDAO.isVereficatedUser(email, password)) {
             if (Boolean.TRUE.equals(user.getBlocked())) {
                 response.sendRedirect("/BlockedUserServlet");
             } else {

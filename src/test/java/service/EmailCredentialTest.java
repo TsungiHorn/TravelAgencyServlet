@@ -1,6 +1,6 @@
 package service;
 
-import com.kolosovskyi.agency.service.CredentialService;
+import com.kolosovskyi.agency.exception.service.CredentialService;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

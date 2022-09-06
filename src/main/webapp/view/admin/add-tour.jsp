@@ -1,4 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="lang"/>
 <html>
 <head>
     <title>Add tour</title>
@@ -97,11 +101,38 @@
             margin-left: -1px;
         }
     </style>
+
     <div class="p-x-1 p-y-3">
         <form action="${pageContext.request.contextPath}/AddTourServlet" method="post"
               class="card card-block m-x-auto bg-faded form-width">
             <legend class="m-b-1 text-xs-center">Create new tour</legend>
-
+            <c:if test="${fail_title}">
+                <font color="red"><p><c:out value="title error"/><p></font>
+            </c:if>
+            <c:if test="${fail_person}">
+                <font color="red"><p><p><c:out value="person number error"/><p></font>
+            </c:if>
+            <c:if test="${fail_stars}">
+                <font color="red"><p><p><c:out value="stars error"/><p></font>
+            </c:if>
+            <c:if test="${fail_price}">
+                <font color="red"><p><p><c:out value="price error"/><p></font>
+            </c:if>
+            <c:if test="${fail_hot}">
+                <font color="red"><p><p><c:out value="hot error"/><p></font>
+            </c:if>
+            <c:if test="${fail_hidden}">
+                <font color="red"><p><p><c:out value="hidden error"/><p></font>
+            </c:if>
+            <c:if test="${fail_country}">
+                <font color="red"><p><p><c:out value="country error"/><p></font>
+            </c:if>
+            <c:if test="${fail_city}">
+                <font color="red"><p><p><c:out value="city error"/><p></font>
+            </c:if>
+            <c:if test="${fail_date}">
+                <font color="red"><p><p><c:out value="date error"/><p></font>
+            </c:if>
 
             <div class="form-group input-group">
  <span class="has-float-label">
@@ -110,13 +141,12 @@
  </span>
             </div>
 
-
-            <div class="form-group input-group">
- <span class="has-float-label">
- <input class="form-control" id="two" type="text" placeholder="REST, SHOPPING or EXCURSION" name="type"/>
- <label for="two">REST, SHOPPING or EXCURSION</label>
- </span>
-            </div>
+            <select class="form-select" aria-label="Default select example" name="type">
+                <option value="REST">REST</option>
+                <option value="SHOPPING">SHOPPING</option>
+                <option value="EXCURSION">EXCURSION</option>
+            </select>
+            <br>
 
 
             <div class="form-group input-group">
@@ -129,7 +159,7 @@
 
             <div class="form-group input-group">
  <span class="has-float-label">
- <input class="form-control" id="four" type="text" placeholder="Hotel stars" name="stars" />
+ <input class="form-control" id="four" type="text" placeholder="Hotel stars" name="stars"/>
  <label for="four">Hotel stars</label>
  </span>
             </div>
@@ -137,7 +167,7 @@
 
             <div class="form-group input-group">
  <span class="has-float-label">
- <input class="form-control" id="five" type="text" placeholder="Price" name="price" />
+ <input class="form-control" id="five" type="text" placeholder="Price" name="price"/>
  <label for="five">Price</label>
  </span>
             </div>
@@ -145,7 +175,7 @@
 
             <div class="form-group input-group">
  <span class="has-float-label">
- <input class="form-control" id="six" type="text" placeholder="Country" name="country" />
+ <input class="form-control" id="six" type="text" placeholder="Country" name="country"/>
  <label for="six">Country</label>
  </span>
             </div>
@@ -153,7 +183,7 @@
 
             <div class="form-group input-group">
  <span class="has-float-label">
- <input class="form-control" id="seven" type="text" placeholder="City" name="city" />
+ <input class="form-control" id="seven" type="text" placeholder="City" name="city"/>
  <label for="seven">City</label>
  </span>
             </div>
@@ -161,27 +191,50 @@
 
             <div class="form-group input-group">
  <span class="has-float-label">
- <input class="form-control" id="eight" type="date" placeholder="Start date" name="date" />
+ <input class="form-control" id="eight" type="date" placeholder="Start date" name="date"/>
  <label for="eight">Start date</label>
  </span>
             </div>
 
 
-            <div class="form-group input-group">
- <span class="has-float-label">
- <input class="form-control" id="nine" type="text" placeholder="Hot" name="hot"/>
- <label for="nine">Hot(true or false)</label>
- </span>
+<%--            <div class="form-group input-group">--%>
+<%-- <span class="has-float-label">--%>
+<%-- <input class="form-control" id="nine" type="text" placeholder="Hot" name="hot"/>--%>
+<%-- <label for="nine">Hot(true or false)</label>--%>
+<%-- </span>--%>
+<%--            </div>--%>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="hot" id="flexRadioDefault1" value="true">
+                <label class="form-check-label" for="flexRadioDefault1">
+                    Hot
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="hot" id="flexRadioDefault2" value="false">
+                <label class="form-check-label" for="flexRadioDefault2">
+                    Not hot
+                </label>
+                <hr/>
             </div>
 
-            <div class="form-group input-group">
- <span class="has-float-label">
- <input class="form-control" id="ten" type="text" placeholder="Hidden" name="hidden"/>
- <label for="ten">Hidden(true or false)</label>
- </span>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="hidden" id="isHidden" value="true" >
+                <label class="form-check-label" for="isHidden">
+                    Hidden
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="hidden" id="isNotHidden" value="false">
+                <label class="form-check-label" for="isNotHidden">
+                    Not hidden
+                </label>
             </div>
 
-
+<%--            <div class="form-group input-group">--%>
+<%-- <span class="has-float-label">--%>
+<%-- <input class="form-control" id="ten" type="text" placeholder="Hidden" name="hidden"/>--%>
+<%-- <label for="ten">Hidden(true or false)</label>--%>
+<%-- </span>--%>
+<%--            </div>--%>
 
 
             <div class="text-xs-center">

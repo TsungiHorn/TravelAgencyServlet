@@ -1,4 +1,4 @@
-package com.kolosovskyi.agency.service;
+package com.kolosovskyi.agency.exception.service;
 
 import java.time.LocalDate;
 

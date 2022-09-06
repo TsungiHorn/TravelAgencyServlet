@@ -32,16 +32,7 @@ public class TourDAO {
     public void create(Tour tour) {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.INSERT_INTO_TOUR)) {
-            statement.setString(1, tour.getTitle());
-            statement.setInt(2, tour.getTourType().ordinal());
-            statement.setLong(3, tour.getPersonNumber());
-            statement.setInt(4, tour.getHotelStars());
-            statement.setBigDecimal(5, tour.getPrice());
-            statement.setBoolean(6, tour.getHot());
-            statement.setBoolean(7, tour.getHidden());
-            statement.setString(8, tour.getCountry());
-            statement.setString(9, tour.getCity());
-            statement.setDate(10, Date.valueOf(tour.getStartDate()));
+            getSettingsForTour(tour, statement);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next())
                 tour.setId(resultSet.getLong("id"));
@@ -77,22 +68,26 @@ public class TourDAO {
     public void update(Tour tour) {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.UPDATE_TOUR)) {
-            statement.setString(1, tour.getTitle());
-            statement.setLong(2, tour.getTourType().ordinal());
-            statement.setLong(3, tour.getPersonNumber());
-            statement.setInt(4, tour.getHotelStars());
-            statement.setBigDecimal(5, tour.getPrice());
-            statement.setBoolean(6, tour.getHot());
-            statement.setBoolean(7, tour.getHidden());
-            statement.setString(8, tour.getCountry());
-            statement.setString(9, tour.getCity());
-            statement.setDate(10, Date.valueOf(tour.getStartDate()));
+                getSettingsForTour(tour, statement);
             statement.setLong(11, tour.getId());
             statement.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error("Cannot update tour ", e);
             throw new DAOException();
         }
+    }
+
+    private void getSettingsForTour(Tour tour, PreparedStatement statement) throws SQLException {
+        statement.setString(1, tour.getTitle());
+        statement.setLong(2, tour.getTourType().ordinal());
+        statement.setLong(3, tour.getPersonNumber());
+        statement.setInt(4, tour.getHotelStars());
+        statement.setBigDecimal(5, tour.getPrice());
+        statement.setBoolean(6, tour.getHot());
+        statement.setBoolean(7, tour.getHidden());
+        statement.setString(8, tour.getCountry());
+        statement.setString(9, tour.getCity());
+        statement.setDate(10, Date.valueOf(tour.getStartDate()));
     }
 
     public void delete(Tour tour) {
@@ -121,7 +116,7 @@ public class TourDAO {
     }
 
     public List<Tour> getAllToursToADMIN(int offset) {
-        List<Tour> tours = new ArrayList<>();
+        List<Tour> tours;
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS_ADMIN)) {
             statement.setInt(1, offset);
@@ -169,7 +164,7 @@ public class TourDAO {
     }
 
     public List<Tour> getTourOrderByPrice(int offset) {
-        List<Tour> tours = new ArrayList<>();
+        List<Tour> tours;
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS_ORDER_BY_PRICE)) {
             statement.setInt(1, offset);
@@ -183,7 +178,7 @@ public class TourDAO {
     }
 
     public List<Tour> getTourOrderByStars(int offset) {
-        List<Tour> tours = new ArrayList<>();
+        List<Tour> tours;
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS_ORDER_BY_HOTEL_STARS)) {
             statement.setInt(1, offset);
@@ -197,7 +192,7 @@ public class TourDAO {
     }
 
     public List<Tour> getTourOrderByCountOfPerson(int offset) {
-        List<Tour> tours = new ArrayList<>();
+        List<Tour> tours;
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLStatements.SELECT_ALL_TOURS_ORDER_BY_PERSON_NUMBER)) {
             statement.setInt(1, offset);

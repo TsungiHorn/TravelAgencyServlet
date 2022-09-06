@@ -7,7 +7,7 @@ public final class SQLStatements {
     public static final String SELECT_ALL_TOURS_ORDER_BY_HOTEL_STARS = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY hotel_stars DESC LIMIT 6 OFFSET ?";
     public static final String SELECT_ALL_TOURS_ORDER_BY_PERSON_NUMBER = "SELECT * FROM tour WHERE is_hidden = false AND start_date >= 'today' ORDER BY person_number DESC LIMIT 6 OFFSET ?";
     public static final String SELECT_ALL_TOURS = "SELECT * FROM tour WHERE is_hidden = false ORDER BY is_hot DESC LIMIT 9 OFFSET ? ";
-    public static final String SELECT_ALL_TOURS_ADMIN = "SELECT * FROM tour ORDER BY is_hot DESC LIMIT 6 OFFSET ? ";
+    public static final String SELECT_ALL_TOURS_ADMIN = "SELECT * FROM tour LIMIT 6 OFFSET ? ";
     public static final String SELECT_PAGES_OF_TOUR = "SELECT CEIL(count(id)/6.0) from tour";
     public static final String SELECT_ALL_USERS = "SELECT * FROM \"user\"";
     public static final String INSERT_INTO_DISCOUNT = "INSERT INTO discount(step, max_percent) VALUES (?, ?) RETURNING id";

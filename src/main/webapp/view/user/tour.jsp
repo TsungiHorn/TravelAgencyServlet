@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <fmt:setLocale value="${sessionScope.lang}" />
 <fmt:setBundle basename="lang"/>
 <html>
@@ -44,10 +43,21 @@
                     <p class="fs-5"><fmt:message key="label.Tour.TWO"/> <b>${tour.getPersonNumber()}
                         <fmt:message key="label.Tour.SEVEN"/></b>
                     </p>
-                    <p class="fs-5"><fmt:message key="label.Tour.THREE"/> <b>${tour.getTourType()}</b></p>
+                    <p class="fs-5"><fmt:message key="label.Tour.THREE"/> <b>
+                        <c:if test="${tour.getTourType().toString().equals('REST')}">
+                            <fmt:message key="label.Tour.EIGHT"/>
+                        </c:if>
+                        <c:if test="${tour.getTourType().toString().equals('SHOPPING')}">
+                            <fmt:message key="label.Tour.NINE"/>
+                        </c:if>
+                        <c:if test="${tour.getTourType().toString().equals('EXCURSION')}">
+                            <fmt:message key="label.Tour.TEN"/>
+                        </c:if>
+                    </b></p>
                     <p class="fs-5"><fmt:message key="label.Tour.FOUR"/> <b>${tour.getStartDate()}</b></p>
                     <p class="fs-5"><fmt:message key="label.Tour.FIVE"/> <b>${tour.getPrice()}$</b></p>
                     <p>
+<%--                        ${tour.getTourType()}--%>
                     <div class="text-xs-center">
                         <button class="btn btn-block btn-primary" type="submit"><fmt:message key="label.Tour.SIX"/></button>
                     </div>

@@ -6,7 +6,7 @@ import com.kolosovskyi.agency.dao.SQLStatements;
 import com.kolosovskyi.agency.dao.UserDAO;
 import com.kolosovskyi.agency.entity.Role;
 import com.kolosovskyi.agency.entity.User;
-import com.kolosovskyi.agency.service.CredentialService;
+import com.kolosovskyi.agency.exception.service.CredentialService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

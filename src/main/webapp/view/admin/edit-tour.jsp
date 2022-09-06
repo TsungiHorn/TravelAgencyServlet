@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Андрей
@@ -117,18 +118,18 @@
  </span>
             </div>
 
+            <select class="form-select" aria-label="Default select example" name="type">
+                <option selected>${tour.getTourType()}</option>
+                <option value="REST">REST</option>
+                <option value="SHOPPING">SHOPPING</option>
+                <option value="EXCURSION">EXCURSION</option>
+            </select>
+            <br>
 
             <div class="form-group input-group">
  <span class="has-float-label">
- <input class="form-control" id="two" type="text" placeholder="REST, SHOPPING or EXCURSION" name="type" value="${tour.getTourType()}"/>
- <label for="two">REST, SHOPPING or EXCURSION</label>
- </span>
-            </div>
-
-
-            <div class="form-group input-group">
- <span class="has-float-label">
- <input class="form-control" id="three" type="text" placeholder="Person number" name="person" value="${tour.getPersonNumber()}"/>
+ <input class="form-control" id="three" type="text" placeholder="Person number" name="person"
+        value="${tour.getPersonNumber()}"/>
  <label for="three">Person number</label>
  </span>
             </div>
@@ -136,7 +137,8 @@
 
             <div class="form-group input-group">
  <span class="has-float-label">
- <input class="form-control" id="four" type="text" placeholder="Hotel stars" name="stars" value="${tour.getHotelStars()}"/>
+ <input class="form-control" id="four" type="text" placeholder="Hotel stars" name="stars"
+        value="${tour.getHotelStars()}"/>
  <label for="four">Hotel stars</label>
  </span>
             </div>
@@ -168,28 +170,51 @@
 
             <div class="form-group input-group">
  <span class="has-float-label">
- <input class="form-control" id="eight" type="date" placeholder="Start date" name="date" value="${tour.getStartDate()}"/>
+ <input class="form-control" id="eight" type="date" placeholder="Start date" name="date"
+        value="${tour.getStartDate()}"/>
  <label for="eight">Start date</label>
  </span>
             </div>
 
 
-            <div class="form-group input-group">
- <span class="has-float-label">
- <input class="form-control" id="nine" type="text" placeholder="Hot" name="hot" value="${tour.getHot()}"/>
- <label for="nine">Hot(true or false)</label>
- </span>
+<%--            <div class="form-group input-group">--%>
+<%-- <span class="has-float-label">--%>
+<%-- <input class="form-control" id="nine" type="text" placeholder="Hot" name="hot" value="${tour.getHot()}"/>--%>
+<%-- <label for="nine">Hot(true or false)</label>--%>
+<%-- </span>--%>
+<%--            </div>--%>
+
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="hot" id="isHot" value="true" <c:if test="${tour.getHot()==true}"><c:out value="checked"/></c:if>>
+                <label class="form-check-label" for="isHot">
+                    Hot
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="hot" id="IsNotHot" value="false" <c:if test="${tour.getHot()==false}"><c:out value="checked"/></c:if>>
+                <label class="form-check-label" for="IsNotHot">
+                    Not hot
+                </label>
             </div>
 
-
-            <div class="form-group input-group">
- <span class="has-float-label">
- <input class="form-control" id="ten" type="text" placeholder="Hidden" name="hidden" value="${tour.getHidden()}"/>
- <label for="ten">Hidden(true or false)</label>
- </span>
+            <hr>
+            <div class="form-check">
+                <input class="form-check-input" type="radio" name="hidden" id="isHidden" value="true" <c:if test="${tour.getHidden()==true}"><c:out value="checked"/></c:if>>
+                <label class="form-check-label" for="isHidden">
+                    Hidden
+                </label>
+                <br>
+                <input class="form-check-input" type="radio" name="hidden" id="isNotHidden" value="false" <c:if test="${tour.getHidden()==false}"><c:out value="checked"/></c:if>>
+                <label class="form-check-label" for="isNotHidden">
+                    Not hidden
+                </label>
             </div>
 
-
+<%--            <div class="form-group input-group">--%>
+<%-- <span class="has-float-label">--%>
+<%-- <input class="form-control" id="ten" type="text" placeholder="Hidden" name="hidden" value="${tour.getHidden()}"/>--%>
+<%-- <label for="ten">Hidden(true or false)</label>--%>
+<%-- </span>--%>
+<%--            </div>--%>
 
 
             <div class="text-xs-center">

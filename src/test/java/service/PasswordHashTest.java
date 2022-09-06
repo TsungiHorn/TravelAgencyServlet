@@ -1,6 +1,6 @@
 package service;
 
-import com.kolosovskyi.agency.service.PasswordHasher;
+import com.kolosovskyi.agency.exception.service.PasswordHasher;
 import org.junit.jupiter.api.Test;
 import java.security.NoSuchAlgorithmException;
 

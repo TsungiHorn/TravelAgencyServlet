@@ -96,8 +96,8 @@ class UserDAOTest {
         dao.create(user2);
         dao.create(user3);
 
-        assertTrue(dao.isExistingLogin("kolos@gmail.com", "qwser32"));
-        assertFalse(dao.isExistingLogin("kolos@gmail.com", "qw44r32"));
+        assertTrue(dao.isVereficatedUser("kolos@gmail.com", "qwser32"));
+        assertFalse(dao.isVereficatedUser("kolos@gmail.com", "qw44r32"));
 
     }
 

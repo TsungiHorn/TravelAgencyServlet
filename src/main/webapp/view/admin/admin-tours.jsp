@@ -51,8 +51,8 @@
                                 Hotel stars: ${tour.getHotelStars()}&nbsp;&nbsp;&nbsp;
                                 Start date: ${tour.getStartDate()}&nbsp;&nbsp;&nbsp;
                                 Price: ${tour.getPrice()}&nbsp;&nbsp;&nbsp;
-                                Hot: ${tour.getHot()}&nbsp;&nbsp;&nbsp;
-                                Hidden: ${tour.getHidden()}&nbsp;&nbsp;&nbsp;
+                                <c:if test="${tour.getHot()}"><font color="red"><c:out value="Hot"/></font>&nbsp;&nbsp;&nbsp;</c:if>
+                                <c:if test="${tour.getHidden()}"><font color="#ffd700"><c:out value="Hidden"/></font>&nbsp;&nbsp;&nbsp;</c:if>
                                 Country: ${tour.getCountry()}&nbsp;&nbsp;&nbsp;
                                 City: ${tour.getCity()}&nbsp;&nbsp;&nbsp;
                             </p>

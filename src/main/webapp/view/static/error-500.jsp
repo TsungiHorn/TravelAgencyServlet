@@ -1,3 +1,7 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<fmt:setLocale value="${sessionScope.lang}"/>
+<fmt:setBundle basename="lang"/>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,11 +18,10 @@
 <div class="d-flex align-items-center justify-content-center vh-100">
     <div class="text-center">
         <h1 class="display-1 fw-bold">500</h1>
-        <p class="fs-3"> <span class="text-danger">Opps!</span> Something went wrong.</p>
+        <p class="fs-3"> <span class="text-danger"><fmt:message key="label.error-500.ONE"/></span> <fmt:message key="label.error-500.TWO"/></p>
         <p class="lead">
-            Try this action later.
+            <fmt:message key="label.error-500.THREE"/>
         </p>
-        <a href="/home" class="btn btn-primary">Go Home</a>
     </div>
 </div>
 </body>

@@ -60,7 +60,16 @@
                         <div class="col-sm-10">
                             <p class="mb-0"><strong>${tour.getTour().getTitle()}</strong>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:message
-                                        key="label.Profile.THREE"/> ${tour.getStatus()}
+                                        key="label.Profile.THREE"/>
+                                <c:if test="${tour.getStatus().toString().equals('REGISTERED')}">
+                                    <fmt:message key="label.Profile.EIGHT"/>
+                                </c:if>
+                                <c:if test="${tour.getStatus().toString().equals('PAID')}">
+                                    <fmt:message key="label.Profile.NINE"/>
+                                </c:if>
+                                <c:if test="${tour.getStatus().toString().equals('CANCELED')}">
+                                    <fmt:message key="label.Profile.TEN"/>
+                                </c:if>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:message
                                         key="label.Profile.FOUR"/> ${tour.getTour().getStartDate()}
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<fmt:message
@@ -71,23 +80,24 @@
                         <br>
                         <div class="col-sm-20">
                             <div class="btn-group">
-                                <c:if test="${tour.getStatus().toString().length()!=8}">
-                                    <form action="${pageContext.request.contextPath}/deleteTour?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}"
-                                          method="post">
-                                        <button class="btn btn-block btn-primary" type="submit"><fmt:message
-                                                key="label.Profile.SIX"/></button>
-                                    </form>
-                                </c:if>
-                                <c:if test="${(tour.getStatus().toString().length()!=4) and (tour.getStatus().toString().length()!=8)}">
-                                    <form action="${pageContext.request.contextPath}/buy?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}"
-                                          method="post">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-block btn-primary"
-                                                                                    type="submit"><fmt:message
-                                            key="label.Profile.SEVEN"/>
-                                            ${tour.getFinalPrice()}$
-                                    </button>
-                                    </form>
-                                </c:if>
+
+
+                                <form action="${pageContext.request.contextPath}/deleteTour?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}"
+                                      method="post">
+                                    <button class="btn btn-block btn-primary" type="submit"
+                                            <c:if test="${tour.getStatus().toString().equals('CANCELED')}">
+                                                <c:out value="disabled"/>
+                                            </c:if>><fmt:message
+                                            key="label.Profile.SIX"/></button>
+                                </form>
+                                <form action="${pageContext.request.contextPath}/buy?ui=${tour.getUser().getId()}&ti=${tour.getTour().getId()}"
+                                      method="post">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-block btn-primary" type="submit"
+                                            <c:if test="${tour.getStatus().toString().equals('PAID') or tour.getStatus().toString().equals('CANCELED')}">
+                                                <c:out value="disabled"/>
+                                            </c:if>><fmt:message
+                                            key="label.Profile.SEVEN"/> <c:out value="${tour.getTour().getPrice()}"/>$</button>
+                                </form>
                             </div>
                         </div>
 

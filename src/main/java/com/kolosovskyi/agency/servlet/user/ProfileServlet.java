@@ -5,7 +5,7 @@ import com.kolosovskyi.agency.dao.UserToursDAO;
 import com.kolosovskyi.agency.entity.TourStatus;
 import com.kolosovskyi.agency.entity.User;
 import com.kolosovskyi.agency.entity.UserTours;
-import com.kolosovskyi.agency.service.TourService;
+import com.kolosovskyi.agency.exception.service.TourService;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
